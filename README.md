@@ -2,10 +2,9 @@
 
 * **Odbor:** BPC-TLI
 * **Rok vypracovania:** 2026
-* **Platnosť pre akademický rok:** 2025/2026
 
 # Disclaimer
-**Materiál bol vytvorený aj za pomoci AI, výhradne z oficiálnych materiálov jednotlivých predmetov a zo znalostí autorov. Úlohou materiálu nie je byť jediným zdrojom pravdy, ale prostriedkom na opakovanie. Napriek všetkej vynaloženej snahe môže materiál obsahovať chyby, nekompletné otázky alebo iné nezrovnalosti. Jeho využitie je tak výhradne na vlastnú zodpovednosť. Tento dokument berte ako znak dobrej vôle a v budúcnosti ho zveľaďujte a udržiavajte. Podobný materiál obsahujúci otázky pre odbor BPC-EKT a niektoré iné voliteľné predmety je dostupný v tomto repozitári.**
+**Materiál bol vytvorený aj za pomoci AI, výhradne z oficiálnych materiálov jednotlivých predmetov a zo znalostí autorov. Úlohou materiálu nie je byť jediným zdrojom pravdy, ale prostriedkom na opakovanie. Napriek všetkej vynaloženej snahe môže materiál obsahovať chyby, nekompletné otázky alebo iné nezrovnalosti. Jeho využitie je tak výhradne na vlastnú zodpovednosť. Tento dokument berte ako znak dobrej vôle a v budúcnosti ho zveľaďujte a udržiavajte. Podobný materiál obsahujúci otázky pre odbor BPC-EKT a niektoré iné voliteľné predmety je dostupný v ![tomto]([((https://github.com/Stredoslovak/SZZ-BPC-EKT-2026))) repozitári.**
 
 ---
 
