@@ -1,0 +1,310 @@
+\section{Analogová technika (BPC-ANA)}
+\subsection{Základní stavební jednotky bipolárních a unipolárních analogových obvodů - parametry PNP a NPN, MOS FET a JFET tranzistorů, zapojení se společným emitorem, bází a kolektorem (emitorový sledovač), tranzistor jako zdroj proudu, proudová zrcadla, diferenční zesilovač, FET jako řízený rezistor.}
+    \subsubsection{Parametry bipolárních tranzistorů (PNP a NPN)}
+        Bipolární tranzistor je zjednodušeně tvořen dvěma opačně pólovanými diodami, které mají společnou vrstvu (bázi B). Zbylé vývody tvoří emitor (E) a kolektor (C). Aby tranzistor pracoval jako lineární zesilovač v aktivním (nenasyceném) režimu, musí být přechod báze-emitor (BE) v propustném (napětí cca 0,6 V) a přechod báze-kolektor (BC) v závěrném směru. Základní malosignálové parametry:
+        
+        \begin{itemize}
+            \item \textbf{Proudový zesilovací činitel ($\beta$ nebo $h_{21E}$):} Definován jako poměr změny kolektorového proudu ke změně bázového proudu ($\beta = \partial i_C / \partial i_B$). Dosahuje typických hodnot 100 až 400. Mírný nárůst $\beta$ v závislosti na napětí $u_{CE}$ se nazývá Earlyho jev.
+            \item \textbf{Strmost ($g_m$):} Popisuje závislost změny kolektorového proudu na změně napětí $u_{BE}$ ($g_m = \partial i_C / \partial u_{BE}$). Lze ji určit analyticky, při pokojové teplotě platí aproximace $g_m \approx 40i_C$. Nezávisí na individuálním kusu tranzistoru, ale přímo úměrně na jeho klidovém proudu.
+            \item \textbf{Vstupní odpor ($r_{BE}$):} Tranzistor svými vstupy zatěžuje předchozí obvod, klade mu diferenciální odpor $r_{BE} = \partial u_{BE} / \partial i_B$. Typicky se pohybuje od 5 do 10 k$\Omega$ a lze jej vyjádřit jako $r_{BE} = \beta / g_m$.
+            \item \textbf{Výstupní odpor ($r_{CE}$):} Klesá se vzrůstajícím kolektorovým proudem. S dostatečnou přesností platí $r_{CE} = U_E / i_C$, kde $U_E$ je Earlyho napětí (pro NPN typicky 80 až 200 V). Dosahuje hodnot 50 k$\Omega$ až 100 k$\Omega$.
+        \end{itemize}
+    \subsubsection{Parametry unipolárních tranzistorů (MOSFET a JFET)}
+        U unipolárních tranzistorů (FET) je vodivost kanálu řízena čistě elektrickým polem pomocí napětí $u_{GS}$ na řídicí elektrodě. Dělí se na tranzistory s izolovaným hradlem (MOSFET) a přechodovým hradlem (JFET). Dále se člení na typy s kanálem N a P, a u MOSFET na obohacovací (při $u_{GS} = 0$ je kanál nevodivý) a ochuzovací (při $u_{GS} = 0$ je vodivý). Základní parametry:
+        
+        \begin{itemize}
+            \item \textbf{Strmost ($g_m$):} Podobně jako u bipolárních se určuje z přenosové charakteristiky ($g_m = \partial i_D / \partial u_{GS}$). Typické hodnoty strmosti pro FET jsou výrazně nižší než u BJT, např. jen 2 až 20 mA/V při proudech do 50 mA.
+            \item \textbf{Vstupní odpor ($r_{GS}$):} Protože do řídicí elektrody teče téměř nulový proud (1 fA až 1 nA podle typu), je vstupní odpor extrémně velký ($r_{GS} \approx \infty$). Pro MOSFET dosahuje $10^{13}$ až $10^{15} \Omega$, pro JFET $10^{10}$ až $10^{13} \Omega$.
+            \item \textbf{Výstupní odpor ($r_{DS}$):} V oblasti saturace vykazuje tranzistor výstupní odpor závislý na modulaci délky kanálu. Podobně jako u bipolárních lze určit pomocí Earlyho napětí: $r_{DS} \approx U_E / i_D$ a nabývá hodnot od 10 k$\Omega$ do 100 k$\Omega$.
+        \end{itemize}
+    \subsubsection{Základní zapojení zesilovačů (SE, SB, SC)}
+
+        Zapojení se odlišují připojením společné elektrody vstupu a výstupu. K potlačení nelineárního zkreslení je nutné stejnosměrně nastavit klidový pracovní bod.
+        
+        \begin{itemize}
+            \item \textbf{Zapojení se společným emitorem (SE):} Vstup je na bázi, výstup na kolektoru. Signál napěťově zesiluje a invertuje (otáčí fázi o 180°). Zesílení $A_U \approx -g_m(R_C || r_{CE} || R_Z)$. Vložením emitorového rezistoru $R_E$ se zavádí záporná proudová zpětná vazba, která stabilizuje a snižuje zesílení na $A_U \approx -R_C / R_E$. Vstupní odpor závisí na $r_{BE}$. U FET (společný source) je zesílení $A_U \approx -g_m(R_D || r_{DS})$, tedy obvykle řádově 10x menší než u bipolárního tranzistoru.
+            \item \textbf{Zapojení se společnou bází (SB):} Vstup na emitoru, výstup na kolektoru. Zesilovač je neinvertující ($A_U \approx g_m R_C$). Vyznačuje se velmi nízkým vstupním odporem ($R_{vst} \approx 1 / g_m$, např. 25 $\Omega$ při 1 mA). Užívá se u vysokofrekvenčních a širokopásmových zesilovačů (kaskódové zapojení) pro potlačení Millerova jevu.
+            \item \textbf{Zapojení se společným kolektorem (SC) – Emitorový sledovač:} Vstup na bázi, výstup na emitoru. Napěťové zesílení je blízké jedné ($A_U \approx 1$) a neinvertuje. Má velmi vysoký vstupní odpor ($R_{vst} \approx \beta R_E$) a nízký výstupní odpor ($R_{vyst} \approx R_E || 1/g_m$). Slouží k impedančnímu oddělení stupňů nebo jako koncový proudový posilovač výkonu.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.9\linewidth]{SE.jpg}
+            \includegraphics[width=0.9\linewidth]{SB.png}
+            \includegraphics[width=0.9\linewidth]{SC.png}
+        \end{figure}
+    \subsubsection{Tranzistor jako zdroj proudu a proudová zrcadla}
+        \textbf{Tranzistorový zdroj proudu:} Využívá zapojení se společným emitorem, kde výstupní veličinou je kolektorový proud. Ve výstupních charakteristikách (oblast nad saturačním napětím) je kolektorový proud téměř konstantní a nezávislý na zatěžovacím odporu ($u_{CE}$). Vnitřní diferenciální odpor $r_0$ zdroje roste se zavedením emitorového odporu $R_E$ (od $r_{CE}$ až do extrému $\beta \cdot r_{CE}$). U unipolárních tranzistorů zajišťuje konstantní proud oblast saturace výstupní charakteristiky a $u_{GS}$ lze definovat např. automatickým úbytkem na rezistoru.
+        
+        \textbf{Proudová zrcadla:} Zrcadla na výstupu kopírují (či poměrově mění) vstupní referenční proud. Tvoří tzv. aktivní zátěž v integrovaných obvodech pro výrazné zvýšení napěťového zesílení.
+        
+        \begin{itemize}
+            \item \textbf{Jednoduché Widlarovo zrcadlo:} Dva shodné tranzistory, kde propojené báze zaručují stejné $u_{BE}$ a tudíž i $i_C$. U BJT vzniká chyba vlivem bázových proudů: přenos $K_I \approx \beta / (\beta + 2)$. U FET (vstupní proud 0) lze jednoduše poměr proudů určit poměrem šířky a délky kanálu obou tranzistorů $W/L$.
+            \item \textbf{Zrcadlo s redukcí proudu do bází:} Třetí tranzistor zapojený jako sledovač saturuje chybu od bázových proudů na zlomek promile, přenos $K_I \approx 1 - 2/\beta^2$.
+            \item \textbf{Zpětnovazební Wilsonovo zrcadlo:} K potlačení chyby zrcadlení je zařazena paralelní proudová zpětná vazba. Poskytuje několikanásobně vyšší vnitřní odpor. Lze realizovat s bipolárními i unipolárními tranzistory (kde se takto řeší nízký výstupní odpor $r_{DS}$).
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{pz.jpg}
+        \end{figure}
+    \subsubsection{Diferenční zesilovač}
+        Diferenční zesilovač je tvořen symetrickým spojením dvou tranzistorů, obvykle v zapojení se společným emitorem, napájených ze společného zdroje proudu (typicky $2I_0$).
+        \begin{itemize}
+            \item \textbf{Zesílení:} Hlavní vlastností je schopnost zesilovat výhradně rozdíl napětí přivedených na oba vstupy ($u_D = u_{B1} - u_{B2}$). Diferenční zesílení $A_D = \partial u_0 / \partial u_D$ je vysoké a s klasickými odpory dosahuje hodnot -50 až -100 (v případě aktivní zátěže pomocí proudových zrcadel pak -500 až -1000).
+            \item \textbf{Potlačení souhlasného signálu:} Shodné (souhlasné) napětí na obou vstupech ($u_{CM}$) nevyvolá změnu diferenčního výstupu – teoretické souhlasné zesílení $A_{CM} \approx 0$.
+            \item \textbf{Činitel CMRR:} Kvalitu obvodu určuje činitel potlačení souhlasného signálu definovaný jako $CMRR = |A_D / A_{CM}|$. V praxi dosahuje $10^3$ až $10^5$ (podle vnitřního odporu napájecího zdroje proudu).
+            \item \textbf{Vstupy/Výstupy:} Vstupní diferenční odpor je roven zhruba $2 \cdot r_{BE}$. Na diferenčním uspořádání se také vzájemně vykompenzují vlivy tepelných změn jednotlivých tranzistorů.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.4\linewidth]{TDiffAmp.png}
+        \end{figure}
+    \subsubsection{FET jako řízený rezistor}
+        Unipolární tranzistor se při velmi malých napětích $u_{DS}$ (v okolí počátku charakteristik v tzv. odporové oblasti) chová jako lineární rezistor, jehož odpor $R_{DS}$ lze ovládat napětím na hradle $u_{GS}$.
+        
+        \begin{itemize}
+            \item U malovýkonových tranzistorů se dá typicky odpor řídit v hodnotách mezi 50 až 500 $\Omega$.
+            \item \textbf{Linearizace:} Při vyšších hodnotách napětí $u_{DS}$ se objevuje nezanedbatelná nelinearita. Ta se odstraňuje přivedením poloviny napětí $u_{DS}$ zpět na řídicí elektrodu tranzistoru přes rezistorový dělič ($R_1, R_2$). Rostoucí $u_{DS}$ způsobí nárůst $u_{GS}$, čímž se vykompenzuje stoupající tendence nelineárního odporu $R_{DS}$. Pro optimální linearitu se odpory volí $R_1 = R_2 \approx 1$ M$\Omega$, přičemž odchylka se redukuje pod 1 \% (pro $|u_{DS}| \le 1$ V).
+        \end{itemize}
+\subsection{Parametry operačních zesilovačů; lineární obvody s OZ - invertující a neinvertující zesilovač, integrátor a derivátor, sčítací a rozdílové zapojení, přístrojový rozdílový zesilovač, zdroje proudu řízené napětím. Komparátory s OZ, okénkový komparátor, komparátor s hysterezí.}
+    \subsubsection{Parametry operačních zesilovačů}
+        \begin{itemize}
+            \item \textbf{Převodní charakteristika a diferenční zesílení:} OZ primárně reaguje na odchylky diferenčního napětí $u_i = u_N - u_P$ na vstupu. Diferenční (stejnosměrné) zesílení $A = -\Delta u_o / \Delta u_i$ nabývá vysokých hodnot, přičemž aktivní oblast je ohraničena saturačním napětím $\pm U_{osat}$, které je blízké napájecímu napětí.
+            \item \textbf{Souhlasné zesílení a CMRR:} Reálný OZ má  konečné souhlasné zesílení $A_{CM} = \Delta u_o / \Delta u_{CM}$. Schopnost zesilovače potlačit tento vliv se vyjadřuje činitelem potlačení souhlasného napětí $CMMR = 20 \log(A / A_{CM})$, který běžně dosahuje 60 až 100 dB, u kvalitních až 130 dB.
+            \item \textbf{Vstupní a výstupní odpor:} Diferenční vstupní odpor $r_i$ je velmi vysoký (stovky k$\Omega$ až $10^{12} \Omega$ u unipolárních vstupů), avšak kmitočtově závislý kvůli parazitním kapacitám. Výstupní odpor reálného OZ je v řádu desítek Ohmů, zavedením silné záporné zpětné vazby ale klesá pod 1 $\Omega$.
+            \item \textbf{Napěťový a proudový ofset:} Napěťový ofset ($U_{IO}$) je stejnosměrné chybové napětí, které je nutno přivést na vstup, aby výstup nevybuzeného OZ byl nulový (typicky $\mu$V až mV). Proudový ofset ($I_{IO}$) je dán rozdílem klidových proudů tekoucích do vstupních svorek vlivem elektrické nesymetrie vnitřních obvodů.
+            \item \textbf{Dynamické vlastnosti:} Charakterizuje je především tranzitní kmitočet $f_T$ (kmitočet, při kterém klesne zesílení bez zpětné vazby na úroveň 0 dB) a rychlost přeběhu $S_R$ (maximální rychlost změny výstupního napětí při velkém skoku signálu, např. V/$\mu$s).
+        \end{itemize}
+    \subsubsection{Lineární obvody s OZ}
+        Při návrhu lineárních obvodů často uvažujeme ideální OZ: zisk $A \approx \infty$, diferenční vstupní napětí $u_i \approx 0$ a nulové vstupní proudy $i_i \approx 0$.
+        \begin{itemize}
+            \item \textbf{Invertující zesilovač:} Využívá paralelní napěťovou zápornou zpětnou vazbu. Invertující vstup tvoří tzv. "virtuální nulu", protože se na něm udržuje nulový potenciál. Zesílení $A_U = -R_2/R_1$. Má velmi malý výstupní odpor a vstupní odpor roven odporu vstupního rezistoru $R_1$.
+            \item \textbf{Neinvertující zesilovač:} Využívá sériovou napěťovou zápornou zpětnou vazbu, která obrovsky zvyšuje vstupní odpor ke zdroji signálu ($R_{vst} \approx \infty$). Zesílení $A_U = 1 + R_2/R_1$. Nevýhodou je, že se na obou vstupech vyskytuje souhlasné napětí rovné zpracovávanému signálu.
+            \item \textbf{Integrátor:} Rezistor $R$ je na vstupu, zatímco ve zpětné vazbě leží kondenzátor $C$. Výstupní napětí je úměrné integrálu vstupního napětí $u_2(t) \approx -\frac{1}{RC} \int u_1(t)dt$ s časovou konstantou $\tau = RC$. V praxi je nutné řešit nulování počátečních podmínek (vybití $C$ spínačem před započetím integrace), aby nedocházelo k driftu do saturace.
+            \item \textbf{Derivátor:} Vstupní prvek tvoří kondenzátor $C$ a zpětnovazební prvek rezistor $R$. Výstup reaguje na strmost změn na vstupu: $u_2(t) \approx -RC \frac{du_1(t)}{dt}$. Běžné zapojení je v praxi nestabilní a náchylné na vysokofrekvenční šum (klesající charakteristika se na Bodeho diagramu přibližuje strmosti OZ s rychlostí 40 dB/dek). Zabránit nestabilitě lze vložením odporu do série se vstupním kapacitorem.
+            \item \textbf{Sčítací zapojení:} Představuje rozšíření invertujícího zesilovače o více vstupních větví ($R_{11}, R_{12}, \dots$) směřujících do jednoho sčítacího bodu na "virtuální nule". Výstupní napětí je vážený záporný součet vstupních signálů: $u_2 \approx -R_2 \sum (u_{1n}/R_{1n})$.
+            \item \textbf{Rozdílové zapojení:} Diferenční vstupy umožňují přivést signál na oba vstupy a zesílit jejich rozdíl. K neinvertujícímu vstupu se doplňuje dělič. Při symetrickém návrhu s poměrem odporů $k$ bude výstup $u_2 \approx k(u_{1P} - u_{1N})$. Vliv souhlasného napětí je zde eliminován pouze částečně a zapojení klade nízký vstupní odpor pro zdroj signálu.
+            \item \textbf{Přístrojový rozdílový zesilovač:} Eliminuje nevýhody klasického rozdílového zapojení (vysoký vstupní odpor a potlačení souhlasného napětí). Skládá se ze tří OZ: první stupeň využívá dva vázané neinvertující zesilovače tvořící diferenční stupeň, druhý stupeň je klasický rozdílový zesilovač jedním s OZ. Zesílení tohoto symetrického uspořádání lze velmi snadno řídit pomocí změny odporu jediného rezistoru.
+            \item \textbf{Zdroje proudu řízené napětím (převodníky U/I):} Konstrukčně vycházejí z klasických zapojení OZ, kdy je zátěž vložena přímo do smyčky zpětné vazby. Proud zátěží je pak přesně definován vstupním napětím ($i_Z \approx u/R$). Pro měřicí systémy s uzemněnou zátěží se využívá např. Howlandovo čerpadlo proudu s diferenčním zapojením OZ, u kterého se neuplatňuje vliv souhlasného napětí.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.9\linewidth]{INVNEINV.jpg}
+            \includegraphics[width=0.9\linewidth]{INTDERI.jpg}
+            \includegraphics[width=0.9\linewidth]{SCITROZD.jpg}
+        \end{figure}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.9\linewidth]{PRISTSCIT.jpg}
+        \end{figure}
+    \subsubsection{Komparátory s OZ}
+        Porovnávají dvě napětí na vstupech a na základě výsledku mění skokově svůj výstup. Použití běžného OZ jako komparátoru je teoreticky možné, ale prakticky nevhodné – pokud dojde k plné saturaci, projeví se jev "latch up", z něhož se obvod dlouho zotavuje. Z tohoto důvodu se pro komparaci vyrábějí specializované integrované komparátory bez frekvenčních kompenzací (jsou rychlé) a s logickými výstupními úrovněmi.
+        
+        \begin{itemize}
+            \item \textbf{Okénkový komparátor:} Detekuje, zda velikost vstupního signálu spadá do definovaného rozmezí (napěťového okna). Využívá dva paralelní komparátory, jejichž vstupy tvoří horní a dolní hranici okénka ($U_{S1}$ a $U_{S2}$) a jejich výstupy jsou logicky spojeny.
+            \item \textbf{Komparátor s hysterezí (Schmittův klopný obvod):} Obsahuje silnou kladnou kmitočtově nezávislou zpětnou vazbu, která vytváří dvě oddělené srovnávací úrovně – horní ($U_{sp}$) a dolní ($U_{sn}$). Jakmile napětí překročí $U_{sp}$, výstup se lavinovitě překlopí a referenční práh obvodu ihned skočí na spodní hranici $U_{sn}$. Tento hysterezní mechanismus zabraňuje nežádoucím překmitům výstupu v případech, kdy se na vstupech nachází šum nebo pomalu se měnící signál.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.8\linewidth]{KOMP.jpg}
+        \end{figure}
+\subsection{Kmitočtové filtry - základní zapojení pasivních filtrů RC a RLC, aproximace přenosové funkce dle Butterwortha, Bessela a Čebyševa, aktivní filtry RC s jednoduchou smyčkou zpětné vazby, s rozvětvenou zpětnou vazbou, se zesilovačem s konečným zesílením (Sallen-Key).}
+    \subsubsection{Základní zapojení pasivních filtrů RC a RLC}
+        Kmitočtové filtry jsou lineární dvojbrany, které z kmitočtového spektra propouštějí určité pásmo s minimálním útlumem a jiné frekvence potlačují.
+        
+        \begin{itemize}
+            \item \textbf{Pasivní filtry RC:} Vyznačují se propojováním rezistorů a kapacitorů bez použití dalších aktivních prvků nebo cívek. Jsou velmi jednoduché a levné. Jejich praktické využití je omezeno převážně na jednoduché struktury 1. a 2. řádu s nízkým činitelem jakosti $Q$, který nepřesahuje hodnotu 0,5. 
+            \item \textbf{Pasivní filtry RLC:} K rezistorům a kapacitorům přidávají induktory (cívky), díky čemuž lze teoreticky realizovat libovolný typ filtru s vyšším činitelem jakosti a strmějším přechodem. Na nízkých frekvencích je jejich realizace neefektivní, jelikož induktory s velkou indukčností jsou rozměrné, nákladné a ztrátové (mají malý činitel jakosti). RLC filtry se tedy využívají především u vyšších kmitočtů, jako jsou pasivní výhybky reprosoustav.
+        \end{itemize}
+    \subsubsection{Aproximace přenosové funkce}
+        Pro definování vlastností filtru se zavádí tzv. aproximace přenosové funkce, která udává hodnoty koeficientů polynomů filtru pro dosažení specifického průběhu modulové nebo fázové charakteristiky.
+        \begin{itemize}
+            \item \textbf{Aproximace dle Butterwortha (mocninová):} Vyznačuje se maximálně plochou modulovou charakteristikou v propustném pásmu. Za mezním kmitočtem modul rychle klesá do nepropustného pásma. Přechodová charakteristika (odezva na jednotkový skok) u tohoto filtru vykazuje zákmity, které se stávají významnějšími s rostoucím řádem filtru.
+            \item \textbf{Aproximace dle Čebyševa:} Modulová charakteristika vykazuje v propustném pásmu definované zvlnění (např. 0,5 dB, 1 dB, 3 dB) s konstantním rozkmitem. Odměnou za to je podstatně rychlejší (strmější) pokles z propustného do nepropustného pásma než u obvodů s Butterworthovou aproximací. Značnou nevýhodou jsou velké zákmity v přechodové charakteristice při buzení skokem.
+            \item \textbf{Aproximace dle Bessela (Thomsonovy filtry):} Je navržena pro optimalizaci odezvy v časové oblasti. Vyznačuje se přibližně konstantním skupinovým zpožděním (lineární fázovou charakteristikou) v propustném pásmu. Díky tomu signál (např. obdélníkový) prochází bez fázového zkreslení a na přechodové charakteristice nevznikají překmity. Nevýhodou této aproximace je nejméně strmý pokles modulové charakteristiky při přechodu z propustného do nepropustného pásma.
+        \end{itemize}
+    \subsubsection*{3. Aktivní filtry RC}
+
+        Aktivní filtry umožňují realizaci filtrů v oblasti nízkých kmitočtů (řádově do 10 MHz) výhradně s použitím rezistorů, kapacitorů a operačních zesilovačů. Pro vyšší řády se obvykle tvoří kaskádním spojením dílčích filtrů 1. a 2. řádu.
+        
+        \begin{itemize}
+            \item \textbf{Aktivní filtry RC s jednoduchou smyčkou zpětné vazby:} Zapojení využívá invertující operační zesilovač, jehož vstupní svorka tvoří "virtuální nulu". V přímé i zpětnovazební větvi jsou zapojeny pasivní RC dvojbrany (např. T-články či $\Pi$-články). Celkový přenos je pak dán výhradně poměrem jejich přenosových vodivostí $\bar{K}(p) = -\bar{y}_{21A} / \bar{y}_{12B}$. Vhodným výběrem těchto pasivních dvojbranů (např. z dostupných tabulek typických RC sítí) se dosáhne požadované funkce.
+            \item \textbf{Aktivní filtry RC s rozvětvenou zpětnou vazbou:} V tomto uspořádání je zpětná vazba operačního zesilovače rozvedena několika cestami. Typická struktura má neinvertující vstup uzemněný a využívá pětici admitancí tvořících kombinovanou RC síť připojenou k invertujícímu vstupu a výstupu. Kombinací rezistorů a kapacitorů na místě těchto admitancí (např. admitance z rezistoru $\bar{Y} = G$ a z kapacitoru $\bar{Y} = pC$) lze realizovat aktivní dolní propust, horní propust i pásmovou propust. K návrhu konkrétního obvodu 2. řádu se řeší kvadratické rovnice pro výpočet potřebných pasivních součástek.
+            \item \textbf{Aktivní filtry se zesilovačem s konečným zesílením (Sallen-Key):} Obvod funguje na principu slabé kladné zpětné vazby z výstupu neinvertujícího zesilovače, která zajistí pouze nepatrné odtlumení pasivní RC sítě, čímž vznikne selektivní charakter bez rizika nestability. Zapojení se často realizuje strukturou známou jako Sallen-Key. Tvar modulové charakteristiky (a typ aproximace, např. podle Butterwortha či Čebyševa) lze modifikovat změnou hodnoty zesílení $A_U$ při zachování stejného mezního kmitočtu. Zapojení je velmi citlivé na hodnotu zesílení.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{F1.jpg}
+            \includegraphics[width=1\linewidth]{KonZes.png}
+        \end{figure}
+\subsection{Nelineární obvody - pasivní diodové omezovače a tvarovače, diodové omezovače a tvarovače s OZ, logaritmické a exponenciální převodníky, jednocestné a dvoucestné operační usměrňovače.}
+    \subsubsection{Pasivní diodové omezovače a tvarovače}
+        \begin{itemize}
+            \item \textbf{Horní diodové omezovače:} Omezují horní část signálu, tedy nahrazují všechna napětí $u_1 > U_H$ napětím $U_H$.
+            \begin{itemize}
+                \item U \textbf{paralelního uspořádání} jsou zdroj, dioda a zátěž zapojeny paralelně. Je-li vstupní napětí $u_1 < U_H$, dioda je zavřená a výstupní napětí kopíruje vstupní ($u_2 = u_1$, strmost převodu $S = 1$). K otevření diody a omezení napětí dojde při $u_1 > U_H + U_P$, kde $U_P$ je prahové napětí diody.
+                \item U \textbf{sériového uspořádání} je zdroj, dioda a zátěž v sérii. Dioda je uzavřena pro $u_1 > U_H$, kdy je na výstupu stálé napětí $U_H$ (při nulové zátěži).
+                \item Lze použít také paralelní horní omezovač s \textbf{referenční (Zenerovou) diodou}, kde úroveň omezení je určena součtem prahového napětí $U_P$ a napětí na referenční diodě $U_Z$.
+            \end{itemize}
+            \item \textbf{Dolní diodové omezovače:} Odstraňují ze signálu jeho dolní část pod úrovní $U_D$. Získají se pouhou záměnou polarity použitých diod a zdrojů předpětí.
+            \item \textbf{Oboustranné diodové omezovače:} Vzniknou paralelním spojením horního a dolního omezovače, čímž vznikne obvod omezující signál z obou stran. Výhodou tzv. \textbf{můstkového oboustranného omezovače} je velmi dobrá vzájemná kompenzace teplotních závislostí diod, protože v neomezené oblasti jsou všechny čtyři diody můstku otevřeny.
+            \item \textbf{Pasivní diodové funkční měniče (tvarovače):} Slouží pro složitější tvarování signálu aproximací nelineární funkce pomocí lomené čáry. Příkladem je tvarování trojúhelníkových kmitů na harmonický signál. Obvod pracuje jako rezistorový dělič, jehož dělicí poměr se postupně snižuje tím, jak rostoucí napětí postupně spíná jednotlivé diody obvodu.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{DioH.png}
+            \includegraphics[width=1\linewidth]{ObojObm.png}
+            \includegraphics[width=1\linewidth]{FunkM.png}
+        \end{figure}
+    \clearpage
+    \subsubsection{Diodové omezovače a tvarovače s OZ (obvody s nelineární zpětnou vazbou)}
+        Pasivní omezovače vykazují značnou závislost na odporu zátěže, proto se v praxi často spojují s operačním zesilovačem (OZ), což umožňuje zpracovávaný signál zároveň zesílit.
+        
+        \begin{itemize}
+            \item \textbf{Horní diodové omezovače s OZ:}
+            \begin{itemize}
+                \item \textbf{Invertující paralelní omezovač:} Vznikne zařazením paralelního diodového omezovače před invertující zesilovač. Při zavřené diodě se obvod chová jako lineární invertující zesilovač se strmostí $S \approx -R_3/(R_1 + R_2)$. Jakmile se dioda otevře, stane se výstupní napětí konstantním.
+                \item \textbf{Invertující sériový omezovač:} Sériový diodový omezovač je zapojen do kaskády s invertujícím zesilovačem.
+                \item Lze také aplikovat \textbf{omezovač s referenční diodou} umístěnou ve zpětné vazbě. Tato zapojení primárně chrání OZ před překročením dovolených napětí, aby nedošlo k jeho vyřazení z funkce neboli "upnutí" do saturace. K zamezení vlivu zbytkového závěrného proudu referenčních diod na přesnost se využívá tzv. proudový dělič, který chybový proud odvádí.
+            \end{itemize}
+            \item \textbf{Dolní diodové omezovače s OZ:} Získají se analogicky z horních omezovačů pouhým přepólováním diod.
+            \item \textbf{Oboustranné diodové omezovače s OZ:} Vznikají na bázi paralelního nebo zpětnovazebního omezovače. Zpětnovazební oboustranný omezovač využívá dvě paralelní větve ve zpětné vazbě, přičemž propustnost určité větve závisí na polaritě a velikosti napětí a zajišťuje výrazné snížení strmosti zesílení při překročení komparačních úrovní.
+            \item \textbf{Diodové funkční měniče s OZ:} Rezistory, diody a zdroje konstantního napětí se zapojují do zpětné vazby či vstupní větve OZ k modelování lomených charakteristik.
+            \begin{itemize}
+                \item \textbf{Měnič ve vstupní větvi:} S rostoucím vstupním napětím se diody postupně spínají, čímž se \textbf{strmost převodní charakteristiky postupně zvětšuje}.
+                \item \textbf{Měnič ve zpětnovazební větvi:} Postupné spínání diod paralelně k hlavnímu zpětnovazebnímu rezistoru snižuje celkový zpětnovazební odpor, takže se \textbf{strmost charakteristiky postupně zmenšuje}. Kombinací prvků ve vstupní i zpětnovazební větvi lze modelovat funkce nemonotónní (s klesající i rostoucí strmostí). Z důvodu velké teplotní závislosti diod se měniče obvykle teplotně kompenzují, např. zapojením kompenzačních diod přímo do zdroje referenčního napětí.
+            \end{itemize}
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.8\linewidth]{OZHornObm.png}
+        \end{figure}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.8\linewidth]{OZHronRef.png}
+            \includegraphics[width=0.6\linewidth]{OPTvar.png}
+        \end{figure}
+    \subsubsection{ Logaritmické a exponenciální převodníky}
+
+        Základním principem těchto převodníků je převedení operací násobení nebo dělení analogových signálů na součet nebo rozdíl jejich logaritmů. Pomocí exponenciálního (inverzního) převodu se pak součet/rozdíl převede na konečný výsledek (násobení, dělení, umocňování).
+        
+        \begin{itemize}
+            \item \textbf{Logaritmický převodník s diodou:} Dioda je vložena do zpětnovazební větvě invertujícího OZ. Proud diodou je závislý na exponenciále napětí. Z tohoto vztahu plyne výstupní napětí $u_2 \approx -U_T \ln(u_1 / R I_0)$. Obvod má ale nevýhody: rovnice přesně platí jen v malém rozmezí a navíc parametry $U_T$ (teplotní napětí) a $I_0$ (zbytkový proud) vykazují silnou teplotní závislost.
+            \item \textbf{Exponenciální převodník s diodou:} Vznikne pouhou záměnou prvků – dioda se zařadí na vstup a lineární rezistor do zpětné vazby. Obvod generuje exponenciální převodní funkci: $u_2 \approx -R I_0 e^{u_1 / U_T}$. Podobně jako u logaritmického převodníku s diodou je přesnost zaručena jen zhruba na 2 dekády.
+            \item \textbf{Logaritmický převodník s tranzistorem:} Pro přesný převod (až v rozsahu 9 dekád) se využívá přechod báze-emitor (BE) bipolárního planárního tranzistoru. Obvod generuje výstupní napětí $u_2 \approx -U_T \ln(u_1 / I_{ES} R)$. Pro zajištění kmitočtové stability se redukuje vlastní přídavné napěťové zesílení vloženého tranzistoru zařazením rezistoru do emitoru a kondenzátoru do zpětné vazby. Výraznou teplotní nestabilitu parametru $I_{ES}$ lze kompenzovat využitím \textbf{diferenčního zapojení dvou tranzistorů}, kde se poměr jejich kolektorových proudů stane závislým jen na rozdílu napětí $u_{BE}$.
+            \item \textbf{Exponenciální převodník s tranzistorem:} Tranzistor je zapojen ve vstupní větvi. Zajišťuje kolektorový proud $i_C \approx I_{ES} e^{-u_1 / U_T}$ pro záporná vstupní napětí, a tudíž výstupní napětí $u_2 \approx i_C R$. Pro kompenzaci teplotních změn $I_{ES}$ se opět preferuje použití diferenční dvojice tranzistorů.
+            \item \textbf{Analogová násobička / dělička:} Využívá komplexní propojení tří teplotně kompenzovaných logaritmických převodníků a jednoho exponenciálního převodníku pro realizaci operace $w = x \cdot y / z$. Jsou-li všechny tranzistory umístěny na jednom křemíkovém čipu, vlivy teplotních změn veličin $I_{ES}$ i $U_{T}$ se vzájemně téměř úplně vykompenzují.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{LogTranz.png}
+        \end{figure}
+    \subsubsection{Jednocestné a dvoucestné operační usměrňovače}
+        Diodové usměrňovače vnášejí do signálu chybu způsobenou nutností překonat prahové napětí diody (cca 0,6 V). Tento problém řeší tzv. \textbf{operační usměrňovače}, které zařazením diod do přímé zpětnovazební smyčky OZ zvyšují přesnost až o několik řádů.
+        
+        \begin{itemize}
+            \item \textbf{Jednocestné operační usměrňovače:} Zapojení typicky využívá invertující OZ doplněný na výstupu dvěma diodami. Při kladném vstupním napětí $u_1 > 0$ je výstup OZ záporný, jedna dioda se otevře a druhá je zavřená; obvod usměrňuje a funguje jako invertující zesilovač se ziskem daným podílem odporů. Při záporném vstupním napětí je zapojena druhá dioda, která uzavře zpětnovazební smyčku, a na výstupu je napětí přibližně nulové.
+            \begin{itemize}
+                \item \textit{Dynamické vlastnosti:} Vysokofrekvenční vlastnosti a schopnost přesně usměrňovat velmi malá napětí jsou podstatně omezeny vlivem zotavovacích procesů v diodách (závěrná zotavovací doba $t_{rr}$) při přechodu z propustného do nepropustného stavu. K omezení tohoto vlivu je nutné použít rychlé spínací diody nebo diody Schottkyho.
+            \end{itemize}
+            \item \textbf{Dvoucestné operační usměrňovače (zesilovače absolutní hodnoty):} Vyznačují se převodní charakteristikou $u_2 = k|u_1|$. Vznikají několika způsoby:
+            \begin{itemize}
+                \item \textbf{Se sčítacím zesilovačem:} Jednocestný operační usměrňovač je doplněn o další invertující sčítací zesilovač, do kterého je současně přiváděn usměrněný i původní vstupní signál. Správným nastavením hodnot odporů se dosáhne požadovaného zisku $k$ pro obě polarity signálu.
+                \item \textbf{S rozdílovým zesilovačem:} V tomto uspořádání se využívá kaskáda jednocestného usměrňovače a rozdílového zesilovače. Podle polarity vstupního signálu se druhý OZ chová buď jako rozdílový, nebo jako neinvertující zesilovač.
+                \item \textbf{S velkým vstupním odporem:} Tyto obvody přivádějí signál prioritně na neinvertující svorky. Většinou jde o paralelní nebo kaskádní kombinaci usměrňovačů fungujících jako neinvertující a rozdílové zesilovače. Jedno ze zapojení je výhodné navrhovat pouze pro jednotkový přenos ($k = 1$), existují ale i verze stavěné pro případ, kdy je vyžadován přenos $k > 1$.
+            \end{itemize}
+            \item \textbf{Špičkové usměrňovače:} Slouží k vyhledání a uchování maximální (nebo minimální) hodnoty signálu pomocí tzv. paměťového kapacitoru. K zajištění nulového svodu je použito oddělení pomocí OZ (napěťového sledovače) s velmi vysokým vstupním odporem (vstupy FET). Ochranné diody a spínače brání nasycení (upnutí, "latch up") invertujícího zesilovače v době pamatování maxima a současně umožňují kapacitor před dalším měřením vybít do nulového stavu.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{2usmernovac.png}
+        \end{figure}
+\subsection{Obvody s elektronickými spínači - multiplexery a demultiplexery, zesilovače s elektronicky přepínatelným zesílením, elektronické střídače, vzorkovače/sledovače s pamětí.}
+    \subsubsection{Analogové multiplexery a demultiplexery}
+        \textbf{Analogové multiplexery (AMUX):} slouží k přepínání několika signálů do jednoho uzlu. Obsahují analogové spínače, převodníky napěťových úrovní a dekodér. Přímé použití AMUX pro přepínání signálu je nevýhodné, neboť odpor sepnutého kanálu $r_{ON}$ tvoří se vstupním odporem následujícího obvodu nelineární dělič, což vede ke zkreslení.
+        
+        \begin{itemize}
+            \item \textbf{Invertující AMUX:} Využívá invertující zapojení OZ, kde je multiplexer umístěn v přímé větvi zpětnovazební smyčky. Výstup OZ představuje tvrdý zdroj napětí a vliv $r_{ON}$ se potlačí silnou zápornou zpětnou vazbou. Nevýhodou je zhoršení šumových poměrů, protože AMUX je na citlivém vstupu OZ a jeho šum je zesilován.
+            \item \textbf{Neinvertující AMUX:} Využívá vysokého vstupního odporu neinvertujícího zapojení OZ, díky němuž se úbytek napětí na $r_{ON}$ téměř neuplatní. Zesílení je pro všechny cesty shodné, avšak uplatňuje se zde vliv souhlasného napětí OZ.
+        \end{itemize}
+        
+        \textbf{Analogové demultiplexery:} přepínají jeden signál do více kanálů. V přesných aplikacích se využívá \textbf{invertující uspořádání s jedním OZ}, za jehož výstupem je zapojen AMUX a z každé jeho výstupní svorky vede samostatná zpětnovazební cesta na "virtuální zem" na vstupu OZ. Umístění multiplexeru za výstup OZ do přímé větve zpětné vazby výrazně potlačí vliv $r_{ON}$ i jeho nelinearit. Výstupní odpor aktivního kanálu klesne pod 1 $\Omega$ (chová se jako tvrdý zdroj napětí) a šum multiplexeru není zesilován operačním zesilovačem.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{MUX.png}
+        \end{figure}
+    \subsubsection{Zesilovače s elektronicky přepínatelným zesílením}
+        Přepínání zpětnovazební sítě analogovým multiplexerem přímo na místě rezistorů by vedlo k parazitní modulaci signálu vlivem $r_{ON}$. Proto se AMUX zapojuje výhradně do přímé větve zpětnovazební smyčky.
+        
+        \begin{itemize}
+            \item \textbf{Základní invertující zapojení:} Multiplexer přepíná mezi různými zpětnovazebními rezistorovými sítěmi. Odpor $r_{ON}$ se téměř neuplatní, ale hrozí zhoršení šumu, protože AMUX je připojen na citlivý vstup OZ. Alternativou je paralelní přepínání zpětné vazby z výstupu, které snižuje počet potřebných rezistorů.
+            \item \textbf{Základní neinvertující zapojení:} Využívá přepínání sériové zpětné vazby nebo připojení AMUX na odbočky rezistorového zeslabovače. Výhodou zeslabovače je neměnnost kmitočtových vlastností při přepínání, avšak signál je nejprve zeslaben a pak zesílen, což zhoršuje šumové poměry.
+            \item \textbf{Zapojení pro náročnější aplikace (se dvěma OZ):} Odstraňují problémy se zvýšeným šumem a kolísáním šířky pásma. Využívá se kaskádní spojení přesného demultiplexujícího (s prvním OZ) a sčítacího či rozdílového zesilovače (druhý OZ). AMUX je zařazen až za prvním OZ, takže se jeho šum nezesiluje, minimalizuje se vliv $r_{ON}$ a rozšiřuje se kmitočtové pásmo, protože zesílení je rozděleno mezi dva stupně. V případě potřeby velkého vstupního odporu pracuje první OZ v neinvertujícím zapojení.
+        \end{itemize}
+    \subsubsection{Elektronické střídače}
+        Střídače (někdy též synchronní usměrňovače, modulátory) jsou obvody, které v závislosti na řídicím signálu \textbf{mění polaritu přenosu} ($u_2 = \pm k u_1$).
+        
+        \begin{itemize}
+            \item \textbf{Jednoduché střídače:} Přepojují zpětnovazební síť jednoho OZ tak, aby pracoval střídavě jako invertující nebo neinvertující zesilovač. Jejich nevýhodou je proměnný a někdy příliš nízký vstupní odpor, a uplatňuje se u nich rozdílný vliv souhlasného napětí.
+            \item \textbf{Přesné střídače:} Využívají principu invertujícího analogového demultiplexování. Jsou realizovány spojením demultiplexovacím zapojení s inverzním sčítacím zesilovačem nebo rozdílovým zesilovačem.
+            \item \textbf{Střídače s velkým vstupním odporem:} K zajištění vysokého vstupního odporu využívají na vstupu OZ v neinvertujícím zapojení s jednotkovým přenosem jako oddělovač, za nímž následuje invertující zesilovač, přičemž výstupní přepínače volí signálovou cestu. Typicky se konstruují pro modul přenosu $k = 1$, ale vhodnou volbou rezistorů lze docílit i přenosu $k > 1$.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{S1.jpg}
+        \end{figure}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.6\linewidth]{HZStrie.png}
+        \end{figure}
+        \newpage
+    \subsubsection{Vzorkovače a sledovače s pamětí}
+        Slouží k přesnému odebrání vzorku z časově proměnného analogového signálu a jeho uchování po dobu nutnou pro A/D převod. \textbf{Vzorkovač (S/H - Sample and Hold)} odebírá vzorek co nejkratší dobu, zatímco \textbf{sledovač (T/H - Track and Hold)} signál trvale sleduje a pamatuje si pouze poslední hodnotu před převodem. Fyzikálně se oba obvody liší pouze v organizaci povelových signálů. Obvod se skládá z oddělovacího zesilovače $Z_1$ schopného dodat velký nabíjecí proud, elektronického spínače a výstupního oddělovacího zesilovače $Z_2$ s obrovským vstupním odporem, aby se zabránilo vybíjení \textbf{paměťového kapacitoru ($C_P$)}. Zásadní je výběr kondenzátoru – musí mít dielektrikum z polystyrenu nebo polypropylenu s velmi malou dielektrickou absorbcí (< 0,02 \%), elektrolytické nebo běžné keramické kondenzátory jsou naprosto nevhodné.
+        
+        \begin{itemize}
+            \item \textbf{Vzorkovače bez zpětné vazby:} Zesilovače $Z_1$ a $Z_2$ pracují jako napěťové sledovače a spínač není uvnitř zpětné vazby. Jejich předností je vysoká rychlost vzorkování, nevýhodou je horší přesnost, protože se sčítají stejnosměrné chyby obou OZ. Vliv vybíjení $C_P$ klidovým proudem $Z_2$ během pamatování lze minimalizovat přidáním kompenzačního kapacitoru $C_K = C_P$ na druhý vstup.
+            \item \textbf{Vzorkovače se zpětnou vazbou:} Spínač je umístěn uvnitř celkové zpětnovazební smyčky. To výrazně zvyšuje přesnost obvodu, protože stejnosměrné chyby druhého OZ se eliminují zpětnou vazbou. Nevýhodou je pomalejší vzorkování vlivem doby ustalování smyčky. Aby se zabránilo hluboké saturaci (upnutí) prvního OZ po dobu pamatování (kdy je smyčka rozpojena), musí se zavést ochranné prvky, jako je protitaktně spínaný spínač nebo antiparalelní zapojení diod na výstupu prvního OZ.
+            \item \textbf{Vzorkovače s integrátorem:} Paměťový kapacitor je umístěn ve zpětné vazbě integrátoru, takže analogový spínač se spíná k "virtuální nule". Rychlost nabíjení (časovou konstantu) ovlivňuje kromě rezistoru a $C_P$ také odpor $r_{ON}$. Pro extrémní urychlení odběru vzorku lze za spínač přidat ještě doplňkový proudový zesilovač.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{VZ.jpg}
+        \end{figure}
+\subsection{Stabilizátory napětí - sériový a paralelní stabilizátor se zesilovačem odchylky. Generátory - funkční generátory, multivibrátory.}
+    \subsubsection{Stabilizátory napětí se zesilovačem odchylky}
+        Výstupní napětí jednoduchých usměrňovačů je závislé na kolísání síťového napětí a na změnách zátěže. Pro přesnější aplikace se proto za napájecí zdroj zařazuje stabilizátor napětí, typicky ve formě regulátoru se zesilovačem regulační odchylky. Tento obvod se skládá z porovnávacího obvodu, zesilovače regulační odchylky, zdroje referenčního napětí (často teplotně kompenzovaného) a výkonového regulačního prvku.
+        
+        \begin{itemize}
+            \item \textbf{Sériový stabilizátor se zesilovačem regulační odchylky:} Regulační prvek (výkonový bipolární tranzistor, tranzistor MOSFET nebo Darlingtonova dvojice) je zapojen v sérii se zátěží a funguje principiálně jako emitorový sledovač. Referenční napětí se porovnává s částí výstupního napětí, přičemž vzniklé chybové napětí je po zesílení přivedeno na regulační prvek, který tak udržuje na výstupu konstantní úroveň. Obvodová realizace často využívá operační zesilovač (OZ) v neinvertujícím zapojení, jehož proudové schopnosti jsou posíleny právě koncovým tranzistorem. Výstupní napětí je definováno vztahem $U_P \approx U_Z(1 + R_2/R_1)$, kde $U_Z$ je referenční napětí a $R_1, R_2$ tvoří zpětnovazební dělič. Činitel stabilizace může dosahovat hodnot až několika tisíc. Velkou výhodou tohoto uspořádání je, že výstupní napětí nezávisí na úbytku $u_{BE}$ regulačního tranzistoru a OZ může pracovat i s vyšším výstupním napětím. Nevýhodou konvenčního sériového zapojení je nutnost udržet mezi vstupem a výstupem rozdíl minimálně 1 V (častěji 2,5 až 4 V), aby stabilizátor správně potlačoval zvlnění.
+            \item \textbf{Paralelní stabilizátor se zesilovačem regulační odchylky:} Regulační tranzistor je zapojen paralelně k výstupu (k zátěži) a je se společným emitorem. Protože toto zapojení fázově posouvá signál o 180°, jsou pro zachování záporné zpětné vazby na operačním zesilovači zaměněny vstupní svorky (invertující a neinvertující). Výstupní napětí je určeno shodným vztahem $U_P \approx U_Z(1 + R_2/R_1)$. Zásadní nevýhodou tohoto zapojení je nízká energetická účinnost, protože podstatná část výkonu se trvale ztrácí na předřazeném sériovém rezistoru. Z tohoto důvodu se paralelní stabilizátor napětí používá v praxi jen zřídka. Tyto stabilizátory bývají doplněny o elektronickou pojistku, která omezuje výstupní proud při přetížení nebo zkratu.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{Reg.jpg}
+        \end{figure}
+    \subsubsection{Generátory}
+        Generátory jsou autonomní elektrické obvody, které bez vnějšího periodického buzení vyrábějí netlumené elektrické kmity. Generátory tvarových kmitů, tvořící kmity s prudkými změnami strmosti (relaxační kmity, např. trojúhelníkové, pravoúhlé nebo pilovité), nevyžadují na rozdíl od harmonických oscilátorů dva akumulační prvky a vystačí si se soustavou prvního řádu (s jedním kapacitorem).
+        
+        \subsubsection*{Funkční generátory}
+            Funkční generátory umožňují obvykle generovat více druhů kmitů současně (typicky trojúhelníkové a pravoúhlé).
+            
+            \begin{itemize}
+                \item \textbf{Princip na bázi integrátoru:} Nejčastěji se využívá zapojení invertujícího integrátoru s OZ, za nímž následuje neinvertující komparátor s hysterezí. Integrátor lineárně integruje výstupní napětí komparátoru. Jakmile klesající (nebo rostoucí) napětí dosáhne jedné z komparačních úrovní, komparátor skokově změní polaritu svého výstupu, čímž se obrátí i směr integrace. Výsledkem je na výstupu integrátoru trojúhelníkové napětí a na výstupu komparátoru napětí pravoúhlé.
+                \item \textbf{Generátory s přepínanými zdroji proudu:} Pro generování kmitů ve vyšších kmitočtových rozsazích (1 Hz až 20 MHz) se využívá přepínání zdrojů konstantního proudu. Kapacitor je periodicky střídavě nabíjen kladným proudem $I_1$ a vybíjen záporným proudem $-I_2$ prostřednictvím elektronického přepínače (např. diodového můstku) řízeného z výstupu komparátoru. Je-li $I_1 = I_2$, vznikají symetrické trojúhelníkové kmity. Je-li $I_1 \neq I_2$, vzniká pilovité napětí a pravoúhlý puls s odlišnou střídou. Harmonický signál lze z trojúhelníkových kmitů následně odvodit pomocí nelineárního diodového funkčního měniče.
+            \end{itemize}
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.4\linewidth]{FuncInt.png}
+            \end{figure}
+        \subsubsection*{Multivibrátory}
+
+            Multivibrátory jsou podkategorií relaxačních generátorů, jejichž hlavním produktem jsou výhradně pravoúhlé kmity.
+            
+            \begin{itemize}
+                \item \textbf{Multivibrátor s operačním zesilovačem:} Tvoří jej invertující komparátor s hysterezí a RC článek ve zpětné vazbě. Kapacitor $C$ je přes rezistor $R$ střídavě nabíjen a vybíjen z výstupního napětí komparátoru $U_{2p}$ resp. $U_{2n}$. Překlopení komparátoru nastane při dosažení úrovní definovaných napěťovým děličem $R_1, R_2$ (úrovně jsou závislé na saturačním napětí OZ). Doba periody se řídí vztahem $T = 2RC \ln(1 + 2R_1/R_2)$, což v typickém případě $R_1 = R_2$ činí $T \approx 2,2RC$. Nevýhodou je nízká stabilita kmitočtu z důvodu odvození komparačních úrovní z nepřesného saturačního napětí zesilovače.
+                \item \textbf{Multivibrátor s časovačem 555:} K dosažení mnohem vyšší kmitočtové stability se používá integrovaný časovač (např. 555) osazený přesným vnitřním rezistorovým děličem, dvěma komparátory a klopným obvodem RS. Uvnitř obvodu jsou pevně definovány stabilní komparační úrovně typicky $1/3U_C$ a $2/3U_C$. Externí kapacitor se exponenciálně nabíjí přes rezistory vnějších obvodů a při dosažení $2/3U_C$ horní komparátor překlopí obvod RS, který sepne vybíjecí tranzistor. Kapacitor se následně vybíjí na úroveň $1/3U_C$, kdy spodní komparátor cyklus zvrátí. Kmitočet výstupního pravoúhlého signálu je určen vztahem $f \approx 1,44 / ((R_1 + 2R_2)C)$. Připojením vnějšího referenčního napětí na vývod obvodu 555 lze komparační úrovně libovolně přesně předdefinovat.
+            \end{itemize}
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=1\linewidth]{Multivib.png}
+                \includegraphics[width=1\linewidth]{Multivib555.png}
+            \end{figure}

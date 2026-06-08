@@ -1,0 +1,251 @@
+\section{Digitální elektronika (BPC-DE1)}
+\subsection{Logická hradla. Postuláty a zákony Booleovy algebry}
+    \subsubsection{Logická hradla a základní kombinační funkce}
+        Kombinační logická funkce je pravidlo, které přiřazuje každé kombinaci logických hodnot (0 a 1) vstupních proměnných z definičního oboru jedinou výstupní hodnotu. Pro daný počet vstupů $n$ existuje vždy konečný počet možných kombinačních funkcí, a to přesně $2^{2^n}$.
+        
+        \begin{itemize}
+            \item \textbf{Funkce jedné proměnné}
+            \begin{itemize}
+                \item \textbf{Nulová funkce:} $y = f_0(x) = 0$.
+                \item \textbf{Opakování (Buffer, BUF):} $y = f_1(x) = x$.
+                \item \textbf{Inverze (NOT, negace):} $y = f_2(x) = \bar{x}$.
+                \item \textbf{Jednotková funkce:} $y = f_3(x) = 1$.
+            \end{itemize}
+        
+            \item \textbf{Funkce dvou proměnných a logická hradla}
+            \begin{itemize}
+                \item Ze 16 možných logických funkcí dvou proměnných se v digitální technice využívají především tři základní funkce a jejich invertované podoby:
+                \item \textbf{AND (logický součin, konjunkce):} $y = a \cdot b$.
+                \item \textbf{OR (logický součet, disjunkce):} $y = a + b$.
+                \item \textbf{XOR (exkluzivní logický součet, nonekvivalence):} $y = a \oplus b = a \cdot \bar{b} + \bar{a} \cdot b$.
+                \item Ke každé z těchto základních funkcí existuje její \textbf{negovaná (inverzní) forma}:
+                \item \textbf{NAND:} $y = \overline{a \cdot b}$.
+                \item \textbf{NOR:} $y = \overline{a + b}$.
+                \item \textbf{XNOR (ekvivalence):} $y = \overline{a \oplus b} = a \cdot b + \bar{a} \cdot \bar{b}$.
+            \end{itemize}
+        
+            \item \textbf{Pravdivostní stavy základních hradel pro vstupy a, b}
+            \begin{itemize}
+                \item \textbf{AND:} Nabývá hodnoty 1 pouze tehdy, jsou-li oba vstupy 1. V ostatních případech je 0.
+                \item \textbf{OR:} Nabývá hodnoty 0 pouze tehdy, jsou-li oba vstupy 0. V ostatních případech je 1.
+                \item \textbf{XOR:} Nabývá hodnoty 1, pokud jsou vstupní hodnoty rozdílné (0 a 1 nebo 1 a 0).
+            \end{itemize}
+        \end{itemize}
+    \subsubsection{Postuláty a zákony Booleovy algebry}
+        Booleova algebra představuje matematický nástroj pro manipulaci a práci s logickými (dvoustavovými) proměnnými, využívající primárně operace AND, OR a NOT. Lze dokázat, že jakákoliv logická funkce s libovolným počtem proměnných může být reprezentována (realizována) pomocí elementárních logických funkcí, jež tvoří tzv. \textbf{úplný soubor logických funkcí}.
+        
+        Při zjednodušování logických výrazů se aplikují následující základní postuláty a zákony:
+        
+        \begin{itemize}
+            \item \textbf{Vliv konstant a operace identity}
+            \begin{itemize}
+                \item Pro konstanty 0 a 1 a identické proměnné platí:
+                \item $0 + a = a$ a současně $a + 0 = a$
+                \item $1 + a = 1$ a současně $a + 1 = 1$
+                \item $1 \cdot a = a$ a současně $a \cdot 1 = a$
+                \item $0 \cdot a = 0$ a současně $a \cdot 0 = 0$
+                \item $a + a = a$
+                \item $a \cdot a = a$
+            \end{itemize}
+            
+            \item \textbf{Zákony negace}
+            \begin{itemize}
+                \item Pro logickou operaci negace platí pravidla komplementarity a dvojité negace:
+                \item $\bar{0} = 1$ a $\bar{1} = 0$
+                \item $a + \bar{a} = 1$
+                \item $a \cdot \bar{a} = 0$
+                \item $\bar{\bar{a}} = a$ (dvojitá negace)
+            \end{itemize}
+
+            \item \textbf{Komutativní zákon}
+            \begin{itemize}
+                \item Pořadí operandů u základních logických funkcí nehraje roli:
+                \item $a + b = b + a$
+                \item $a \cdot b = b \cdot a$
+            \end{itemize}
+        
+            \item \textbf{Asociativní zákon}
+            \begin{itemize}
+                \item Operandy lze libovolně sdružovat:
+                \item $a + b + c = a + (b + c)$
+                \item $a \cdot b \cdot c = a \cdot (b \cdot c)$
+            \end{itemize}
+        
+            \item \textbf{Distributivní zákon (Distributivnost)}
+            \begin{itemize}
+                \item Určuje pravidla roznásobování a vytýkání v logických výrazech:
+                \item $a \cdot (b + c) = a \cdot b + a \cdot c$
+                \item $a + b \cdot c = (a + b) \cdot (a + c)$
+            \end{itemize}
+        
+            \item \textbf{Zákon absorpce (pohlcení)}
+            \begin{itemize}
+                \item Slouží ke zjednodušení logického výrazu eliminací redundantní proměnné:
+                \item $a + a \cdot b = a$
+                \item $a \cdot (a + b) = a$
+            \end{itemize}
+        
+            \item \textbf{Zákon spojování}
+            \begin{itemize}
+                \item Využívá se při minimalizaci logických funkcí k odstranění proměnné, která se vyskytuje v přímém i negovaném tvaru:
+                \item $a \cdot b + a \cdot \bar{b} = a$
+                \item $(a + b) \cdot (a + \bar{b}) = a$
+            \end{itemize}
+
+            \item \textbf{Princip duality}
+            \begin{itemize}
+                \item Podle principu duality platí, že dva ekvivalentní logické výrazy si zachovají svou rovnost (zůstávají v platnosti) i v případě, že současně vzájemně zaměníme logické operátory AND ($\cdot$) za OR (+) a naopak, a k tomu zaměníme všechny logické konstanty 0 za 1 a naopak.
+            \end{itemize}
+        
+            \item \textbf{De Morganovy zákony}
+            \begin{itemize}
+                \item Základní věty definující chování negace u logických operací. Hodnota logického výrazu se nezmění, pokud operátory logického součtu nahradíme operátory logického součinu (a naopak), a současně invertujeme všechny proměnné i celý výsledek.
+                \item Vyjadřují se dvěma základními teorémy:
+                \item \textbf{Teorém 1:} $\overline{a \cdot b} = \bar{a} + \bar{b}$
+                \item \textbf{Teorém 2:} $\overline{a + b} = \bar{a} \cdot \bar{b}$
+            \end{itemize}
+        \end{itemize}
+\subsection{Klopné obvody. Typy, vlastnosti, zapojení a realizace.}
+        Klopné obvody tvoří základní paměťové prvky v sekvenčních logických obvodech. Na rozdíl od kombinačních obvodů závisí jejich výstupní hodnoty nejen na aktuálním stavu vstupních signálů, ale také na předchozích hodnotách (obsahují paměťový segment).
+        
+        Podle způsobu řízení a reakce na vstupní signály se klopné obvody dělí na dvě hlavní kategorie:
+        \begin{itemize}
+            \item \textbf{Latches (Klopné obvody se statickým řízením):} Zařízení citlivá na úroveň řídicího signálu (\textit{level-sensitive}). Obvod je po dobu aktivní úrovně transparentní.
+            \item \textbf{Flip-flops (Klopné obvody s dynamickým řízením):} Zařízení citlivá výhradně na hranu řídicího (hodinového) signálu (\textit{edge-triggered}). Výstup reaguje pouze v okamžiku náběžné nebo sestupné hrany.
+        \end{itemize}
+    \subsubsection{Latches: Klopné obvody citlivé na úroveň}
+        \begin{itemize}
+            \item \textbf{S-R Latch}
+            \begin{itemize}
+                \item \textbf{Zapojení a realizace:} Typicky se realizuje asymetrickým křížovým spojením dvou dvouvstupových hradel NOR nebo NAND.
+                \item \textbf{Vlastnosti (realizace s hradly NOR):} Má dva vstupy s (set – nastavení) a r (reset – nulování). Logická "1" na vstupu s nastaví hlavní výstup do stavu 1. Logická "1" na vstupu r výstup vynuluje. Stav, kdy s=0 a r=0, je paměťový (obvod drží předchozí hodnotu). Kombinace s=1, r=1 je \textbf{nepovolená} – výstupy ztrácí komplementaritu (Q i /Q jsou obojí 0). Při návratu z tohoto zakázaného stavu zpět do stavu paměťového (00) se obvod na desítky nanosekund dostává do tzv. metastabilního stavu s nedefinovaným výstupem.
+                \item \textbf{Vlastnosti (realizace s hradly NAND):} Vstupy /S a /R jsou aktivní v nízké úrovni. Paměťový stav je pro "11" a zakázaný (nepovolený) naopak pro hodnoty "00".
+            \end{itemize}
+        
+            \item \textbf{Gated S-R Latch}
+            \begin{itemize}
+                \item \textbf{Zapojení a realizace:} Vznikne přidáním povolovacího vstupu \textit{en} (enable) před základní S-R obvod. Ve struktuře složitějších integrovaných obvodů se využívá velmi často jako dílčí stavební blok.
+                \item \textbf{Vlastnosti:} Obvod reaguje na vstupy s a r, pouze pokud je povolovací vstup v aktivní úrovni (např. \textit{en}=1). Pokud je \textit{en}=0, vstupy pro nastavení a reset jsou deaktivovány, obvod si pamatuje svou hodnotu a jakékoliv změny datových vstupů jsou na výstupu ignorovány.
+            \end{itemize}
+        
+            \item \textbf{D Latch}
+            \begin{itemize}
+                \item \textbf{Zapojení a realizace:} Vychází z obvodu Gated S-R, ke kterému je přidán invertor. Tím je zaručeno, že hodnoty na větvích s a r jsou neustále logickým komplementem. Původní vstup "s" je přejmenován na D (data).
+                \item \textbf{Vlastnosti:} Implementace invertoru eliminuje možnost vzniku zakázaného vstupního stavu. Když \textit{en}=1, je obvod transparentní (výstup Q přímo kopíruje vstup D). Po přechodu \textit{en} na 0 se na sestupné hraně aktuální hodnota zablokuje a zapamatuje do příchodu dalšího povolovacího pulzu.
+            \end{itemize}
+        \end{itemize}
+        \newpage
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{SRlatch.png}
+            \caption{S-R Latch}
+        \end{figure}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{GatedSRlatch.png}
+            \caption{Gated S-R Latch}
+        \end{figure}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{Dlatch.png}
+            \caption{D Latch}
+        \end{figure}
+    
+    \subsubsection{Flip-Flops: Klopné obvody řízené hranou}
+
+        Pro tyto obvody je typická přítomnost hodinového signálu (\textit{clk}). Citlivost na hranu je ve schematické značce u pinu \textit{clk} znázorněna pomocí malého trojúhelníku.
+        
+        \begin{itemize}
+            \item \textbf{D-type Flip-Flop}
+            \begin{itemize}
+                \item \textbf{Zapojení a realizace:} Vytváří se v kaskádové topologii Master-Slave propojením dvou klopných obvodů: D latche a Gated S-R latche, které jsou aktivovány v opačných fázích hodinového signálu.
+                \item \textbf{Vlastnosti:} Během první fáze hodin propisuje první obvod (Master) data na svůj výstup, zatímco druhý (Slave) je deaktivovaný. Teprve při aktivní hraně hodin (např. sestupné) se aktivuje stupeň Slave a výstupní hodnota prvního se překlopí na konečný výstup Q.
+                \item \textbf{Charakteristická rovnice:} Výstupní stav po aktivní hraně je definován rovnicí $q_{n+1} = d$.
+            \end{itemize}
+        
+            \item \textbf{JK-type Flip-Flop}
+            \begin{itemize}
+                \item \textbf{Zapojení a realizace:} Modifikovaný hranově řízený D-type Master-Slave obvod, kde jsou výstupy klopného obvodu přivedeny zpět na vstup a logicky zkombinovány s datovými vstupy j a k.
+                \item \textbf{Vlastnosti:} Obvod řeší problém nedefinovaného stavu klasického RS obvodu. Při kombinaci vstupů j=1 a k=1 se namísto chybového stavu výstup Q invertuje (tzv. toggle) vůči předchozímu stavu. Zbylé logické stavy jsou totožné s RS (00 = paměť, 01 = reset do nuly, 10 = nastavení jedničky).
+                \item \textbf{Charakteristická rovnice:} $q_{n+1} = j \cdot \bar{q}_n + \bar{k} \cdot q_n$.
+            \end{itemize}
+        
+            \item \textbf{T-type Flip-Flop}
+            \begin{itemize}
+                \item \textbf{Zapojení a realizace:} Je strukturálně identický s obvodem JK, se zásadním rozdílem – datové vstupy j a k jsou zkratovány do jediného datového vstupu t.
+                \item \textbf{Vlastnosti:} Působí jako obvod pro invertování výstupu. Pokud je na datovém vstupu t nula, obvod svůj stav udržuje. Je-li přítomna jedna, na aktivní hraně hodin se aktuální uložený stav neguje.
+                \item \textbf{Charakteristická rovnice:} $q_{n+1} = t \cdot \bar{q}_n + \bar{t} \cdot q_n = t \oplus q_n$.
+            \end{itemize}
+        \end{itemize}
+    \subsubsection{Časové parametry}
+        Pro bezchybnou realizaci záznamu dat u synchronních překlápěcích obvodů je nutné bezpodmínečně respektovat fyzikální zpoždění součástek v podobě specifických časových oken. Jejich narušení u datových signálů může způsobit zapsání chybné hodnoty či metastabilitu.
+        
+        \begin{itemize}
+            \item \textbf{Setup time ($t_{su}$):} Určuje minimální přesný časový okamžik před příchodem aktivní hrany hodin, po který již musí být hodnota na datovém vstupu neměnná (stabilní).
+            \item \textbf{Hold time ($t_h$):} Představuje minimální nutný čas bezprostředně po aktivní hraně hodin, během kterého se zapisovaná data stále nesmí změnit.
+            \item \textbf{Clock-to-Q delay ($t_{cq}$):} Doba nutná pro propagaci zpracovávaného signálu, reprezentující prodlevu od reálného příchodu hrany hodinových pulzů do stabilizování nové hodnoty přímo na fyzickém výstupu Q.
+        \end{itemize}
+\subsection{Čítače. Typy, vlastnosti, zapojení a realizace. }
+        Čítač je sekvenční logický obvod, který má schopnost počítat vstupní hodinové impulzy. Nejběžnější typ čítače má jeden hodinový vstup a více výstupů, které zpravidla reprezentují binární nebo binárně kódovaná desetinná (BCD) čísla.
+        
+        \begin{itemize}
+            \item \textbf{Základní vlastnosti čítačů:}
+            \begin{itemize}
+                \item \textbf{Maximální počet stavů:} Obecný čítač s $n$ klopnými obvody může mít maximálně $2^n$ stavů.
+                \item \textbf{Modul (MOD):} Označuje počet výstupních stavů, kterými čítač projde ve výstupní sekvenci, než se vrátí ke své počáteční hodnotě. Například čítač sestavený ze 4 klopných obvodů má maximum $2^4 = 16$ stavů (0--15) a označuje se jako "MOD-16" čítač.
+            \end{itemize}
+        \end{itemize}
+    \subsubsection{Typy a klasifikace čítačů}
+        \begin{itemize}
+            \item \textbf{Podle vnitřního propojení (synchronizace):} Asynchronní a synchronní.
+            \item \textbf{Podle kódu:} Binární, dekadické (\textit{decade}), čítače v Grayově kódu, LFSR (\textit{Linear Feedback Shift Register}) a další.
+            \item \textbf{Podle směru čítání:} Čítající vpřed (\textit{UP counter}), čítající vzad (\textit{DOWN counter}) a vratné (\textit{UP/DOWN counter}).
+            \item \textbf{Podle typu použitých klopných obvodů:} Typicky D, T nebo JK.
+        \end{itemize}
+    \subsubsection{Asynchronní čítače (Ripple counters)}
+        U asynchronních čítačů jsou jednotlivé klopné obvody (KO) řízeny různými hodinovými signály, výstupy tak mění svůj stav jeden po druhém.
+        \begin{itemize}
+            \item \textbf{Zapojení a realizace}
+            \begin{itemize}
+                \item Externím hodinovým signálem \textit{clk} je taktován pouze první klopný obvod. Hodinový vstup každého dalšího stupně je tvořen výstupem z předchozího klopného obvodu.
+                \item \textbf{Čítač vpřed (UP):} Realizován s D klopnými obvody tak, že vstup D každého KO je připojen na jeho vlastní invertovaný výstup ($\bar{Q}$). Tento invertovaný výstup slouží zároveň jako hodinový signál pro následující klopný obvod.
+                \item \textbf{Čítač vzad (DOWN):} Lze realizovat totožným zapojením, jedinou změnou je použití hlavního neinvertovaného výstupu ($Q$) pro hodinový vstup následujícího klopného obvodu.
+                \item Nevyžadují žádná dodatečná logická hradla, zapojení je velmi jednoduché.
+            \end{itemize}
+        
+            \item \textbf{Vlastnosti a omezení}
+            \begin{itemize}
+                \item \textbf{Ripple effect:} Při přechodu (např. ze stavu 111 na 000) se výstupy mění sekvenčně. Zpoždění klopných obvodů způsobuje, že se v krátkém časovém úseku na výstupu generují nepravé hodnoty.
+                \item \textbf{Maximální frekvence:} Doba ustálení je přímo úměrná počtu bitů čítače $n$. Maximální frekvence hodin se vypočítá jako $$f_{clkmax} = \frac{1}{n \cdot t_{FF} + t_{setup}}$$ kde $t_{FF}$ je zpoždění klopného obvodu a $t_{setup}$ je doba předstihu.
+            \end{itemize}
+        \end{itemize}
+    \subsubsection{Synchronní čítače}
+
+        V synchronním čítači je externí hodinový signál (\textit{clk}) připojen k hodinovým vstupům všech klopných obvodů současně. Všechny KO jsou tedy taktovány paralelně ve stejném čase.
+        
+        \begin{itemize}
+            \item \textbf{Vlastnosti a zapojení}
+            \begin{itemize}
+                \item Klopné obvody tvoří registr, a protože mění stav současně, nevzniká zde žádný "ripple effect".
+                \item Kromě registru obsahuje synchronní systém kombinační obvody ve zpětnovazební smyčce, které definují následující stav.
+            \end{itemize}
+        
+            \item \textbf{Binární synchronní čítač}
+            \begin{itemize}
+                \item Z pravdivostní tabulky vyplývá, že nejnižší bit (LSB) se invertuje s každou aktivní hranou hodin. Každý další vyšší bit se invertuje pouze tehdy, jsou-li všechny aktuální nižší bity rovny 1.
+                \item \textbf{Realizace s T klopnými obvody:} Pro inverzi stavu využívá KO typu T. K ověření, že jsou všechny nižší bity rovny 1, se využívají hradla AND.
+                \item \textbf{Varianty přenosu:}
+                \begin{enumerate}
+                    \item \textbf{Paralelní přenos (Parallel carry):} Využívá hradla AND s rostoucím počtem vstupů připojená přímo na výstupy předchozích KO. Maximální frekvence: $$f_{clkmax} = \frac{1}{t_{FF} + t_{AND} + t_{setup}}$$
+                    \item \textbf{Sériový přenos (Ripple carry):} Místo rozšiřování počtu vstupů hradel AND se využívá řetězení 2vstupových hradel AND. Tímto způsobem jsou čítače implementovány v programovatelných logických obvodech (PLD). Maximální frekvence: $$f_{clkmax} = \frac{1}{t_{FF} + (n-1) \cdot t_{AND} + t_{setup}}$$
+                \end{enumerate}
+                \item \textbf{Realizace s D klopnými obvody:} Protože pro převod T klopného obvodu na D platí $d = t \oplus q_n$, objevuje se v kombinační části obvodu kromě hradel AND také hradlo XOR.
+            \end{itemize}
+        
+            \item \textbf{LFSR čítač (Linear Feedback Shift Register)}
+            \begin{itemize}
+                \item Implementován jako posuvný registr tvořený sérií klopných obvodů. Zpětná vazba pro začátek řetězce je tvořena výstupem hradla XOR nebo XNOR, do kterého vstupují vybrané výstupy registru (taps).
+                \item Generuje pseudonáhodnou binární sekvenci. Maximální počet stavů $n$-bitového LFSR není $2^n$, ale $2^n - 1$. Důvodem je, že např. při použití hradla XOR by sekvence samých nul trvale produkovala další nuly. Dosažení maximální délky je podmíněno správným výběrem zpětnovazebních odboček.
+                \item \textbf{Výhody:} Jednoduchá vnitřní struktura a vysoká rychlost.
+            \end{itemize}
+        \end{itemize}

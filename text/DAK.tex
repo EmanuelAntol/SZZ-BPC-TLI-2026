@@ -1,0 +1,241 @@
+\section{Datová komunikace (BPC-DAK)}
+\subsection{Teorie informace: Statické a dynamické vlastnosti zdroje informace, množství informace, entropie, nadbytečnost, kódování snižující nadbytečnost, prefixové kódy, Huffmanův kód a další.}
+    \subsubsection{Statické vlastnosti zdroje informace}
+        \begin{itemize}
+            \item \textbf{Množství informace ($I_i$):} Je definováno jako záporně vzatý logaritmus pravděpodobnosti výskytu zprávy $p_i$ na výstupu zdroje. Vztah pro výpočet je $I_i = -\log_2 p_i$, přičemž jednotkou je Shannon (Sh). Čím menší je pravděpodobnost výskytu jevu, tím větší množství informace daná zpráva nese.
+            \item \textbf{Entropie zdroje ($H$):} Vyjadřuje průměrné množství informace nesené jedním symbolem (zprávou) ze zdrojové abecedy o rozměru $q$. Vypočítá se jako střední hodnota množství informace všech symbolů abecedy: $H = -\sum_{i=1}^{q} p_i \log_2 p_i$ [Sh/symbol].
+            \item \textbf{Maximální entropie ($H_{max}$):} Je jí dosaženo v ideálním případě, kdy je pravděpodobnost výskytu všech symbolů v abecedě rovnoměrná (stejná), tj. $p_i = 1/q$. Vypočte se vztahem $H_{max} = \log_2 q$ [Sh/symbol].
+            \item \textbf{Relativní entropie ($H_r$):} Slouží k porovnání různých zdrojů informace a je definována jako poměr skutečné entropie zdroje vůči jeho maximální entropii: $H_r = H / H_{max}$. Nabývá hodnot z intervalu $\langle 0, 1 \rangle$.
+            \item \textbf{Nadbytečnost (Redundance, $R$):} Představuje doplněk relativní entropie do jedničky: $R = 1 - H_r$. Nabývá hodnot $R \in \langle 0, 1 \rangle$ a ukazuje, nakolik je zdroj nevyužitý.
+        \end{itemize}
+    \subsubsection{Dynamické vlastnosti zdroje informace}
+        Dynamické vlastnosti posuzují zdroj z hlediska času.
+        \begin{itemize}
+            \item \textbf{Modulační rychlost ($M$):} Vyjadřuje počet změn symbolů za jednotku času. Určuje se z doby výstupu jednoho symbolu ze zdroje $t_s$ vztahem $M = 1/t_s$ a její jednotkou je Baud (Bd).
+            \item \textbf{Informační rychlost ($v_i$):} Udává průměrné množství informace vygenerované za jednu sekundu. $v_i = H \cdot M$ [Sh/s].
+            \item \textbf{Přenosová rychlost ($v_p$):} Určuje fyzické množství signálových prvků přenesených za sekundu. Počítá se jako $v_p = M \log_2 F$ [bit/s], kde $F$ je počet stavů signálu (pro binární signál $F = 2$).
+        \end{itemize}
+    \subsubsection{Kódování snižující nadbytečnost (Zdrojové kódování)}
+        Mnoho reálných informačních zdrojů vytváří zprávy s vysokou nadbytečností, což snižuje celkový přenosový výkon komunikačního systému. Cílem zdrojového kódování je přechod na jinou abecedu s vyšší účinností neboli odstranění redundance.
+        \begin{itemize}
+            \item \textbf{Princip:} Často se vyskytujícím zprávám se přiřadí značka s menším počtem signálových prvků a méně pravděpodobným zprávám značka delší. Tím se minimalizuje střední délka značky $n$. Kódy navržené na tomto principu se označují také jako entropické kódy.
+            \item \textbf{Účinnost kódování ($\mu$):} Vyjadřuje míru optimality přizpůsobeného zdroje. Platí $\mu = H / (n \log_2 F)$, kde $n$ je střední délka značky.
+            \item \textbf{Nadbytečnost přizpůsobeného zdroje ($R_x$):} Určuje se doplňkem účinnosti, $R_x = 1 - \mu$.
+        \end{itemize}
+    \subsubsection{Prefixové kódy}
+        \begin{itemize}
+            \item \textbf{Prefixový kód:} Je definován jako nerovnoměrný kód, pro nějž platí, že \textbf{žádná značka není prefixem (předponou) jiné značky}.
+            \item \textbf{Dekódování:} Díky prefixové vlastnosti je kód \textbf{jednoznačně dekódovatelný}. Při příjmu bitů zleva se hledá nejmenší sekvence tvořící známou značku.
+            \item \textbf{Kraft--McMillanova věta:} Stanovuje nutnou podmínku pro existenci jednoznačně dekódovatelného kódu. Definuje Kraft--McMillanovo číslo $K = \sum m_i F^{-i}$, kde $m_i$ je počet značek majících délku $i$, a $F$ je základ číselné soustavy (typicky $F = 2$).
+            \begin{itemize}
+                \item $K < 1$: Kód má nadbytečnost a může být jednoznačně dekódovatelný.
+                \item $K = 1$: Jde o kompletní kód a může být jednoznačně dekódovatelný.
+                \item $K > 1$: Kód s jistotou \textbf{není jednoznačně dekódovatelný}.
+            \end{itemize}
+        \end{itemize}
+    \subsubsection{Metody konstrukce a optimální kód}
+
+        Základní podmínkou optimálního kódu je, že jeho střední délka značky $n_{opt}$ leží v úzkém rozmezí daném entropií: $H \le n_{opt} < H + 1$.
+
+        \begin{itemize}
+            \item\textbf{Shannonův--Fanův (SF) kód}
+                \begin{itemize}
+                    \item Teoretický přístup konstrukce kódů, který stanovuje délky jednotlivých značek $n_i$ jako nejbližší vyšší celé číslo splňující podmínku: $n_i \ge -\log_F p_i$.
+                \end{itemize}
+            \item\textbf{Huffmanův kód}
+                \begin{itemize}
+                    \item Jedná se o algoritmus pro návrh optimálního prefixového kódu.
+                    \item \textbf{Huffmanovo pravidlo:} Symboly s menší pravděpodobností výskytu mají delší kódová slova. 
+                    \item \textbf{Algoritmus návrhu:}
+                    \begin{enumerate}
+                        \item V množině symbolů se vyhledají dva s nejmenší pravděpodobností a sloučí se do jednoho nového uzlu, jehož pravděpodobnost je součtem obou prvků.
+                        \item Původním dvěma větvím se přiřadí bit 0 a 1 (obvykle 0 pro menší pravděpodobnost, 1 pro větší).
+                        \item Kroky se opakují pro zredukovanou množinu prvků, dokud nezbude pouze jeden kořen o pravděpodobnosti 1,0.
+                    \end{enumerate}
+                \end{itemize}
+        \end{itemize}
+    \subsubsection{Další metody bezeztrátové komprese}
+        \begin{itemize}
+            \item \textbf{Komprese bloků dat:} Pokud jeden symbol silně dominuje, prosté Huffmanovo kódování selhává (nejkratší možný znak je 1 bit). Řešením je sdružení několika původních znaků do bloku (nová abeceda). Na bloky se aplikuje kód s podstatně lepší kompresní účinností.
+            \item \textbf{Aritmetické kódování:} Mapuje zprávu na reálné číslo v definovaném intervalu. Pro každý prvek určí délku tak, aby $n \ge 1 - \log_2 p_i$, a následně generuje celé číslo $c$, takové, že $c - 1 \le 2^n a_i < c$.
+            \item \textbf{Kódování se slovníkem (např. LZW):} Slovníkové algoritmy (statické či dynamické) nahrazují opakující se delší sekvence či fráze pouze jejich indexem ve sdíleném slovníku.
+        \end{itemize}
+\subsection{Přenos informace: Kapacita diskrétního a spojitého kanálu, Shannonův vztah a jeho popis, kapacita kanálu a přenosová rychlost, modulační rychlost, výkon a výkonová spektrální hustota.}
+    \subsubsection{Kapacita diskrétního kanálu}
+        Diskrétní kanál používá pro přenos konečný počet stavů. Jeho informační kapacita (propustnost) $C$ definuje maximální množství informace, které je kanál schopen přenést za jednotku času.
+        \begin{itemize}
+            \item \textbf{Ideální diskrétní kanál:} Neuvažuje se působení šumu a poruch. Kapacita je určena vztahem $C = M \cdot H_{max} = M \cdot \log_2 F$ [Sh/s], kde $M$ je modulační rychlost a $F$ je počet stavů, které kanál používá.
+            \item \textbf{Diskrétní kanál s poruchami:} Vstup poruch do kanálu způsobuje, že vyslaný prvek $x$ se může změnit na přijatý prvek $y$ s určitou pravděpodobností chyby $p(y|x)$. Průměrné množství přenesené užitečné informace $I(X;Y)$ je dáno rozdílem entropie přijatého signálu $H(Y)$ a průměrné rušivé (ztracené) informace $H(Y|X)$, tedy $I(X;Y) = H(Y) - H(Y|X)$. Kapacita kanálu $C$ se definuje maximalizací tohoto vztahu: $C = \max\{M \cdot I(X;Y)\}$. Pro zjednodušený model tzv. symetrického kanálu s poruchami lze odvodit tvar $C = M \cdot [\log_2 N - h]$.
+        \end{itemize}
+    \subsubsection{Kapacita spojitého kanálu}
+        Spojitý (analogový) kanál má  nekonečný počet stavů, proto se vztahy z diskrétní podoby převádí do integrálního vyjádření. Kanál se zpravidla modeluje jako systém s aditivním Gaussovým bílým šumem (AWGN), který má normální rozdělení a nulovou střední hodnotu. Odvození kapacity $C = M \cdot \max\{h(Y) - h(Z)\}$ vede (při Gaussově rozložení se zadanými rozptyly užitečného signálu a šumu) ke kvantifikaci vlivu odstupu signál--šum.
+        \begin{itemize}
+            \item \textbf{Shannonův vztah:} 
+            Shannonův (Shannon--Hartleyův) vztah vychází ze základního Nyquistova kritéria, které váže maximální modulační rychlost a šířku pásma vztahem $M \le 2B$ (modulační rychlost nesmí překročit dvojnásobek šířky pásma).
+            Dosazením do integrálních vztahů vzniká finální rovnice: $C = B \cdot \log_2(1 + SNR)$
+            
+            \begin{itemize}
+                \item \textbf{$B$:} Šířka kmitočtového pásma udávaná v Hz.
+                \item \textbf{$SNR$ (\textit{Signal to Noise Ratio}):} Odstup signálu od šumu v logaritmických jednotkách dB. Před dosazením do vzorce musí být odstup v dB převeden na lineární poměr.
+            \end{itemize}
+        \end{itemize}
+    \subsubsection{Výkon a výkonová spektrální hustota}
+        \begin{itemize}
+            \item \textbf{Výkonová spektrální hustota (PSD -- \textit{Power Spectral Density}):} Popisuje přesné rozložení výkonu napříč frekvenčním spektrem. Její jednotkou je [W/Hz], typicky se však používá vyjádření v [dBm/Hz]. Celkový výkon signálu je pak integrálem spektrální hustoty přes dané pásmo ($P = \int PSD(f) df$).
+            \item \textbf{Integrální tvar kapacity:} Při reálném přenosu není útlum ani spektrum šumu ideálně ploché. Shannonův vztah proto získává s využitím přenosové funkce kanálu $H(f)$ a PSD tvar:
+            \[ C = \int_B \log_2 \left( 1 + \frac{PSD_{TX}(f) \cdot |H(f)|^2}{N(f)} \right) df \]
+            kde $N(f)$ reprezentuje výkonovou spektrální funkci šumu AWGN.
+        \end{itemize}
+\subsection{Druhy chyb, zabezpečovací schopnost kódu, Hammingova vzdálenost a váha. Blokové kódy: Vytvářecí a kontrolní matice. Cyklické kódy: Vytvářecí mnohočlen. Zabezpečení, detekce a oprava chyb. Příklady cyklických kódů. LDPC kódy.}
+    \subsubsection{Druhy chyb}
+        Zprávy jsou typicky přenášeny jako posloupnost dvoustavových signálových prvků. Vlivem rušivých jevů v přenosovém kanálu  se chyby projevují jako inverze hodnoty bitu. Z hlediska rozložení dělíme chyby na dva základní druhy:
+        \begin{itemize}
+            \item \textbf{Nezávislé chyby:} 
+            \begin{itemize}
+                \item Jsou relativně rovnoměrně rozloženy v přijaté zprávě.
+                \item Vyskytují se jako „jednoduchá chyba“ (jeden chybný prvek v n-tici bitů) nebo „vícenásobná chyba“ (více prvků v n-tici).
+            \end{itemize}
+            \item \textbf{Shluky chyb:} 
+            \begin{itemize}
+                \item Jde o úseky v přenášené posloupnosti, ve kterých relativní četnost chyb výrazně převyšuje četnost chyb ve zbytku zprávy.
+                \item Shluk se charakterizuje délkou $b$ a hustotou chyb.
+            \end{itemize}
+        \end{itemize}
+    \subsubsection{Hammingova vzdálenost a váha}
+        K hodnocení schopnosti kódových slov vzájemně se odlišit se užívají následující metriky:
+        \begin{itemize}
+            \item \textbf{Hammingova vzdálenost ($d$):} Definuje počet míst, ve kterých se dvě různé kombinace prvků (kódová slova) stejné délky mezi sebou liší. \textbf{Minimální Hammingova vzdálenost ($d_{min}$):} představuje nejmenší nalezenou hodnotu Hammingovy vzdálenosti napříč všemi možnými dvojicemi kódových slov v celém souboru. Určuje odolnost kódu.
+            \item \textbf{Hammingova váha ($w$):} Udává celkový počet nenulových prvků (jedniček) v daném kódovém slově. \textbf{Minimální Hammingova váha ($w_{min}$):} je nejmenší hodnota Hammingovy váhy mezi všemi kódovými slovy, s výjimkou slova tvořeného samými nulami.
+        \end{itemize}
+    \subsubsection{Zabezpečovací schopnost kódu}
+        Schopnost kódu detekovat či korigovat chyby se odvíjí od minimální Hammingovy vzdálenosti ($d_{min}$).
+        \begin{itemize}
+            \item \textbf{Detekční schopnost:} Pro odhalení (detekci) $t_2$ chyb musí platit $d_{min} \ge t_2 + 1$.
+            \item \textbf{Korekční schopnost:} Pro opravu (korekci) $t_1$ chyb musí kód splňovat nerovnost $d_{min} \ge 2t_1 + 1$. Změněná kombinace má stále menší Hammingovu vzdálenost ke správnému slovu než k jinému platnému.
+            \item \textbf{Smíšená schopnost:} Systém zvládne $t_1$ chyb opravit a současně $t_2$ chyb detekovat, pokud platí $d_{min} \ge t_1 + t_2 + 1$.
+            \item \textbf{Schopnost pro shluky chyb:} Aby kód dokázal opravit jediný shluk chyb délky $b$, musí platit pro počet zabezpečovacích prvků $c \ge 2b - 1$.
+        \end{itemize}
+    \subsubsection{Blokové kódy}
+        V případě blokových kódů tvoří $k$ informačních prvků a $r$ zabezpečovacích prvků blok o celkové délce $n = k + r$. Značí se $(n; k)$. Lineární blokový kód funguje tak, že každé kódové slovo je lineární kombinací ostatních.
+        
+        \begin{itemize}
+            \item \textbf{Vytvářecí (generující) matice ($G$):} Matematický předpis pro tvorbu kódového slova $f$ z vektoru informačních prvků $p$ pomocí maticového násobení $f = p \cdot G$. Matice má rozměr $k$ řádků a $n$ sloupců. Její řádky tvoří lineárně nezávislé generující vektory (bázi podprostoru).
+            \item U tzv. \textbf{systematického kódu} (informační prvky jsou na začátku bloku) je matice složena z jednotkové matice $I_{k \times k}$ a zabezpečovací submatice $C_{k \times r}$, tedy $G = [I_{k \times k} | C_{k \times r}]$. Operace probíhají v aritmetice modulo 2.
+            \item \textbf{Kontrolní matice ($H$):} Definuje inverzní zapojení pro kontrolu zprávy (dekodér) pomocí kontrolních součtů. Umožňuje výpočet chybového syndromu. Její podoba logicky souvisí se submaticí ve vytvářecí matici, má strukturu transponované matice $H = [C^T | I_{r \times r}]$.
+        \end{itemize}
+    \subsubsection{Cyklické kódy}
+        Cyklické kódy jsou podskupinou lineárních blokových kódů zadávaných pomocí vytvářecího mnohočlenu $G(x)$ (generujícího polynomu), který nahrazuje funkci vytvářecí matice $G$.
+        \begin{itemize}
+            \item Počet zabezpečovacích prvků kódu $r$ odpovídá řádu mnohočlenu $G(x)$.
+            \item Kódování systematickým cyklickým kódem se v polynomickém zápisu realizuje jako přednásobení polynomu nezabezpečené zprávy $P(x)$ členem $x^r$ (tj. posun zprávy vlevo o $r$ pozic) a následným dělením mnohočlenem $G(x)$.
+            \item Proces vytvoří zabezpečenou zprávu $F(x) = P(x) \cdot x^r + R(x)$, kde $R(x)$ je nedělitelný zbytek z předchozího dělení (zabezpečovací bity).
+        \end{itemize}
+        Během přenosu působí na kanál chybový mnohočlen $E(x)$. Přijatá zpráva má pak tvar $J(x) = F(x) + E(x)$ v aritmetice modulo 2.
+        \begin{itemize}
+            \item \textbf{Detekce chyby:} Na přijímači se provádí opakované dělení přijaté zprávy $J(x)$ vytvářecím mnohočlenem $G(x)$. Je-li výsledek bezezbytku, nedošlo k chybě (nebo selhala detekční schopnost). Pokud vznikne \textbf{zbytek $R(x)$}, došlo prokazatelně k chybě. Tento zbytek nazýváme \textbf{syndromem $S(x)$}.
+            \item \textbf{Oprava chyby:} Pokud kód disponuje korekčními vlastnostmi, syndrom $S(x)$ v sobě nese jednoznačnou informaci o poloze chyby $E(x)$ (existuje specifická tabulka syndromů prvků $S(x) \rightarrow E(x)$). Samotná oprava spočívá v přičtení odhaleného chybového polynomu k přijaté zprávě, tj. $F(x) = J(x) + E(x)$.
+        \end{itemize}
+        Základní typy cyklických kódů a jejich deriváty zahrnují:
+        \begin{itemize}
+            \item \textbf{CRC kódy (\textit{Cyclic Redundancy Check}):} Čistě detekční kódy užívané např. v sítích. CRC-5 (pro USB), CRC-8 (ADSL)...
+            \item \textbf{Cyklický kód odvozený z Hammingova kódu:} Slouží pro detekci a opravu drobnějších úseků nezávislých chyb.
+            \item \textbf{Fireův kód:}
+            \item \textbf{BCH kódy (\textit{Bose--Chaudhuri--Hocquenghem}):} Cyklické kódy pro efektivní opravu vícenásobných chyb, opírající se silně o algebru tzv. Galoisových těles $GF(p^r)$.
+            \item \textbf{Reed--Solomonovy kódy (RS):} Speciální (nebinární) bloková implementace BCH algoritmů schopná efektivně korektovat dlouhé shluky chyb.
+        \end{itemize}
+    \subsubsection{LDPC kódy}
+        \textbf{Low-Density Parity-Check (LDPC)} kódy jsou třídou lineárních blokových kódů, které se řadí mezi nejvýkonnější metody kanálového kódování. Jejich hlavní předností je schopnost dosahovat přenosových rychlostí blízkých teoretickému Shannonovu limitu.
+        \begin{itemize}
+            \item Kontrolní matice H je velmi řídká, což znamená, že obsahuje jen velmi malý počet jedniček v poměru k počtu nul. Díky tomu jsou výpočetní nároky na dekódování zvladatelné i pro velmi dlouhé bloky dat.
+            \item Dekódují se pomocí iterativních algoritmů (např. Sum-Product Algorithm nebo Belief Propagation). Informace o pravděpodobnosti správnosti bitu se v cyklech přelévají mezi uzly grafu, dokud není nalezeno platné kódové slovo nebo není dosažen limit opakování.
+        \end{itemize}
+        \textbf{Klíčové výhody a aplikace}
+            \begin{itemize}
+                \item \textbf{Vysoká účinnost:} Minimální chybovost i při velmi nízkém odstupu signál--šum (SNR).
+                \item \textbf{Paralelizace:} Algoritmus dekódování je přirozeně paralelizovatelný, což umožňuje velmi vysoké přenosové rychlosti v hardwaru.
+                \item \textbf{Standardy:} Jsou základem moderních systémů jako \textbf{DVB-S2} (satelitní TV), \textbf{Wi-Fi (802.11n/ac/ax)}, \textbf{10G Ethernet} a mobilních sítí \textbf{5G} (pro datové kanály).
+            \end{itemize}
+\subsection{Stromové kódy: Odlišnost proti blokovým, popis grafy a diagramy, princip dekódování, Viterbiho algoritmus. Zřetězené kódy, Turbo kódy a násobné kódy.}
+    \subsubsection{Stromové kódy}
+        \paragraph{}
+        \textbf{Odlišnost proti blokovým kódům}
+        \begin{itemize}
+            \item \textbf{Zabezpečovací proces:} U stromových kódů není zabezpečení realizováno pouze na základě aktuálního bloku, ale využívá se k němu navíc $m - 1$ předchozích $k$-prvkových bloků nezabezpečených dat.
+            \item \textbf{Závislost dat:} Zabezpečovací sekvence je závislá na předchozích informačních prvcích datového toku. V případě rekurzivních stromových kódů navíc existuje i závislost na samotných předchozích kódových kombinacích.
+        \end{itemize}
+        \paragraph{}
+        \textbf{Grafické vyjádření stromových kódů}
+        
+        \begin{itemize}
+            \item \textbf{Stromový graf:} Vizualizuje kódovací proces formou větvícího se stromu, od kterého je odvozen samotný název kódů. Z každého uzlu vycházejí žebra (horní typicky odpovídá logické hodnotě vstupu 1 a spodní 0), přičemž samotné uzly reprezentují vygenerované výstupní bity.
+            \item \textbf{Mřížový graf:} Řeší problém exponenciálního růstu stromu tím, že spojuje stejné stavy systému do mřížky. Názorně reprezentuje vývoj zabezpečovacího procesu v čase pomocí definovaných stavů a možných přechodů mezi nimi. Cesta tímto grafem jednoznačně popisuje kódovou posloupnost. 
+            \item \textbf{Stavový diagram:} Tento popis znázorňuje proces jako automat. Jednotlivé stavy diagramu jsou dány obsahem vnitřních pamětí kodéru (např. registry $X_1, X_2$). Pokaždé, když dorazí nový vstupní bit, přejde systém po orientované hraně do nového stavu a vygeneruje příslušnou výstupní posloupnost bitů.
+        \end{itemize}
+    \subsubsection{Zřetězené kódy a násobné kódy}
+        Zřetězené kódy představují metodu kombinování více kódů za sebou pro dosažení vysoké odolnosti proti chybám. Rozlišujeme paralelní zřetězení (Turbo kódy) a sériové zřetězení.
+        \begin{itemize}
+            \item \textbf{Násobné kódy:} Jedná se o sériové zřetězení kódů. Zabezpečovací proces zde spočívá v tom, že datový tok zakódovaný v prvním kodéru se stane vstupem pro druhý kodér a je následně ještě jednou zabezpečen dalším kódem. Sériově zřetězený kód je možné popsat vytvářecí maticí ve tvaru $G = G_1 \cdot \Pi \cdot G_2$, kde $G_1$ a $G_2$ jsou vytvářecí matice jednotlivých kódů.
+            \item \textbf{Prokládání (\textit{Interleaving}):} U sériového i paralelního zřetězení se velice často umísťuje mezi kodéry tzv. prokladač (v maticovém zápisu výše matice $\Pi$). Prokladač přeskládá bity z prvního kodéru do jiného, pseudonáhodného pořadí, čímž realizuje dekorelaci (rozbíjí případné shluky chyb).
+        \end{itemize}
+    \subsubsection{Turbo kódy}
+        Turbo kódy jsou protichybové kódy určené k přenosu dat velmi blízko k Shannonovu teoretickému limitu sítě (používané v LTE, 3G, DVB-RCS).
+        
+        \begin{itemize}
+            \item \textbf{Struktura kodéru:} Jádrem Turbo kódu je paralelní zřetězení dvou nebo více \textbf{Rekurzivních systematických konvolučních kodérů (RSC)}. Během kódování se často vkládají tzv. doplňkové bity (\textit{Padding}) a paralelní větve odděluje prokladač. Z důvodu zvýšení efektivity se výstupy z kodérů \textbf{děrují}, kdy se některé nadbytečné bity vynechají.
+            \item \textbf{Dekódování:} Turbo kódy jsou iteračně dekódovatelné. Dekodér sestává z několika dílčích dekodérů, které navzájem spolupracují a sdílejí výpočty v iteracích.
+            \item \textbf{Měkké rozhodování (SOVA):} K dekódování se používá modifikovaný Viterbiho algoritmus s tzv. měkkým rozhodováním, nejčastěji pod zkratkou \textbf{SOVA} (\textit{Soft Output Viterbi Algorithm}). Tento algoritmus zkouší minimalizovat bitovou chybu odhadováním aposteriorních (následujících) pravděpodobností. Každý stav určuje akumulovanou pravděpodobnost cesty a dekodéry si mezi sebou vyměňují „měkké“ pravděpodobnostní hodnoty v nekonečné zpětnovazební smyčce, aby se ustálily na co nejpřesnějším odhadu.
+        \end{itemize}
+\subsection{Modemy: Měniče v základním a v přeloženém pásmu, linkové kódy, klíčování, modulace s jednou a více nosnými, DMT/OFDM, metody duplexního přenosu. }
+    \subsubsection{Modemy a rozdělení měničů signálu}
+        Výstupní signál z koncového zařízení nemá obvykle vlastnosti umožňující jeho přímý přenos přes daný přenosový kanál. Proto se datový signál upravuje v zařízení zvaném měnič signálu. Pro zařízení umožňující duplexní přenos se historicky vžilo označení \textbf{modem} (MOdulátor/DEModulátor). Z hlediska využití kmitočtového pásma dělíme měniče do dvou základních skupin:
+        
+        \begin{itemize}
+            \item \textbf{Měniče v základním pásmu (\textit{baseband}):} K úpravě datového signálu se uplatňují tzv. linkové kódy. Přenos je realizován v základním pásmu, přičemž je zpravidla potlačena stejnosměrná složka.
+            \item \textbf{Měniče v přeloženém pásmu (\textit{passband}):} Přenos je realizován posunutím spektra pomocí klíčovacích či modulačních technik. Amplituda, fáze nebo kmitočet harmonické nosné jsou ovlivňovány modulačním (datovým) signálem.
+        \end{itemize}
+    \subsubsection{Přenos v základním pásmu -- Linkové kódy}
+        Přenos v základním pásmu se realizuje pomocí linkových kódů, které definují reprezentaci signálových prvků formou dvou či vícestavového obdélníkového průběhu.
+        \begin{itemize}
+            \item \textbf{Důvody užití:} Mezi hlavní výhody patří potlačení stejnosměrné složky (pro přenosová média s transformátorovou či kapacitní vazbou), zlepšení synchronizace v přijímači (odstranění dlouhých sledů nul nebo jedniček), možnost detekce chyb a snížení nároků na šířku kmitočtového pásma použitím vícestavových kódů.
+            \item \textbf{Dělení:} Kódy se dělí podle návratu k referenční úrovni na \textbf{NRZ} (bez návratu k nule) a \textbf{RZ} (s návratem k nule), a dále podle počtu napěťových hladin na unipolární, bipolární, tří a víceúrovňové.
+            \item \textbf{Příklady v praxi:}
+            \begin{itemize}
+                \item \textit{HDB3 a AMI:} Zlepšují synchronizaci a uplatňují se v systémech ISDN a PCM systémech typu E1 a T1.
+                \item \textit{Manchester:} Klasický kód pro Ethernet o rychlosti 10 Mb/s.
+                \item \textit{2B1Q a 4B3T:} Víceúrovňové kódy šetřící šířku pásma, používané např. na ISDN rozhraní U.
+            \end{itemize}
+        \end{itemize}
+    \subsection*{3. Měniče v přeloženém pásmu -- Klíčování}
+        Pro přenos v přeloženém pásmu se aplikuje proces klíčování (u digitálního vstupu) nebo modulace.
+        \begin{itemize}
+            \item \textbf{Základní typy klíčování:}
+            \begin{itemize}
+                \item \textbf{ASK:} Změna amplitudy nosné. Realizuje se např. pomocí násobičky a demoduluje obálkovou či koherentní detekcí.
+                \item \textbf{FSK:} Přepínání dvou oscilátorů nebo využití jednoho napěťově řízeného oscilátoru (VCO). Demodulace se typicky provádí pomocí fázového závěsu (PLL) nebo pásmových propustí.
+                \item \textbf{PSK:} Datový signál řídí fázi nosné vlny. Pro BPSK se používá posun o 180° (0 a $\pi$).
+            \end{itemize}
+            \item \textbf{Vícestavové fázové klíčování:}
+            \begin{itemize}
+                \item \textbf{QPSK (\textit{Čtyřstavové fázové klíčování}):} Slučuje bity do dvojic (dibity) a používá čtveřici signálových prvků posunutých o 90° ($\pi/2$). Pro realizaci se užívá I/Q modulátor obsahující soufázovou složku (\textit{In-phase}) a kvadraturní složku (\textit{Quadrature}).
+                \item \textbf{8-PSK:} Vyjadřuje 3 bity (tribity :D) prostřednictvím osmi různých fázových stavů. K demodulaci bezpodmínečně vyžaduje koherentní demodulátor.
+                \item ...
+            \end{itemize}
+        \end{itemize}
+    \subsubsection{Modulace s jednou nosnou}
+        \begin{itemize}
+            \item \textbf{QAM:} Spojuje amplitudové a fázové klíčování. Vstupní datový tok se dělí na dvě větve, které D/A převodníky přemění na vícestavové úrovně sloužící pro modulaci složek I a Q. Tvoří konstelační diagramy (např. 16QAM tvoří čtvercovou matici 16 bodů pro reprezentaci 4 bitů). V běžných systémech existují varianty od 8QAM  až po 4096QAM.
+            \item \textbf{CAP:} Plně digitální realizace modulace QAM, kde je klasický I/Q modulátor s násobičkami nahrazen dvojicí číslicových FIR filtrů tvořících tzv. Hilbertův pár s fázovým posuvem přesně o 90°.
+        \end{itemize}
+    \subsubsection{Modulace s více nosnými}
+        K zajištění odolnosti vůči zhoršeným vlastnostem kanálů se využívá modulací s více nosnými (MCM -- \textit{Multi Carrier Modulation}), které informační tok paralelně rozkládají do nezávislých subnosných. K implementaci se užívá proces rychlé Fourierovy transformace.
+        \begin{itemize}
+            \item \textbf{DMT (\textit{Discrete Multitone}):} Varianta MCM optimalizovaná pro \textbf{základní pásmo} (využívaná např. na telefonních vedeních u ADSL/VDSL). Vstupní komplexní hodnoty musí být pro IFFT na vysílači vhodně zrcadlově zkopírovány a doplněny o hodnoty komplexně sdružené, čímž se zajistí, že výstupem bude čistě reálný signál přenositelný na fyzické lince.
+            \item \textbf{OFDM (\textit{Orthogonal Frequency Division Multiplexing}):} MCM určená pro systémy v \textbf{přeloženém pásmu} (WLAN, DVB-T, sdílená média). K zrcadlení pro algoritmus IFFT nedochází; jeho výstupem je komplexní signál posílaný do analogového I/Q modulátoru, jenž ho posune na vysokofrekvenční rádiovou nosnou.
+        \end{itemize}
+        \textbf{Cyklická předpona (CP -- \textit{Cyclic Prefix}):} Základní nástroj proti mezisymbolové interferenci u obou standardů. Realizuje se tak, že se definovaný blok vzorků z konce OFDM/DMT symbolu zkopíruje a vloží na jeho samotný začátek (např. v ADSL je to 32 vzorků z celkových 512). Na přijímači se po potlačení vlivu zpoždění kanálu tato předpona odstraní.
+    \subsubsection{Metody duplexního přenosu}
+        \begin{itemize}
+            \item \textbf{FDD (\textit{Kmitočtové oddělení -- Frequency Division Duplex}):} Spoj využívá odlišná kmitočtová pásma pro příjem a vysílání. K jejich hardwarové separaci se na vstupech zařízení užívají vysílací a přijímací filtry.
+            \item \textbf{TDD (\textit{Časové oddělení -- Time Division Duplex}):} Přenos v obou směrech je přepínán ve vymezených a přesně synchronizovaných časových slotech střídavě v jednom a druhém směru.
+            \item \textbf{EC (\textit{Obvodové oddělení s potlačením ozvěny -- Echo Cancellation}):} Nejfrekventovanější metoda umožňující oběma směry naplno sdílet identické kmitočtové pásmo. Systém se opírá o směrovou odbočnici zvanou \textbf{vidlice (\textit{hybrid})}. Vidlice aktivně potlačuje přeslech vysílače vlastního modemu do svého vlastního přijímače o zhruba 25 až 40 dB, přičemž zbytek rušivého ozvěnového signálu je matematicky modelován a odečítán až v číslicovém subsystému přijímače.
+        \end{itemize}

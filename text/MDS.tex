@@ -1,0 +1,178 @@
+\section{Multimediální služby (BPC-MDS)}
+\subsection{Kvalita služeb a kvalita zážitků v multimediálních službách.}
+    \subsubsection{Kvalita služeb}
+        Kvalita služeb (QoS) je definována jako vhodně definované a kontrolovatelné chování systému v souladu s kvantitativně měřitelnými parametry. \\
+        V systémech pracujících v reálném čase závisí správnost zpracování nejen na samotném výsledku, ale také na čase, ve kterém je výpočet vykonán a doručen. Časová omezení se dělí na:
+        \begin{itemize}
+            \item \textbf{Hard Deadline:} Nesmí být nikdy porušen, pozdní doručení výsledku zapříčiní vážnou chybu systému a pro uživatele nemá již žádnou hodnotu.
+            \item \textbf{Soft Deadline:} Neměl by být porušován, ale občasné zpoždění je systémem tolerováno a doručený výsledek si stále zachovává svou hodnotu.
+        \end{itemize}
+    \subsubsection{Měřitelné parametry QoS a třídy služeb}
+        Pro transport dat v multimediálních sítích jsou klíčové následující parametry QoS:
+        \begin{itemize}
+            \item \textbf{Propustnost / Šířka pásma:} Maximální počet datových jednotek přenesených za jeden časový interval.
+            \item \textbf{Zpoždění:} Čas zahrnující paketizaci na koncové stanici, propagaci na médiu a čekání ve frontách směrovačů.
+            \item \textbf{Kolísání zpoždění:} Maximální povolená časová odchylka doručení dat. Kompenzuje se pomocí zásobníků.
+            \item \textbf{Ztrátovost:} Maximální počet ztracených paketů v intervalu.
+        \end{itemize}
+        \textbf{Třídy služeb z hlediska garance doručení:}
+        \begin{itemize}
+            \item \textbf{Garantované služby:} Poskytují deterministické hodnoty parametrů, doručení dat je 100\% a prostředky jsou vždy k dispozici.
+            \item \textbf{Služby s řízením zátěže:} Garantují průměrné zpoždění a doručení velmi vysokého procenta dat.
+            \item \textbf{Služby Best-Effort:} Nedisponují žádnou garancí doručení dat.
+        \end{itemize}
+    \subsubsection{Architektury QoS}
+        \textbf{A) Integrované služby (IntServ -- Integrated Services)}\\
+        Model založený na \textbf{rezervaci prostředků pro každý datový tok}. Využívá protokol \textbf{RSVP (Resource reSerVation Protocol)}, kdy vysílající aplikace pošle zprávu \textit{PATH} a příjemce odpoví zprávou \textit{RESV}, která rezervuje kapacitu v každém směrovači na cestě.
+        \\
+        \textbf{B) Diferencované služby (DiffServ -- Differentiated Services)}\\
+        Škálovatelný model, který člení data do \textbf{tříd}. Klasifikace probíhá na okrajových (hraničních) routerech pomocí 6bitového kódu \textbf{DSCP (Differentiated Services Code Point)} v IP hlavičce. Vnitřní routery pak zpracovávají pakety podle značky (\textit{PHB - Per Hop Behavior}).
+        \begin{itemize}
+            \item \textbf{Hlavní režimy PHB:}
+            \begin{itemize}
+                \item \textit{Best Effort (BE):} Standardní doručení, nejnižší priorita.
+                \item \textit{Expedited Forwarding (EF):} Nízká latence a jitter.
+                \item \textit{Assured Forwarding (AF):} Třídy se zaručeným doručením dle SLA, rozlišené podle priority zahazování paketů při přetížení.
+            \end{itemize}
+            \item \textbf{Nevýhody:} Nemůže zaručit stoprocentní \textit{end-to-end} kvalitu (není rezervace cesty) a vyžaduje kompatibilitu mezi sítěmi různých operátorů.
+        \end{itemize}
+    \subsubsection{Kvalita zážitků (QoE -- Quality of Experience)}
+        QoE představuje \textbf{subjektivní dojem koncového uživatele}. Je ovlivňována technickými i lidskými faktory (očekávání uživatele, fyzické prostředí, výkonnost HW/SW).
+        \begin{itemize}
+            \item \textbf{Objektivní měření QoE:} Odhaduje kvalitu pomocí výpočetních modelů bez přítomnosti uživatele.
+            \begin{itemize}
+                \item Metody: Úplná reference (srovnání s originálem), částečná a neúplná reference.
+                \item \textbf{VMAF (Video Multi-method Assessment Fusion):} Pokročilá metrika (Netflix/YouTube) využívající regresní model trénovaný na reálných testech pro analýzu ztráty vizuálních detailů.
+            \end{itemize}
+            \item \textbf{Subjektivní měření QoE:} Testování na vzorku uživatelů. K vyjádření slouží \textbf{MOS (Mean Opinion Score)} na stupnici 1 (velmi špatná) až 5 (velice dobrá).
+            \item \textbf{Metodiky testování:}
+            \begin{itemize}
+                \item \textit{ACR (Absolute Category Rating):} Hodnocení obsahu ihned po 10s ukázce.
+                \item \textit{DCR (Degradation Category Rating):} Srovnání referenčního a znehodnoceného obsahu s pauzou.
+                \item \textit{PC (Pair Comparison):} Přímé porovnání dvou odlišných obsahů.
+                \item \textit{CCR (Comparison Category Rating):} Hodnocení na relativní škále od -3 do +3.
+            \end{itemize}
+        \end{itemize}
+\subsection{Streaming – standardy, využívané protokoly pro signalizaci a přenos, unicast vs. multicast. }
+    \subsubsection{Standardy a využívané formáty}
+        \begin{itemize}
+            \item \textbf{MPEG-DASH (Dynamic Adaptive Streaming over HTTP):} Standard využívající XML dokument zvaný \textbf{MPD} (\textit{Media Presentation Description}) neboli manifest. MPD obsahuje informace o časování, dostupnosti médií, použitých kodecích, rozlišeních a požadované šířce pásma. Zakódované médium je děleno do segmentů -- první inicializační segment slouží k inicializaci dekodéru, další mediální segmenty nesou data a obsahují přístupové body \textbf{SAP} (\textit{Stream Access Point}).
+            \item \textbf{Apple HLS (HTTP Live Streaming):} Systém založený na doručování obsahu na webu. K orientaci slouží playlisty (soubory \texttt{.m3u8}) -- \textbf{Master Playlist} (odkazuje na různé varianty stejného obsahu) a \textbf{Media Playlist} (definuje délku a URL konkrétních mediálních segmentů s příponou \texttt{.ts}).
+            \item \textbf{WebRTC:} Standard umožňující streamování v reálném čase přímo z webového prohlížeče, založený na technologiích HTML5 a JavaScript.
+            \item \textbf{RTP (Real-time Transport Protocol):} Definován v RFC 3550, zajišťuje doručování dat v reálném čase (nezaručuje však doručení samo o sobě). K rekonstrukci správného pořadí využívá 16bitové (\textit{Sequence Number}) a k synchronizaci médií (intramedia i intermedia) 32bitovou \textbf{časovou značku} (\textit{Timestamp}). Pomocí 7bitového pole \textbf{Payload Type} definuje použitý kodek. Přes 32bitové identifikátory \textbf{SSRC} (\textit{Synchronization source}) a \textbf{CSRC} (\textit{Contributing source}) specifikuje jednotlivé uživatele a zdroje dat.
+            \item \textbf{RTCP (RTP Control Protocol):} Zajišťuje řízení, dohled nad QoS, kontrolu zahlcení sítě a identifikaci (CNAME) účastníků v relaci RTP. Odesílá se periodicky s tím, že šířka pásma pro RTCP nesmí přesáhnout 5 \% celkové kapacity relace. Přenáší typy paketů jako \textbf{SR} (\textit{Sender Report}), \textbf{RR} (\textit{Receiver Report}) pro statistiku ztrátovosti a zpoždění (\textit{jitter}).
+        \end{itemize}
+        Přenášená data jsou zapouzdřena do \textbf{kontejnerů}, které zajišťují enkapsulaci, synchronizaci (časování), možnosti vyhledávání a nesou metadata. Mezi užívané standardy patří:
+        \begin{itemize}
+            \item \textbf{MP4:} Kontejner využívaný pro adaptivní streaming (MPEG-DASH i HLS).
+            \item \textbf{MPEG-CMAF:} Kontejner kódující segmenty do bloků (\textit{chunks}), což umožňuje u živého vysílání dosažení nižší latence při doručování přes HTTP.
+            \item \textbf{MPEG-TS (Transport Stream):} Navržen pro ztrátové prostředí a sítě (IPTV, DVB). Přenáší pakety fixní délky \textbf{188 B}. Každý elementární stream (ES) je identifikovatelný pomocí 13bitového identifikátoru \textbf{PID} (\textit{Packet Identifier}).
+        \end{itemize}
+    \subsubsection{Protokoly pro signalizaci a řízení}
+        \begin{itemize}
+            \item \textbf{RTSP (Real-Time Streaming Protocol):} Definován v RFC 2326, funguje na portu 554 v režimu klient--server. Funguje jako „síťový dálkový ovladač“ pro řízení přenosu dat (např. protokolem RTP). Syntaxí se podobá HTTP/1.1 a podporuje i multicast. Mezi klíčové metody (žádosti) patří \textbf{SETUP} (nastavení spojení), \textbf{PLAY} (zahájení vysílání), \textbf{PAUSE} (přerušení), \textbf{TEARDOWN} (ukončení relace) a \textbf{DESCRIBE} (získání popisu obsahu, typicky v SDP).
+            \item \textbf{SDP (Session Description Protocol):} Definován v RFC 4566, textově orientovaný protokol sloužící k popisu datového toku a relace. Obsahuje dostatek informací pro sestavení spojení (IP adresy, čísla portů, použité kodeky). Obsahuje pole pro určení verze (\texttt{v=}), vlastníka a relaci (\texttt{o=}, \texttt{s=}), informace o médiích a portech (\texttt{m=audio}, \texttt{m=video}) či atributy používaných kodeků (\texttt{a=rtpmap}).
+            \item \textbf{RTMP (Real Time Messaging Protocol):} Protokol nad vrstvou TCP vyvinutý společností Adobe. Vyznačuje se třícestným handshakem (podobně jako TCP). Dnes se již nevyužívá pro přenos ke koncovému klientovi, ale \textbf{primárně slouží k doručení dat z kodéru (např. kamery) na streamovací server (tzv. „První míle“)}.
+            \item \textbf{SRT (Secure Reliable Transport Protocol):} Open-source alternativa k RTMP. Na transportní vrstvě využívá UDP, ale kontrolu chyb zajišťuje na aplikační vrstvě. Zahrnuje vestavěné šifrování AES.
+        \end{itemize}
+    \subsubsection{Distribuce obsahu: Unicast vs. Multicast}
+        \begin{itemize}
+            \item \textbf{Unicast} -- Nejrozšířenější pro distribuci videa na vyžádání (VoD). Neefektivní pro masové živé vysílání.
+                \begin{itemize}
+                    \item Vysílač posílá samostatnou kopii datového toku zvlášť každému jednotlivému příjemci, šířka pásma (BW) potřebná u vysílače roste lineárně s počtem diváků.
+                \end{itemize}
+                \item \textbf{Multicast} -- Efektivní odesílání pouze jedné kopie dat, jež je směrovači v síti replikována (větvena) pouze do těch uzlů, kde se nachází koncoví zájemci o vysílání.
+                \begin{itemize}
+                    \item Vychází z UDP. Neexistuje přímé spojení mezi vysílačem a příjemci.
+                    \item Vyžaduje registraci koncového bodu ke skupině pomocí protokolu \textbf{IGMP} (\textit{Internet Group Management Protocol}). Přes zprávy (např. \textit{Membership Report}, \textit{Membership Query} či \textit{Leave Group}) sděluje klient svému lokálnímu směrovači zájem o připojení/odpojení od multicastového vysílání.
+                    \item V IPv4 je skupina reprezentována adresami třídy D (\textbf{224.0.0.0 -- 239.255.255.255}), v IPv6 adresou začínající předponou \textbf{ff00::/8}.
+                \end{itemize}
+            \textbf{Modely a směrování v Multicastu:}
+                \begin{itemize}
+                    \item \textbf{ASM (Any Source Multicast):} Model založený na sdíleném stromě (značení \texttt{(*, G)}). V síti existuje jeden centrální směrovač zvaný \textbf{Rendezvous Point (RP)}, přes který prochází komunikace od všech zdrojů ve skupině.
+                    \item \textbf{SSM (Source Specific Multicast):} Model zdrojového stromu (značení \texttt{(S, G)}). Vysílač je vždy kořenem stromu nejkratších cest. Používá se pro distribuci $1$ k $N$ (např. IPTV, e-learning) a řeší problémy s kolizemi adres ASM modelu.
+                    \item \textbf{Směrovací protokoly} zajišťující vytváření doručovacích stromů v síti se dělí na:
+                    \begin{itemize}
+                        \item \textbf{Sparse Mode} (\textit{pull model}): Data jdou jen tam, kam byla vyžádána pomocí zpráv \textit{Join/Prune}, např. \textbf{PIM-SM}.
+                        \item \textbf{Dense Mode} (\textit{push model}): Data primárně zaplaví síť a ořezávají se \textit{Prune} zprávami, např. \textbf{PIM-DM}, \textbf{DVMRP}.
+                        \item \textbf{Link State}: Např. \textbf{MOSPF}.
+                    \end{itemize}
+                \end{itemize}
+        \end{itemize}
+\subsection{Webinar, webcast, videokonference, teleprezence, VoIP – využívané standardy SIP, H.323 a podpůrné protokoly.}
+    \subsubsection{Formy multimediální komunikace v reálném čase}
+        \begin{itemize}
+            \item \textbf{Webcast:} Jedná se o prezentaci a streaming zvuku a videa prostřednictvím sítě Internet k většímu počtu příjemců. Může probíhat v reálném čase nebo na vyžádání. Typicky nevyžaduje interakci účastníků a k příjmu se využívají běžná prezentační zařízení a webové prohlížeče.
+            \item \textbf{Webinar:} Interaktivní seminář v reálném čase. Kromě zvuku a videa se přenáší text a data (např. sdílené prezentace). Lektor prezentuje obsah, zatímco posluchači mohou interaktivně reagovat (typicky prostřednictvím chatu).
+            \item \textbf{Videokonference:} Technologie pro obousměrnou i vícebodovou komunikaci, umožňující spojení do jedné virtuální místnosti. Rozlišujeme typy \textit{ad-hoc} (bez rezervace), \textit{nerezervované} (sestavované dynamicky přes IVR automaty) a \textit{plánované} (vyhrazené konkrétní zdroje i čas). Podle způsobu zobrazení na obrazovce poskytuje videokonference tyto módy:
+            \begin{itemize}
+                \item \textit{Voice-Activated:} Aktivní je zobrazení uživatele, který právě hovoří.
+                \item \textit{Continuous Presence:} Současné zobrazení více účastníků s možností nastavení mřížky.
+                \item \textit{Lecture Mode:} Lektor je trvale ve velkém hlavním okně.
+            \end{itemize}
+            \item \textbf{Teleprezence:} Představuje high-end řešení videokonference, které má pomocí více kamer a prostorového zvuku navodit pocit jednání u „jednoho stolu“. Na rozdíl od klasické videokonference vyžaduje specificky shodně vybavené místnosti pro zajištění konzistence.
+            \item \textbf{VoIP (Voice over Internet Protocol):} Umožňuje přenos digitalizovaného hlasu. Pro jeho srozumitelnost je kritické dodržení parametrů kvality služeb (QoS): zpoždění by nemělo přesáhnout \textbf{150 ms}, kolísání zpoždění (jitter) se kompenzuje vyrovnávacími buffery a pro ozvěnu, která vzniká při zpoždění nad \textbf{25 ms}, je nutné nasazení „Echo Cancelleru“.
+        \end{itemize}
+        K samotnému transportu multimédií a jejich řízení se nezávisle na použité signalizaci (H.323 nebo SIP) používají aplikační protokoly navržené pro IP sítě: RTP, RTCP, WebRTC, SDP. SDP je obsažený nejčastěji v těle zprávy SIP (INVITE nebo 200 OK). V SIPu figuruje v mechanismu Nabídka/Odpověď (Offer/Answer)
+    \subsubsection{Standard H.323 (ITU-T)}
+        Standard vytvořený organizací ITU-T pro audiovizuální služby v paketově orientovaných sítích bez garance kvality služeb (QoS). V síti H.323 je \textbf{hlasová komunikace vždy povinná}. Architektura definuje 4 základní prvky:
+        \begin{itemize}
+            \item \textbf{Terminál:} Povinný koncový bod, který může být hardwarový (např. sálové systémy, IP telefony) nebo softwarový (aplikace v PC).
+            \item \textbf{Brána (Gateway):} Zajišťuje konverzi signalizace i médií pro propojení H.323 sítí s odlišnými sítěmi (např. PSTN).
+            \item \textbf{Gatekeeper:} Obslužná brána řídící určitou zónu sítě. Provádí překlad aliasů (E.164 adres, H.323 ID) na IP adresy, spravuje přidělování šířky pásma, řeší přístup do sítě a autorizaci.
+            \item \textbf{MCU (Multipoint Control Unit):} Řídí konference tří a více účastníků. Tvoří ji povinný \textit{Multipoint Controller} (MC), který zajišťuje pouze signalizaci, a volitelný \textit{Multipoint Processor} (MP) pro centrální přepínání a mixování audio/video dat.
+        \end{itemize}
+        Pro signalizaci standard H.323 využívá protokoly:
+        \begin{itemize}
+            \item \textbf{H.225.0 RAS:} Zajišťuje registraci, přidělování šířky pásma a vyhledávání pomocí UDP komunikace mezi koncovým bodem a Gatekeeperem.
+            \item \textbf{H.225.0 Call Signaling:} Obstarává vlastní sestavení a ukončení hovoru nad TCP spojením. Využívá zprávy převzaté z ISDN (\textit{Setup, Call Proceeding, Alerting, Connect, Release Complete}).
+            \item \textbf{H.245 Media Control:} TCP protokol řídící vlastní média. Slouží k vyjednávání kodeků zasíláním zpráv \textit{Terminal Capability Set} (TCS), určení hlavní stanice \textit{Master--Slave Determination} (MSD) a otevírání toků dat \textit{Open Logical Channel} (OLC). Lze využít i „mód pro rychlé připojení“, kdy je OLC zpráva urychleně přibalena už k inicializační zprávě Setup v protokolu H.225.0.
+        \end{itemize}
+    \subsection*{3. Protokol SIP (Session Initiation Protocol)}
+        Textově orientovaný signalizační protokol definovaný organizací IETF (RFC 3261), který zajišťuje inicializaci, modifikaci a ukončení interaktivní multimediální relace. Na rozdíl od H.323 je jeho adresace řešena pomocí formátu URI (např. \texttt{sip:uzivatel@domena:port}). Identita je rozdělena na veřejnou (AOR -- \textit{Address of Record}) a lokační. V síti SIP existují následující prvky:
+        \begin{itemize}
+            \item \textbf{User Agent (UA):} Rozdělen na klientskou část (UAC), která generuje žádosti, a serverovou část (UAS), která je zpracovává a odesílá odpovědi.
+            \item \textbf{Proxy server:} Mezilehlá entita pro přeposílání a směrování žádostí. Může žádat i na více adres současně nebo sekvenčně (tzv. \textit{forking}).
+            \item \textbf{Redirect server:} Sám hovory nesestavuje, ale generuje odpověď o přesměrování s novou adresou, na kterou se má klient obrátit.
+            \item \textbf{Registrar server:} Přijímá lokalizační údaje od koncových stanic a ukládá je do lokační služby sítě.
+            \item \textbf{SIP pro konference (RFC 4353):} Síť pro vícebodové konference je obohacena o centrální prvek \textbf{Focus} udržující SIP dialog s každým účastníkem a \textbf{Mixer} zajišťující zpracování a distribuci mediálních dat.
+        \end{itemize}
+        \textbf{Zprávy protokolu SIP:}
+        \begin{itemize}
+            \item \textbf{Žádosti (Metody):} \textit{INVITE} (vyzývá k účasti), \textit{ACK} (potvrzuje finální odpověď u INVITE), \textit{BYE} (ukončuje relaci), \textit{CANCEL} (ruší nepotvrzenou žádost), \textit{OPTIONS} (dotaz na schopnosti), \textit{REGISTER} (registrace adresy). Do rozšířených metod patří \textit{SUBSCRIBE} a \textit{NOTIFY} (sledování stavu -- \textit{presence}) či \textit{REFER} (přepojení a řízení třetí stranou).
+            \item \textbf{Odpovědi:} Dělí se číselně: 1xx (dočasné informační, např. \textit{180 Ringing}), 2xx (úspěch, \textit{200 OK}), 3xx (přesměrování), 4xx (chyba klienta), 5xx (chyba serveru), 6xx (globální selhání sítě).
+        \end{itemize}
+        Sestavení spojení SIP představuje \textbf{transakci} (žádost a všechny odpovědi, pro INVITE zahrnuje i ACK). Spojení, které přetrvává určitou dobu, se označuje jako \textbf{dialog} (identifikován hlavičkami \textit{Call-ID, tag} volajícího a \textit{tag} volaného).
+\subsection{Komprese obrazových signálů a videa – principy standardů JPEG a MPEG, H.26x.}
+    \subsubsection{Principy komprese}
+        Cílem komprese multimediálních dat je snížení jejich velikosti odstraňováním redundantních a irelevantních složek. Bezeztrátová komprese odstraňuje pouze redundanci, zatímco ztrátová komprese odstraňuje redundanci i irelevantní složky. Redundance v obraze vzniká jednak na úrovni kódování (častější symboly lze kódovat kratším slovem), a jednak mezi samotnými pixely nebo snímky (prostorová a časová redundance). 
+        
+        Redukce irelevantních dat se opírá o nedokonalosti lidského zrakového systému. Lidské oko je citlivější na jasové změny než na barvu, na prostorové maskování (šum je hůře postřehnutelný v textuře než na souvislé ploše) a chová se jako dolní propust, což znamená, že je méně citlivé na velmi vysoké prostorové frekvence obrazu.
+    \subsubsection{Standard JPEG}
+        Standard JPEG (\textit{Joint Photographic Experts Group}, ISO/IEC 10918-1) vznikl pro kompresi statických obrazů nezávisle na rozlišení nebo barevném modelu. Základní sekvenční mód kodéru je ztrátový a pracuje v těchto krocích:
+        
+        \begin{itemize}
+            \item \textbf{Převod do YCbCr a podvzorkování:} Vstupní signál RGB je transformován na jasovou (Y) a dvě barvonosné (Cb, Cr) složky, které jsou následně podvzorkovány (např. 4:2:0), čímž se redukuje irelevantní barevná informace.
+            \item \textbf{Dělení na bloky a DCT:} Obraz se rozdělí na bloky $8 \times 8$ pixelů a na každý se aplikuje 2D Diskrétní kosinová transformace (2D-DCT). DCT soustředí energii signálu do oblasti nízkých frekvencí -- v levém horním rohu matice vzniká stejnosměrný koeficient DC, zbytek jsou střídavé koeficienty AC.
+            \item \textbf{Kvantizace:} Transformované koeficienty jsou vyděleny krokem z kvantizační tabulky (pro jas a barvu zvlášť) a zaokrouhleny. Zde dochází k hlavní ztrátě dat -- vysokofrekvenční koeficienty získají nulovou hodnotu. Tabulky jsou upravovány koeficientem kvality ($q$).
+            \item \textbf{Cik-cak čtení:} AC koeficienty se z matice vyčítají metodou „cik-cak“ (od nejnižší po nejvyšší frekvenci), čímž vznikne dlouhá posloupnost nul.
+            \item \textbf{Entropické kódování:} Stejnosměrný DC koeficient se kóduje diferenčně (DPCM) vzhledem k předchozímu bloku. AC koeficienty se kódují na základě posloupnosti stejných hodnot (RLE -- \textit{Run Length Encoding}) a následně Huffmanovým nebo aritmetickým kódováním.
+        \end{itemize}
+        
+        JPEG definuje i další módy: \textit{Progresivní mód} (obraz se přenáší nahrubo a postupně se zpřesňuje pomocí spektrální selekce nebo postupné aproximace), \textit{Bezeztrátový mód} (nevyužívá DCT, ale prediktivní kódování okolních pixelů) a \textit{Hierarchický mód} (kódují se diferenční vrstvy různých rozlišení).
+    \subsubsection{Komprese videa}
+        Video na rozdíl od statického obrazu využívá časovou redundanci mezi sousedními snímky, jejichž autokorelace je velmi vysoká. Standardy MPEG dělí video na hierarchickou strukturu: Sekvence $>$ Skupina snímků (GOP -- \textit{Group of Pictures}) $>$ Snímek $>$ Slice (řez) $>$ Makroblok $>$ Blok. Makroblok má zpravidla velikost $16 \times 16$ pixelů a např. ve formátu 4:2:0 zahrnuje 4 bloky jasu (Y) a 2 bloky chrominance (Cb, Cr).\\
+        Ke kódování se využívají 3 primární typy snímků:
+        \begin{itemize}
+            \item \textbf{I-snímky (Intra):} Kódují se nezávisle na jiných snímcích (na principu podobném JPEG) a slouží jako referenční přístupové body v GOP.
+            \item \textbf{P-snímky (Predictive):} Predikují se z předchozího I nebo P snímku. Ke zjištění změny polohy slouží odhad a kompenzace pohybu za pomoci vektorů pohybu. Kóduje a transformuje se pouze chybový rozdíl (chyba predikce).
+            \item \textbf{B-snímky (Bidirectional):} Obousměrně predikované z předchozích i následujících I nebo P snímků. Nikdy se nepoužívají jako referenční, lze u nich tedy uplatnit nejvyšší kompresi bez řetězení chyb.
+        \end{itemize}
+    \subsubsection{Standardy H.26x (ITU-T)}
+        Zatímco počáteční MPEG kodeky byly optimalizovány pro úložná média či broadcast, H.26x byly primárně navrženy pro obousměrné videokomunikace a streamování, kde je kritické zpoždění.
+        \begin{itemize}
+            \item \textbf{H.261:} První telekomunikační kodek (ISDN) používající formáty CIF/QCIF a datové toky v násobcích 64 kb/s. Pro snížení zpoždění využívá pouze I a P makrobloky (nepodporuje B-snímky). Kompenzace pohybu má přesnost jen na celé pixely, ale k redukci chyb se užívá smyčkový filtr.
+            \item \textbf{H.263:} Cílen na aplikace s velmi malou přenosovou rychlostí. Nad rámec H.261 přidává neomezené vektory pohybu (mohou odkazovat i mimo okraje snímku), půlpixelovou přesnost, kompenzaci pohybu různě velkých bloků a aritmetické kódování.
+            \item \textbf{H.264 / AVC (MPEG-4 Part 10):} Společný standard vyvinutý jak organizací ITU-T, tak i ISO. Je o 50 \% efektivnější než MPEG-2. Namísto fixní 8x8 DCT zavádí variabilní velikost bloků pro transformaci i predikci (16x16 až do 4x4), používá celočíselnou transformaci, intra-predikci i na úrovni 4x4 bloků a přidává speciální SP a SI řezy pro snazší přepínání datových toků.
+            \item \textbf{H.265 / HEVC:} Nástupce H.264, přináší úsporu dat o 40--50 \% . Základní makrobloky jsou nahrazeny flexibilnější blokovou strukturou CTU (\textit{Coding Tree Units}) o velikosti až 64x64 pixelů. Poskytuje vysoce pokročilou inter-predikci, 35 režimů intra-predikce a variabilní celočíselnou transformaci od 4x4 do 32x32.
+        \end{itemize}

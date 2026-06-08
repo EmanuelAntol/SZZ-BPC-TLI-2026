@@ -1,0 +1,120 @@
+\section{Síťové operační systémy (BPC-SOS)}
+\subsection{Systémové jádro a systémové volání, monolitický systém a modulární jádro, systém klient-server a mikrojádro}
+    \subsubsection{Systémové jádro a systémová volání}
+        \begin{itemize}
+            \item \textbf{Systémové jádro (kernel)}
+            \begin{itemize}
+                \item Systémové jádro se nachází pod rozhraním systémových volání a bezprostředně nad fyzickými prostředky výpočetního stroje. Jde o základní program operačního systému, který má za úkol spravovat prostředky a přímo pracovat s hardwarem. Jádro je spouštěno jako první program při startu operačního systému a běží v privilegovaném režimu. V tomto režimu není jádro nijak omezováno, na rozdíl od aplikací, které běží v neprivilegovaném uživatelském režimu.
+                \item Mezi hlavní zodpovědnosti jádra patří správa procesů, správa paměti, souborový systém a zajištění síťové komunikace. Služby jádra jsou zpřístupňovány ostatním systémovým a aplikačním programům prostřednictvím systémových volání.
+            \end{itemize}
+            \item \textbf{Systémové volání}
+            \begin{itemize}
+                \item Systémové volání představuje definované rozhraní, kterým program běžící v uživatelském režimu žádá o službu jádro (např. alokaci paměti, práci s I/O zařízeními, otevření souboru).
+            \end{itemize}
+        \end{itemize}
+    \subsubsection{Monolitický systém a Modulární jádro}
+            \begin{itemize}
+                \item \textbf{Monolitický systém} je typ architektury, kde všechny služby operačního systému běží ve společném adresním prostoru v privilegovaném režimu jádra. Monolitické jádro se vytváří kompilací všech procedur do jednoho spustitelného souboru.
+                \begin{itemize}
+                    \item Hlavní výhodou tohoto přístupu je vysoká rychlost komunikace, neboť procedury se mohou navzájem volat přímo. Velkou nevýhodou je, že jediná chyba v programu jádra zablokuje jádro a způsobí pád celého operačního systému.
+                \end{itemize}
+            \end{itemize}
+            \begin{itemize}
+                \item \textbf{Modulární monolitické jádro} tento koncept rozšiřuje. Základní část jádra obsahuje pouze nezbytné funkce, zatímco ostatní jsou kompilovány jako samostatné moduly. 
+                \begin{itemize}
+                    \item Výhodou je, že moduly lze dynamicky za běhu systému přidávat či odebírat bez nutnosti celkového restartu OS nebo nutnosti znovu celé jádro kompilovat.
+                \end{itemize}\textbf{}
+            \end{itemize}
+
+    \subsubsection{Systém klient-server a mikrojádro}
+                \begin{itemize}
+                    \item \textbf{Mikrojádro} omezuje běžící kód v privilegovaném režimu na minimum. Mikrojádro zajišťuje pouze základní obsluhu přepínání procesů, základní správu paměti, obsluhu přerušení a komunikaci mezi procesy. Zbytek systémových funkcí, jako jsou ovladače úložných zařízení, podpora souborových systémů či správa sítě, se z jádra odstraňuje a implementuje ve formě samostatných programů v neprivilegovaném uživatelském režimu. Tyto programy dostávají od mikrojádra jen konkrétní oprávnění k hardwarovým prostředkům, které nutně potřebují.
+                    
+                    \item \textbf{Systém klient-server} - Některé funkce jádra jsou realizovány jako programy – servery v uživatelském režimu. Běžný proces (např. uživatelská aplikace) vystupuje v roli \textit{klienta}, který prostřednictvím zprávy zaslané přes mikrojádro žádá o službu jiný proces, který vystupuje v roli \textit{serveru}.
+                    \begin{itemize}
+                        \item Zásadní výhodou je vysoká odolnost a stabilita systému. Pokud nastane kritická chyba v některém serveru, dojde k pádu pouze této konkrétní služby, nikoliv k pádu celého operačního systému. 
+                        \item Nevýhodou konceptu klient-server s mikrojádrem je snížená rychlost systému oproti monolitickým jádrům, protože obsluha každého systémového volání vyžaduje časově náročnější předávání zpráv mezi klientem a serverem přes mikrojádro.
+                    \end{itemize}
+                \end{itemize}
+\subsection{Rozšířený stavový model činnosti procesů a přechody mezi stavy.}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=1\linewidth]{StateDiagram.png}
+        \caption{Rozšířený stavový model běhu procesu}
+    \end{figure}
+\subsection{Okamžiky rozhodnutí při plánování procesů, plánování procesů a výpočet priority.}
+    \subsubsection{Okamžiky rozhodnutí při plánování procesů}
+        Úkolem plánování procesů je efektivní přidělení času procesoru jednotlivým procesům, které se nacházejí ve stavu „připraven ke zpracování v hlavní paměti“. Plánovač musí rozhodnout, který proces bude nově vykonáván v několika specifických situacích. Tyto situace se nazývají okamžiky rozhodnutí:
+        \begin{itemize}
+            \item \textbf{Vytvoření procesu:} Po vytvoření nového procesu (potomka) musí plánovač rozhodnout, zda bude nadále vykonáván proces rodiče, nebo zda se začne vykonávat nově vytvořený proces potomka.
+            \item \textbf{Ukončení procesu:} Jakmile proces dokončí svou činnost, musí být nevyhnutelně vybrán jiný připravený proces k vykonávání na uvolněném procesoru.
+            \item \textbf{Blokování procesu:} Procesy přirozeně střídají výpočetní úseky a úseky čekání (např. na I/O operace). Pokud proces přejde do stavu čekání (zablokuje se), je nutné vybrat k vykonávání jiný proces.
+            \item \textbf{Přerušení od hodin (preempce):} V preemptivních systémech má každý proces přidělenou maximální dobu běhu. Po jejím vypršení je generováno přerušení od hodin a proces je nuceně přerušen. Plánovač následně rozhoduje, zda vybere jiný proces, nebo zda ve vykonávání bude pokračovat proces stávající.
+            \item \textbf{Dobrovolné předání CPU (kooperace):} V kooperativních systémech proces sám dobrovolně pozastaví své vykonávání a předá CPU. V tomto okamžiku je k vykonávání vybrán jiný proces.
+        \end{itemize}
+    \subsubsection{Plánování procesů}
+        Obecné plánování procesů je hierarchicky rozděleno do dvou základních úrovní:
+        \begin{itemize}
+            \item \textbf{Plánování I. úrovně:} Má za úkol vybírat procesy, které se aktuálně nacházejí ve stavu „připraven ke zpracování v hlavní paměti“, a převádět je do stavu „vykonávaný“.
+            \begin{itemize}
+                \item \textbf{Mechanismus front a výběru (I. úroveň):} Obecný plánovací algoritmus I. úrovně je postaven na paralelních frontách, kde je každá fronta spojena s určitým intervalem nepřekrývajících se priorit. Plánovač prohledává tyto fronty striktně od nejvyšší priority k nejnižší. Přitom platí, že negativní hodnoty obvykle značí vyšší prioritu a pozitivní hodnoty naopak nižší prioritu. Jakmile plánovač nalezne první neprázdnou frontu, vybere z ní první proces k vykonávání. S procesy, které se nacházejí ve stejné frontě, je standardně zacházeno cyklicky metodou round-robin.
+            \end{itemize}
+            \item \textbf{Plánování II. úrovně:} Řídí přesuny celých procesů mezi hlavní pamětí a odkládacím prostorem (swap). Jeho cílem je zajistit, aby se všechny připravené procesy dostaly do hlavní paměti a mohly být posléze vybrány plánovačem I. úrovně.
+        \end{itemize}
+    \subsubsection{Výpočet priority}
+        Pro zajištění dynamického a spravedlivého přidělování CPU je priorita každého procesu ($P$) intervalově přepočítávána. Na základě tohoto výpočtu je následně proces zařazen do příslušné plánovací fronty. Výpočet priority je dán vzorcem P = V + N + B; Jednotlivé složky vzorce mají následující význam:
+        \begin{itemize}
+            \item \textbf{$V$ (Celková doba vykonávání):} hodnota reprezentuje celkový čas, po který byl proces vykonáván na procesoru. Hodnota $V$ se zvyšuje s každým taktem hodin, kdy proces běží. Tímto mechanismem jsou déle běžící procesy postupně penalizovány a odsouvány do front s nižší prioritou, čímž systém upřednostňuje novější nebo méně náročné procesy.
+            \item \textbf{$N$ (Hodnota nice):} Jedná se o uživatelsky nebo systémově definovanou hodnotu, která se implicitně rovná nule a typicky se pohybuje v rozmezí od -20 do +19. Běžný uživatel smí hodnotu $N$ pouze zvyšovat (v rozmezí 0 až 19), čímž svůj proces penalizuje. Administrátor může naopak procesy preferovat tím, že jim přiřadí zápornou hodnotu (-20 až -1). Procesy tuto hodnotu dědí od svého rodiče.
+            \item \textbf{$B$ (Báze):} Tato hodnota vstupuje do výpočtu ve chvíli, kdy byl proces zablokován (např. čekal na dokončení I/O operace). Po dobu čekání je proces z plánovací fronty dočasně odstraněn. Jakmile událost nastane a proces je probuzen, vrací se zpět do fronty s novou prioritou. Hodnota $B$ pak závisí na konkrétním typu události, na kterou proces čekal, a pomáhá tak zvýhodnit I/O vázané procesy oproti procesům výpočetním.
+        \end{itemize}
+\subsection{Stránkování a segmentace paměti, přidělování hlavní paměti procesům.}
+    \subsubsection{Stránkování paměti}
+
+        Stránkování je mechanismus správy paměti, při kterém je logický paměťový prostor procesu rozdělen na úseky o fixní velikosti, které se nazývají stránky (pages). Fyzická hlavní paměť (RAM) je naopak rozdělena na úseky stejné velikosti, jež se označují jako rámce (frames).
+        
+        \begin{itemize}
+            \item \textbf{Princip fungování:}
+            \begin{itemize}
+                \item Pokud proces potřebuje pro své vykonávání pracovat s určitou částí dat, která se aktuálně nenachází v hlavní paměti, dojde k výpadku stránky (page fault).
+                \item Tento výpadek detekuje operační systém a zajistí přesun příslušné stránky z odkládacího prostoru na disku do volného rámce v hlavní paměti.
+                \item Evidenci o aktuálním umístění stránek si operační systém udržuje ve speciální datové struktuře nazývané tabulka stránek (page table).
+            \end{itemize}
+        
+            \item \textbf{Výhody a nevýhody:}
+            \begin{itemize}
+                \item Hlavní výhodou stránkování je eliminace externí fragmentace volného prostoru, neboť stránky fixní velikosti se přesně umísťují do stejně velkých rámců v hlavní paměti.
+                \item Zásadní nevýhodou je, že stránkování je pro proces neviditelné. Proces nemá možnost určit, které stránky k sobě logicky patří, což může vést k častějším výpadkům stránek, jelikož se do paměti nemusí naráz přesunout všechna data, která bude proces bezprostředně potřebovat.
+            \end{itemize}
+        
+            \item \textbf{Velikost stránky:}
+            \begin{itemize}
+                \item \textbf{Malé stránky} snižují interní fragmentaci (nevyužité místo v poslední, ne zcela zaplněné stránce), ale vyžadují větší tabulku stránek a doba jejich přenosu je neúměrně prodloužena časem potřebným pro vyhledání stránky na disku.
+                \item \textbf{Velké stránky} zmenšují velikost tabulky stránek a urychlí přenos dat, ale zvyšují plýtvání pamětí vlivem interní fragmentace.
+            \end{itemize}
+        \end{itemize}
+    \subsubsection{Segmentace paměti}
+        Segmentace představuje přístup, při kterém je uživatelský kontext procesu rozdělen na logické části různých velikostí, tzv. segmenty.
+        \begin{itemize}
+            \item \textbf{Princip fungování:}
+            \begin{itemize}
+                \item Rozdělení na segmenty provádí již kompilátor na základě zdrojového kódu programu. Mezi typické segmenty patří textový segment (instrukce), datový segment (inicializovaná data), BSS (neinicializovaná data), halda (dynamická alokace) a zásobník.
+                \item Na rozdíl od stránkování je tento mechanismus pro proces viditelný. Pokud proces potřebuje určitou část, přesouvá se do paměti vždy celý daný segment.
+                \item Umístění segmentů eviduje OS v tabulce segmentů (segment table).
+            \end{itemize}
+        
+            \item \textbf{Výhody a nevýhody:}
+            \begin{itemize}
+                \item Hlavní výhodou je minimalizace výpadků, jelikož logicky související data (např. celá funkce nebo datová struktura) tvoří jeden celek a do paměti se načítají společně.
+                \item Hlavní nevýhodou je ztráta efektivity paměti. Vzhledem k tomu, že segmenty mají různou velikost, způsobuje jejich dynamické umísťování do paměti \textbf{externí fragmentaci} (vznik nevyužitelných mezer různé velikosti mezi segmenty).
+                \item V moderních systémech lze segmentaci kombinovat se stránkováním pro potlačení nevýhod obou přístupů.
+            \end{itemize}
+        \end{itemize}
+    \subsubsection{Přidělování hlavní paměti procesům}
+        Pro přidělení hlavní paměti jednotlivým procesům existuje několik strategií.
+        \begin{itemize}
+            \item \textbf{Rovnoměrné přidělení:} Všechny procesy dostanou stejný díl paměti, což ale nerespektuje jejich skutečné nároky.
+            \item \textbf{Přidělení podle velikosti procesu:} Paměť je procesům distribuována proporcionálně k velikosti jejich uživatelského kontextu.
+            \item \textbf{Přidělení podle priority procesu:} Zohledňuje se dynamicky se měnící priorita procesu, procesy s vyšší prioritou získají více paměti.
+            \item \textbf{Přidělení podle frekvence výpadků stránek:} Algoritmus reaguje na aktuální chování procesu a jeho cílem je vyhnout se jevu zvanému \textit{thrashing}, kdy systém tráví většinu času přesouváním stránek.
+        \end{itemize}

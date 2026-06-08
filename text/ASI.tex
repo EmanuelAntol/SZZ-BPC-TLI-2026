@@ -1,0 +1,251 @@
+\section{Analýza signálů a soustav (BPC-ASI)}
+\subsection{Systémy se spojitým časem. Dynamický systém, stavové veličiny. Základní dělení systémů. Impulsní charakteristika, princip superpozice. Popis lineárního časově invariantního spojitého systému pomocí lineární diferenciálních rovnic s konstantními koeficienty. Přirozená a vynucená odezva, přechodný děj. Definice kmitočtové charakteristiky. Přenosová funkce, póly a nulové body. Ideální přenosový článek. Kmitočtové filtry. }
+    \subsubsection{Systémy se spojitým časem}
+        Systém obecně představuje soubor určitých objektů a prvků, které na sebe vzájemně působí s cílem plnění definované funkce. Systém spojuje své vnitřní procesy s okolím pomocí vstupů a výstupů, které jsou realizovány fyzikálními veličinami označovanými jako vstupní a výstupní signály. Systémy se spojitým časem zpracovávají analogový (spojitý) signál.
+    
+    \subsubsection{Dynamický systém a stavové veličiny} 
+        Dynamický (neboli setrvačný) systém se vyznačuje tím, že jeho chování a odezva v kterémkoliv časovém okamžiku nezávisí pouze na právě působících vstupních (budicích) signálech, ale rovněž na budicích signálech působících v minulosti. Tento systém si tak zachovává vliv minulosti prostřednictvím stavové paměti. Okamžitý stav paměti v čase $t_0$ jednoznačně definuje stav systému a je popsán množinou stavových veličin. Řád systému odpovídá počtu těchto nezávislých stavových veličin. U spojitých systémů je stav a paměť systému svázána se shromažďováním energie; typickými stavovými veličinami jsou elektrický náboj u kapacitoru a spjatý magnetický indukční tok u induktoru.
+    \subsubsection{Základní dělení systémů}
+        \begin{itemize}
+            \item \textbf{Spojité a diskrétní:} Zda zpracovávají signál spojitý v čase (analogový), nebo signál s diskrétním časem.
+            \item \textbf{Lineární a nelineární:} Lineární systémy obsahují výhradně lineární prvky a platí pro ně  princip superpozice. Pokud systém obsahuje alespoň jeden nelineární prvek, superpozice neplatí.
+            \item \textbf{Neparametrické a parametrické:} Neparametrické (časově invariantní) systémy mají v čase neproměnnou obvodovou strukturu i hodnoty parametrů svých prvků, zatímco u parametrických se tyto vlastnosti mění s časem.
+            \item \textbf{Kauzální a nekauzální:} U kauzálního systému (fyzikálně realizovatelného) nastává reakce (výstup) vždy až po podnětu (vstupu). U nekauzálních systémů může teoreticky reakce předbíhat podnět.
+            \item \textbf{Deterministické a náhodné (stochastické):} Deterministický systém lze plně analyticky popsat a jeho budoucí chování přesně určit, u náhodného systému lze chování pouze odhadovat s určitou pravděpodobností.
+            \item \textbf{Stabilní (BIBO):} U stabilního BIBO (Bounded Input Bounded Output) systému platí, že omezený (konečný) vstupní signál vždy vyvolá omezený výstupní signál.
+        \end{itemize}
+    \subsubsection{Impulsní charakteristika, princip superpozice}
+        \textbf{Princip superpozice} je fundamentální vlastností lineárních systémů. Tento princip stanovuje, že celková odezva systému na složený vstupní signál musí být stejná jako matematický součet odezev vyvolaných jednotlivými dílčími složkami tohoto vstupního signálu. \textbf{Impulsní charakteristika} $h(t)$ lineárního časově invariantního (LTI) spojitého systému je definována jako odezva tohoto systému na vstupní buzení ve tvaru Diracova jednotkového impulzu $\delta(t)$. Známe-li impulsní charakteristiku $h(t)$, lze celkovou odezvu $y(t)$ systému na libovolný vstupní signál $x(t)$ získat pomocí operace konvoluce: $y(t) = x(t) * h(t) = \int_{-\infty}^{\infty} h(\tau)x(t - \tau)d\tau$.
+    \subsubsection{Popis lineárního časově invariantního spojitého systému pomocí lineárních diferenciálních rovnic s konstantními koeficienty} 
+        Vlastnosti lineárního neparametrického (LTI) systému se spojitým časem, který má jeden vstup a jeden výstup, se exaktně modelují pomocí lineárních diferenciálních rovnic s konstantními parametry. Rovnice má tvar:
+
+        \begin{equation*}
+        \sum_{i=0}^{N} b_i \frac{\text{d}^i y(t)}{\text{d}t^i} = \sum_{j=0}^{M} a_j \frac{\text{d}^j x(t)}{\text{d}t^j}
+        \end{equation*}
+        
+        Koeficienty $a_i$ a $b_i$ jsou reálné konstanty. K zajištění kauzality systému musí platit podmínka $M \le N$.
+    \subsubsection{Přirozená a vynucená odezva, přechodný děj} 
+        Celkovou odezvu dynamického systému popsaného diferenciální rovnicí lze rozdělit na dvě základní části: \textbf{přirozenou odezvu} (ZIR) a \textbf{vynucenou odezvu} (ZSR). Přirozená odezva je způsobena čistě vlivem nenulových počátečních podmínek paměťových prvků (systém je bez vnějšího buzení). Vynucená odezva je naopak vyvolána výhradně vnějšími vstupními zdroji za předpokladu nulových počátečních podmínek. Samotná vynucená odezva se dělí na ustálenou a přechodnou část. \textbf{Přechodný děj} označuje stav mezi dvěma ustálenými stavy a celkově je dán součtem přirozené odezvy systému a přechodné části vynucené odezvy.
+    \subsubsection{Definice kmitočtové charakteristiky}
+        Kmitočtová charakteristika $H(\omega)$ spojitého LTI systému je poměr Fourierova obrazu výstupního signálu $Y(\omega)$ a Fourierova obrazu vstupního signálu $X(\omega)$. Transformací výše definované diferenciální rovnice s využitím derivace pro Fourierovu transformaci ($d^n s(t)/dt^n \Leftrightarrow (j\omega)^n S(\omega)$) vznikne v kmitočtové rovině poměr dvou polynomů v proměnné $j\omega$. Kmitočtová charakteristika je komplexní funkce, která se dělí na modulovou charakteristiku $|H(\omega)|$ a argumentovou neboli fázovou charakteristiku $\arg H(\omega)$.
+    \subsubsection{Přenosová funkce, póly a nulové body} 
+        Aplikuje-li se na výpočet rovnice LTI systému Laplaceovu transformaci (s komplexní proměnnou $p = \sigma + j\omega$), získáme tzv. přenosovou funkci systému $G(p)$ (často značenou také $H(p)$), jež vyjadřuje poměr obrazů $Y(p)/X(p)$ ve tvaru racionální lomené funkce. Kořeny polynomu v čitateli této funkce se nazývají nulové body. Kořeny polynomu ve jmenovateli se označují jako póly. Poloha pólů v komplexní rovině definuje stabilitu systému – stabilní systémy mají póly v levé polorovině $p$. Dosazením proměnné $p = j\omega$ do takto stabilní přenosové funkce obdržíme přímo kmitočtovou charakteristiku $H(\omega)$.
+    \subsubsection{Ideální přenosový článek} 
+        Z hlediska přenosu informací je za ideální přenosový článek (systém) považován takový obvod, na jehož výstupu dojde pouze k požadovanému zesílení (nebo zeslabení) a k prostému časovému zpoždění vstupního signálu. Vztah mezi vstupem a výstupem je dán funkcí $y(t) = A \cdot x(t - \tau)$. Po Fourierově transformaci je jeho kmitočtová charakteristika definována jako $H(\omega) = A \cdot e^{-j\omega\tau}$. Z toho plyne, že modulová charakteristika $A$ je v celém pásmu konstantní a fázová charakteristika $-\tau\omega$ je lineární.
+    \subsubsection{Kmitočtové filtry} 
+        Kmitočtový filtr je typ lineárního neparametrického systému se schopností selektivně propouštět definovanou část kmitočtového pásma a odfiltrovat (potlačit) zbylou část spektra. Teoreticky existují čtyři základní charakteristiky ideálních filtrů: dolní propust (DP), horní propust (HP), pásmová propust (PP) a pásmová zádrž (PZ). Skutečné fyzikální filtry tvořené např. RL a RC integračními a derivačními články se musí ideálním průběhům (které představují z principu nekauzální systémy) přibližovat pomocí aproximačních funkcí. Požadavky na tvar filtru se vymezují pomocí tzv. tolerančního schématu (určuje povolené zvlnění v propustném a nepropustném pásmu a šířky pásem). Nejběžněji používanými matematickými modely pro aproximaci modulové charakteristiky filtru jsou Butterworthova aproximace, Čebyševova aproximace (1. a 2. druhu) a Cauerova aproximace pro eliptické filtry.
+\subsection{Skutečné signály a jejich matematické modely, dělení signálů. Základní operace se signály. Jednotkový skok, jednotkový impuls, definice harmonického signálu. Periodický signál, harmonická analýza. Fourierova řada v komplexním tvaru. Spektrum obdélníkového signálu. Fourierova transformace, vlastnosti spektrální funkce. Spektra vybraných signálů. Spektrum konvoluce. Souvislost mezi Fourierovou řadou a Fourierovou transformací. }
+	\subsubsection{Skutečné signály a jejich matematické modely, dělení signálů} 
+		Skutečné signály v praxi mají obecně náhodnou povahu a chápeme je jako nositele informace. Pro systematický popis a technickou analýzu procesů využíváme matematické modely signálů. Z hlediska nahodilosti se signály a jejich modely základně dělí na deterministické a náhodné. Deterministické signály mají svou hodnotu pro každou nezávislou proměnnou (čas) matematicky plně a jednoznačně předurčenou funkcí či posloupností a dělíme je na periodické a neperiodické. Náhodné (stochastické) signály nelze přesně analyticky popsat, jejich okamžité hodnoty lze pouze odhadovat na základě pravděpodobnosti. Ty se posléze mohou rozdělit na stacionární či nestacionární, případně ergodické. Podle oboru hodnot nezávislé proměnné (času) signály také dělíme na systémy se spojitým časem a diskrétním časem.
+	\subsubsection{Základní operace se signály}
+		Základní operace dělíme na ty operující s jedním signálem a ty, jež vyžadují signály dva. V případě jednoho signálu používáme tyto operace: \textbf{časové posunutí} (způsobující zpoždění či předsunutí), \textbf{obrácení časové osy} (využívající inverzi proměnné $s(-t)$), \textbf{obrácení časové osy s posunutím} ($s(\tau - t)$), \textbf{změnu velikosti} (zesílení, zeslabení, či inverzi modifikující amplitudu konstantou $a$) a \textbf{operaci změny časového měřítka}, kde $s(mt)$ pro $m > 1$ vyjadřuje časovou kompresi a pro $m < 1$ časovou expanzi. U dvou signálů definujeme \textbf{součet}, \textbf{rozdíl}, \textbf{součin} a \textbf{podíl} (odehrávající se ve stejných časových okamžicích), a dále \textbf{integrální operace konvoluci} ($y(t) = \int_{-\infty}^{\infty} x(\tau)h(t - \tau)d\tau$) a \textbf{korelaci}, která udává míru podobnosti signálů.
+	\subsubsection{Jednotkový skok, jednotkový impuls, definice harmonického signálu} 
+		\textbf{Jednotkový skok} (značeno $\sigma(t)$, $u(t)$ nebo $1(t)$) má nulovou hodnotu pro $t < 0$ a hodnotu 1 pro $t > 0$, přičemž přímo v bodě $t = 0$ nabývá hodnoty $1/2$.\textbf{ Diracův jednotkový} impuls $\delta(t)$ je zobecněná funkce definovaná teoreticky tak, že roste do nekonečna v bodě $t = 0$, jinde je nulová, a integrál pod ní (tzv. mohutnost) je roven jedné. Mezi skokem a impulsem platí integrálně-diferenciální závislost, kde Diracův impuls získáme časovou derivací jednotkového skoku. \textbf{Harmonický signál} je základní model deterministického periodického signálu určený trigonometrickou funkcí kosinus nebo sinus: $u(t) = U_m \cos(2\pi/T_1 t + \phi_1)$, jenž je zcela definován amplitudou $U_m$, periodou $T_1$ a počáteční fází $\phi_1$.
+	\subsubsection{Periodický signál, harmonická analýza}
+		Obecný periodický signál splňuje vztah $s(t + T_1) = s(t)$ pro všechna teoretická reálná $t$ a nejmenší kladná konstanta $T_1$ určuje základní periodu signálu. Harmonická analýza (neboli rozklad do Fourierovy řady) je operace transformující jakýkoliv periodický signál na dílčí soubor (spektrum) harmonických složek. V případě periodického signálu jsou kmitočty těchto dílčích složek dány jen celistvými násobky základního kmitočtu $f_1 = 1/T_1$, tudíž spektrum takového signálu je z podstaty čárové (diskrétní) a tvořené spektrem amplitud a fází.
+	
+	\subsubsection{Fourierova řada v komplexním tvaru} 
+		Nejvyužívanějším tvarem Fourierovy řady pro harmonickou analýzu je komplexní tvar. S využitím Eulerových vztahů je periodický signál $s(t)$ modelován nekonečnou sumou:
+		
+		\begin{equation*}
+			s(t) = \sum_{k=-\infty}^{\infty} c_k e^{j k \omega_1 t} \;,
+		\end{equation*}
+		
+		s diskrétním proměnným celým číslem $k$. Komplexní koeficienty řady obsahují informace o modulu (amplitudě) i fázi a získají se analyticky výpočtem:
+		
+		\begin{equation*}
+			c_k = \frac{1}{T_1} \int_{-T_1/2}^{T_1/2} s(t) e^{-j k \omega_1 t} \, \text{d}t
+		\end{equation*}
+		
+		přes jednu periodu signálu.
+	\subsubsection{Spektrum obdélníkového signálu} 
+		Pokud vezmeme periodický signál obdélníkových (pravoúhlých) impulzů s určitou šířkou (dobou trvání impulzu) $\vartheta$, amplitudou $D$ a celkovou periodou $T_1$, Fourierovy koeficienty jeho spektra nabývají hodnoty $c_k = \frac{D\vartheta}{T_1} \text{sinc}\left(k\omega_1\frac{\vartheta}{2}\right)$ s ohledem na funkci sinus cardinalis ($\sin(x)/x$). V modulovém spektru $|c_k|$ se kvůli profilu sinc funkce vyskytují průchody nulou, kdy kmitočty těchto nulových bodů leží na celistvých násobcích kmitočtu odpovídajícímu reciprokým hodnotám šířky impulzu. Vlivem toho, že samotná funkce sinc protíná osu do záporných hodnot, ale spektrum modulů musí být absolutně kladné, zavádí se u negativních hodnot invertování s tím, že se záporné znaménko logicky eliminuje posunutím fáze příslušné složky vždy o $\pm\pi$.
+	\subsubsection{Fourierova transformace, vlastnosti spektrální funkce}
+		V případě jednorázových signálů se interval periody matematicky prodlužuje do nekonečna, spektrální čáry splývají a nahrazují se komplexní spektrální funkcí $S(\omega)$ určující Fourierovu transformaci definovanou přímým výpočtem $S(\omega) = \int_{-\infty}^{\infty} s(t)e^{-j\omega t} \text{d}t$ za podmínky absolutní integrovatelnosti zkoumaného signálu. Mezi základní vlastnosti spektrální funkce patří mimo linearity a Parsevalova vztahu ohledně transformace energií:
+	
+		\begin{itemize}
+			\item \textbf{Posunutí v čase:} Pokud je signál zpožděn $s(t - \tau)$, násobí se obvodová spektrální funkce členem $e^{-j\omega\tau}$ – modul zůstává nezměněn, ale fáze se posouvá lineárně s kmitočtem.
+			\item \textbf{Změna znaménka časové osy:} Převrácení $s(-t)$ vede ve spektru ke komplexně sdruženému tvaru $S^*(\omega)$.
+			\item \textbf{Změna časového měřítka:} Časová komprese signálu produkuje kmitočtovou expanzi ve spektru a naopak (funkce $\frac{1}{m} S\left(\frac{\omega}{m}\right)$).
+		\end{itemize}
+	\subsubsection{Spektra vybraných signálů}
+	Základní typologické jednorázové signály mají tyto obrazové definice ve spektrální doméně:
+	
+		\begin{itemize}
+			\item \textbf{Diracův jednotkový impuls} disponuje všemi kmitočty ve stejné míře; jeho spektrální funkce má modul konstantní 1 s nulovou fází.
+			\item \textbf{Časově posunutý Diracův impuls} nese spektrální funkci $1 \cdot e^{-j\omega\tau}$.
+			\item \textbf{Jednotkový skok} má po Fourierově transformaci reálnou část $\pi\delta(\omega)$ a imaginární část $-j/\omega$.
+			\item \textbf{Harmonický signál}, ačkoliv abstraktně do nekonečna trvající, dává ve spektru dva Diracovy impulsy přesně na frekvencích $\omega_1$ a $-\omega_1$ obdařené patřičnou úměrou dané amplitudy.
+			\item \textbf{Jednorázové pravoúhlé časové okno} transformuje spektrum na typický tvar funkce sinc, neboli do funkce $\tau\text{sinc}\left(\omega\frac{\tau}{2}\right)$.
+			\item \textbf{Gaussův impuls} si po Fourierově transformaci zachovává jedinečnou schopnost se transformovat z tvaru gaussova impulsu v čase znovu na Gaussův impuls ve frekvenci.
+		\end{itemize}
+	\subsubsection{Spektrum konvoluce} 
+		Spojité časové signály svázané složitou operací konvoluce v časové rovině $s_1(t) * s_2(t)$ odpovídají po převedení do kmitočtové oblasti obyčejnému a přímému součinu obou jejich spektrálních funkcí $S_1(\omega)S_2(\omega)$. Tento fundamentální vztah nachází široké uplatnění při určování kmitočtových odezev filtrů a obecně LTI systémů.
+	
+	\subsubsection{Souvislost mezi Fourierovou řadou a Fourierovou transformací}
+		 Chceme-li obě Fourierovy reprezentace provázat, definujeme situaci, ve které existuje jednorázový signál (impuls) $s(t)$, tvořící svojí délkou exaktně jedinou periodu odpovídajícího periodického signálu $s_p(t)$. Za tohoto předpokladu koeficienty Fourierovy řady $c_k$ takového periodického signálu odvodíme přímo ze spojité spektrální funkce $S(\omega)$ jednorázového signálu, a to pouhým dosazením celistvých kmitočtových násobků s ohledem na periodu, tj. vztahem $c_k = \frac{1}{T_1}S(k\omega_1)$. Funkční obrys spojitého modulu spektrální funkce (upravený měřítkem $1/T_1$) tedy zcela přesně obepíná a formuje tvar obálky diskrétního čárového spektra koeficientů Fourierovy řady periodického modulu $|c_k|$.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.65\linewidth]{furier.png}
+        \end{figure}
+\subsection{Ideální vzorkování a rekonstrukce signálu se spojitým časem. Vzorkovací poučka. Spektra ideálně vzorkovaného signálu. Aliasing. A/D a D/A převodníky, vzorkování pásmově omezeného signálu.}
+    Zpracování spojitého (analogového) signálu číslicovým či diskrétním systémem vyžaduje použití A/Č (analogově-číslicových, A/D) a Č/A (číslicově-analogových, D/A) převodníků. Samotný proces analogově-číslicového převodu sestává ze tří kroků:
+    \begin{enumerate}
+        \item \textbf{Vzorkování:} Převod signálu se spojitým časem na signál s diskrétním časem (diskrétní signál).
+        \item \textbf{Kvantování:} Vyjádření diskrétních vzorků pomocí konečné množiny čísel, při kterém vzniká kvantovací šum.
+        \item \textbf{Kódování:} Převod kvantovaných vzorků na binární čísla v určitém kódu (např. doplňkový kód).
+    \end{enumerate}
+    \subsubsection{Ideální vzorkování} 
+        Při ideálním vzorkování (diskretizaci) je signál se spojitým časem $s(t)$ přeměněn na posloupnost veličin, které vyjadřují okamžité hodnoty původního signálu $s(t)$. Tento proces lze matematicky modelovat jako součin spojitého signálu $s(t)$ s nekonečnou periodickou posloupností Diracových impulzů $s_{\delta}(t)$, které jsou od sebe rovnoměrně vzdáleny o vzorkovací interval $T$:
+
+        \begin{equation*}
+        s_{id}(t) = s(t) \cdot s_{\delta}(t) = s(t) \sum_{n=-\infty}^{\infty} \delta(t - nT) = \sum_{n=-\infty}^{\infty} s(nT)\delta(t - nT) \;.
+        \end{equation*}
+        
+        \textbf{Spektra ideálně vzorkovaného signálu}\\
+        Násobení v časové oblasti odpovídá konvoluci ve spektrální oblasti. Spektrální funkce ideálně vzorkovaného signálu $S_{id}(\omega)$ je tak dána superpozicí rovnoměrně posunutých spekter původního spojitého signálu $S(\omega)$, které jsou násobeny konstantou $1/T$:
+        
+        \begin{equation*}
+        S_{id}(\omega) = \frac{1}{T} \sum_{k=-\infty}^{\infty} S(\omega - k\omega_{vz}) \;.
+        \end{equation*}
+        
+        Spektrum ideálně vzorkovaného (diskrétního) signálu je z principu vždy periodické, přičemž perioda je rovna úhlovému vzorkovacímu kmitočtu $\omega_{vz} = 2\pi/T = 2\pi f_{vz}$.
+    
+    \subsubsection{Vzorkovací poučka a Aliasing} 
+        Aby se sousední periody spektra ideálně vzorkovaného signálu vzájemně nepřekrývaly, musí být splněna tzv. vzorkovací poučka (Nyquistův-Shannonův-Kotelnikovův teorém). Ta definuje podmínku: $f_{vz} > 2f_{max}$ neboli $\frac{\pi}{T} > \omega_{max}$, kde $f_{max}$ (resp. $\omega_{max}$) je nejvyšší kmitočtová složka ve spektru původního spojitého signálu. Pokud vzorkovací poučka není splněna (tzn. vzorkovací kmitočet je příliš nízký), dochází k jevu zvanému \textbf{aliasing}. Při aliasingu se sousední spektra překrývají, což vede k nevratné ztrátě informace, a původní signál $s(t)$ ani jeho spektrum $S(\omega)$ již nelze bezchybně obnovit. Abychom aliasingu zabránili, je nutné před vzorkováním zařadit antialiasingový kmitočtový filtr (dolní propust), který striktně omezí šířku spektra signálu.
+
+    \subsubsection{Rekonstrukce signálu se spojitým časem} 
+        Obnovení původního spojitého signálu $s(t)$ z jeho vzorků $s(nT)$ (za předpokladu, že nenastal aliasing) se provádí pomocí ideálního rekonstrukčního filtru typu dolní propust. Tento filtr odstraní všechny vyšší periodicky se opakující spektrální složky v rekonstruovaném signálu. V kmitočtové rovině platí $S(\omega) = S_{id}(\omega)H(\omega)$, kde kmitočtová charakteristika $H(\omega)$ ideální propusti má hodnotu $T$ pro $|\omega| \le \omega_{vz}/2$ a hodnotu 0 vně tohoto pásma. V časové rovině odpovídá rekonstrukce konvoluci ideálně vzorkovaného signálu s impulsní charakteristikou ideální dolní propusti, která má tvar funkce sinus cardinalis (sinc): $h(t) = \text{sinc}\left(\frac{\omega_{vz}}{2}t\right)$. Původní spojitý signál je zrekonstruován jako součet posunutých a vzorky vážených interpolačních funkcí sinc:
+
+        \begin{equation*}
+        s(t) = \sum_{n=-\infty}^{\infty} s(nT) \cdot \text{sinc}\left(\frac{\omega_{vz}}{2}(t - nT)\right) \;.
+        \end{equation*}
+
+    \subsubsection{Vzorkování pásmově omezeného signálu} 
+        Pásmově omezený spojitý signál má své spektrum (v  kladné části osy) lokalizováno výhradně v intervalu mezi kmitočty $f_1$ a $f_2$ ($f_1 > 0$), přičemž jeho šířka pásma $B = f_2 - f_1$ je obvykle mnohem menší než samotná vzdálenost od počátku kmitočtové osy. Pro takový signál nejsou podmínky na vzorkovací kmitočet tak přísné jako u standardní vzorkovací poučky (kde by muselo striktně platit $f_{vz} > 2f_2$). K zamezení aliasingu stačí vzorkovat na takovém kmitočtu, aby se periodicky se opakující pásma spektra poskládala do prázdných mezer bez vzájemného překrytí. Podmínka pro vzorkovací kmitočet je pak relaxována na rozsah:
+
+        \begin{equation*}
+        \frac{2f_2}{n} < f_{vz} < \frac{2f_1}{n-1} \;,
+        \end{equation*}
+        
+        kde $n$ je celé číslo splňující podmínku:
+        
+        \begin{equation*}
+        2 < n < \frac{f_2}{f_2 - f_1} \;.
+        \end{equation*}
+        
+        Pokud je vzorkovací kmitočet zvolen v tomto rozsahu, k aliasingu nedojde navzdory zdánlivému porušení základního Nyquistova kritéria pro absolutní maximální kmitočet.
+\subsection{Signály s diskrétním časem. Diskrétní Fourierova řada a diskrétní Fourierova transformace. Rychlá Fourierova transformace (FFT), rychlá konvoluce a rychlá korelace. Transformace Z. Zpětná transformace Z. Použití transformace Z pro řešení diferenčních rovnic. Přenosová funkce a impulzní charakteristika. Rozložení pólů a nulových bodů v rovině-z. Stabilita a kauzalita. Kmitočtová charakteristika.}
+    \subsubsection{Signály s diskrétním časem}
+        Časová osa u signálů s diskrétním časem je tvořena konečnou nebo spočetnou množinou okamžiků (např. v technické praxi je to nejčastěji $nT$, kde $T$ je perioda vzorkování). Často se zavádí relativní (normovaný) bezrozměrný čas $n$ a signály jsou reprezentovány jako posloupnosti hodnot $s[n]$. Mezi základní diskrétní signály patří jednotkový impulz (Diracův) s diskrétním časem $\delta[n]$, jednotkový skok $\sigma[n]$ a reálný či komplexní harmonický diskrétní signál (kosinusovka). Libovolnou diskrétní posloupnost lze posléze modelovat jako sumu posunutých a vážených jednotkových impulzů.
+    \subsubsection{Diskrétní Fourierova řada (DFŘ) a diskrétní Fourierova transformace (DFT)} 
+        Pro harmonickou analýzu periodických diskrétních signálů slouží Diskrétní Fourierova řada (DFŘ). Ta přiřazuje periodické posloupnosti s periodou $N$ obraz $S[k]$, který je opět periodickou posloupností o stejné periodě $N$. Diskrétní Fourierova transformace (DFT) byla teoreticky odvozena právě z DFŘ. Využívá se pro transformaci jednorázových (konečných) posloupností o délce $N$ na obraz, který je rovněž konečnou posloupností o délce $N$. Transformace je realizována výběrem pouze jedné periody (pomocí tzv. okénkové posloupnosti) z teoreticky periodického obrazu DFŘ.
+    \subsubsection{Rychlá Fourierova transformace (FFT), rychlá konvoluce a rychlá korelace} 
+        Vzhledem k tomu, že přímý výpočet obrazu DFT je výpočetně náročný (počet komplexních součinů je $N^2$), využívá se k jeho numerickému výpočtu algoritmus Rychlé Fourierovy transformace (FFT). Tento algoritmus (typicky se základem 2 a provedením typu DIT - decimace v čase, nebo DIF - decimace ve frekvenci) redukuje počet nezbytných součinů na $\frac{N}{2} \log_2 N$, což přináší masivní úsporu času pro velká $N$. Díky FFT lze efektivně provádět náročné operace v časové rovině, jako je konvoluce a korelace. Přímý výpočet lineární konvoluce diskrétních signálů o větších délkách je neefektivní. Proto se uplatňuje takzvaná rychlá konvoluce (a obdobně rychlá korelace), kdy se obě posloupnosti převedou algoritmem FFT do kmitočtové oblasti, kde se vynásobí, a výsledek se inverzní FFT převede zpět do času. Z matematického hlediska realizuje tento výpočet přes FFT kruhovou (cyklickou) konvoluci, proto je pro výpočet lineární konvoluce nutné původní signály správně doplnit nulami.
+
+    \subsubsection{Transformace Z a Zpětná transformace Z} 
+        Zatímco spojité systémy využívají k analýze Laplaceovu transformaci, u diskrétních systémů se využívá transformace Z. Jednostranná transformace Z přiřazuje posloupnosti komplexních čísel $s[n]$ obraz v komplexní rovině Z pomocí vztahu:
+        
+        \begin{equation*}
+        S(z) = \sum_{n=0}^{\infty} s[n] z^{-n} \;.
+        \end{equation*}
+        
+        Obraz $S(z)$ je definován a konverguje pouze v tzv. oblasti konvergence (pro $|z| > R$, kde $R$ je poloměr konvergence). Zpětná (inverzní) transformace Z umožňuje přechod z obrazu $S(z)$ zpět k časové posloupnosti $s[n]$. Lze ji provádět několika způsoby: nejjednodušší metodou je rozklad na parciální (částečné) zlomky, na které se následně aplikuje slovník vzorů a obrazů. Přesnější matematickou formou je využití Cauchyho integrálního teorému a výpočet pomocí reziduové věty, což je nezbytné pro výrazy, kde by rozklad na zlomky vedl k chybám v počátečních podmínkách u $n = 0$.
+    \subsubsection{Použití transformace Z pro řešení diferenčních rovnic} 
+        Diferenční rovnice jsou základním matematickým popisem lineárních diskrétních systémů (např. typ IIR). Aplikací transformace Z lze tyto diferenční rovnice v časové rovině převést na jednodušší algebraické rovnice. Využívá se přitom věta o posunutí doprava (zpoždění posloupnosti), kde zpožděnému signálu $s[n - m]$ odpovídá v Z-rovině obraz posunutý o $z^{-m}$ (tzn. $S(z)z^{-m}$). Tímto se z diferenční rovnice algebraicky vyjádří poměr výstupního obrazu k obrazu vstupnímu.
+
+    \subsubsection{Přenosová funkce a impulzní charakteristika} 
+        Přenosová funkce $H(z)$ lineárního časově invariantního (LTI) diskrétního systému se definuje jako poměr jednostranné transformace Z výstupního signálu $Y(z)$ a vstupního signálu $X(z)$. Současně ale exaktně platí, že přenosová funkce je transformací Z samotné impulzní charakteristiky systému $h[n]$, tj.
+
+        \begin{equation*}
+        H(z) = \sum_{n=0}^{\infty} h[n]z^{-n} \;.
+        \end{equation*}
+
+        Impulzní charakteristika je odezvou systému na diskrétní jednotkový impulz (Diracův diskrétní impulz).
+
+    \subsubsection{Rozložení pólů a nulových bodů v rovině-z}
+        Přenosová funkce $H(z)$ je velmi často vyjádřena ve tvaru racionální lomené funkce jako poměr dvou polynomů. Kořeny polynomu v čitateli této funkce (kde $P(z) = 0$) nazýváme nulovými body (značeny $z_{0i}$). Kořeny polynomu ve jmenovateli ($Q(z) = 0$) určují naopak póly systému (značeny $z_{pi}$). Pozice těchto bodů se vynáší do komplexní roviny Z a jejich rozložení plně určuje základní chování celého diskrétního systému.
+
+    \subsubsection{Stabilita a kauzalita}
+        Pro to, aby byl LTI diskrétní systém (typicky IIR) považován za stabilní, musí z hlediska rozložení platit fundamentální podmínka: veškeré póly jeho přenosové funkce $H(z)$ musí exaktně ležet uvnitř jednotkové kružnice (poloměr 1) v komplexní rovině Z. Kauzalita představuje u fyzikálních systémů podmínku, kdy výstupní odezva nesmí časově předbíhat vstupní podnět. Kauzalita LTI diskrétního systému je zajištěna, pokud je jeho impulzní charakteristika nulová pro záporný čas ($h[n] = 0$ pro $n < 0$). V rovině komplexní proměnné u racionální lomené funkce kauzalita vyžaduje, aby řád polynomu v čitateli nepřekročil řád polynomu jmenovatele. (Pozn.: Diskrétní systémy typu FIR s konečnou impulzní odezvou mají v počátku Z roviny vícenásobný pól, a jsou proto z principu vždy stabilní).
+
+    \subsubsection{Kmitočtová charakteristika}
+        Kmitočtová charakteristika $H(e^{j\omega})$ popisuje ustálenou odezvu LTI diskrétního systému na komplexní harmonický diskrétní signál. Je definována vztahem:
+
+        \begin{equation*}
+        H(e^{j\omega}) = \sum_{m=-\infty}^{\infty} h[m]e^{-j\omega m}
+        \end{equation*}
+        
+        a představuje komplexní veličinu tvořenou modulovou a fázovou složkou. Kmitočtová charakteristika diskrétních systémů je z podstaty vzorkování vždy periodická s periodou $2\pi$. U stabilních a kauzálních LTI systémů existuje přímý vztah s přenosovou funkcí: kmitočtovou charakteristiku $H(e^{j\omega})$ je možné exaktně získat z přenosové funkce $H(z)$ pouhým dosazením substituce $z = e^{j\omega}$. Geometricky to znamená vyhodnocení přenosové funkce přesně po obvodu jednotkové kružnice v rovině Z.
+\subsection{Náhodné signály se spojitým a diskrétním časem. Definice náhodného procesu a jeho reprezentace množinou realizací. Distribuční funkce a hustota rozložení pravděpodobnosti, momenty. Stacionarita a ergodicita. Spektrální výkonová hustota pro spojitý a diskrétní náhodný proces. Bílý šum. Použití FFT pro výpočet spektrální výkonové hustoty.}
+    \subsubsection{Náhodné signály se spojitým a diskrétním časem, definice náhodného procesu a jeho reprezentace množinou realizací} Náhodné signály jsou modely dějů, jejichž hodnotu nelze předem přesně určit, lze ji jen odhadovat s určitou pravděpodobností. K jejich popisu slouží teorie náhodných procesů. Náhodný proces $\xi(t)$ je systém náhodných veličin definovaných pro určité okamžiky. Pokud je čas $t$ spojitá veličina (definován pro všechna $t \in {R}$), hovoříme o spojitém náhodném procesu. Diskrétní náhodný proces je naopak definován pro spočetnou nebo nekonečnou množinu oddělených okamžiků $t_i$. Nejčastěji jde o rovnoměrné vzorkování ($t_i = iT$), takže proces $\xi[n]$ je systémem náhodných veličin $\xi_n$ definovaných pro celočíselný index $n$. Náhodný proces se reprezentuje množinou realizací. Realizace je jeden konkrétní pozorovaný (změřený) průběh náhodného procesu. Mnohonásobným uskutečněním podmínek, za kterých proces probíhá, získáme soubor (množinu) těchto realizací, který je teoreticky nekonečný.
+
+    \subsubsection{Distribuční funkce a hustota rozložení pravděpodobnosti, momenty}
+        \begin{itemize}
+            \item \textbf{Distribuční funkce:} Jednorozměrná distribuční funkce $F(x, t)$ spojitého náhodného procesu udává pravděpodobnost, že náhodný proces $\xi(t)$ v určitém čase $t$ nabyde hodnoty menší než $x$ ($F(x, t) = P\{\xi(t) < x\}$). Odhad se určuje jako poměr počtu realizací splňujících tuto podmínku vůči celkovému počtu realizací. U diskrétního procesu platí obdobná definice pro konkrétní krok vzorkování $n$.
+            \item \textbf{Hustota rozložení pravděpodobnosti:} Existuje-li parciální derivace distribuční funkce podle $x$, nazývá se jednorozměrnou funkcí hustoty rozdělení pravděpodobnosti: $p(x, t) = \frac{\partial F(x, t)}{\partial x}$.
+            \item \textbf{Momenty:} Představují číselné charakteristiky popisující polohu a tvar hustoty pravděpodobnosti.
+            \begin{itemize}
+                \item \textit{Střední hodnota} (obecný moment 1. řádu, $E(x)$) je průměrnou hodnotou procesu.
+                \item \textit{Rozptyl} (centrální moment 2. řádu, $D(x)$) hodnotí míru rozptýlení hodnot procesu kolem jeho střední hodnoty. Odmocnina z rozptylu se nazývá směrodatná odchylka.
+                \item \textit{Normované momenty} 3. a 4. řádu určují koeficient šikmosti (asymetrie) a koeficient špičatosti (excesu). Důležitou charakteristikou pro závislosti mezi dvěma okamžiky je pak korelační funkce (a její centrovaná varianta - kovarianční funkce), která určuje míru podobnosti hodnot procesu v časech $t_1$ a $t_2$.
+            \end{itemize}
+    \end{itemize}
+    \subsubsection{Stacionarita a ergodicita}
+
+        \begin{itemize}
+            \item \textbf{Stacionarita:} U stacionárního náhodného procesu nezávisí jeho statistické charakteristiky na posunutí počátku časové osy. Jednorozměrná distribuční funkce i hustota pravděpodobnosti (a tím pádem i střední hodnota či rozptyl) jsou v čase konstantní ($p(x, t) \to p(x)$). Dvojrozměrná hustota a korelační funkce závisejí pouze na časovém rozdílu zkoumaných okamžiků $\tau = t_2 - t_1$ (resp. $m = n_2 - n_1$ u diskrétních).
+            \item \textbf{Ergodicita:} Speciální případ stacionárního procesu, kdy všechny realizace procesu mají stejné statistické chování. Díky tomu je možné veškeré statistické vlastnosti (střední hodnotu, rozptyl, korelační funkce atd.) stanovovat pouhým výpočtem průměrů z jediné, libovolné, teoreticky nekonečně dlouhé realizace namísto průměrování přes množinu všech realizací.
+        \end{itemize}
+        
+    \subsubsection{Spektrální výkonová hustota pro spojitý a diskrétní náhodný proces} 
+        Pro náhodné procesy nelze klasicky aplikovat deterministické spektrum, proto se procesy vyjadřují v kmitočtové oblasti pomocí \textbf{výkonové spektrální hustoty} $G_{xx}(\omega)$.
+    
+        \begin{itemize}
+            \item \textbf{Spojitý proces:} Výkonová spektrální hustota stacionárního náhodného procesu se definuje (podle Wiener-Chinčinova teorému) exaktně jako Fourierova transformace jeho autokorelační funkce $\gamma_{xx}(\tau)$.
+            \item \textbf{Diskrétní proces:} Provádí se odhad pomocí autokorelační posloupnosti z diskrétní realizace o délce $N$. Aplikací Fourierovy transformace diskrétního signálu na odhad autokorelace vznikne tzv. \textbf{periodogram}. Ten odpovídá podílu kvadrátu modulu Fourierovy transformace přímo z datové realizace a její délky $N$. Periodogram je ovšem nekonzistentním odhadem (jeho rozptyl nekonverguje k nule při $N \to \infty$).
+        \end{itemize}
+    \subsubsection{Bílý šum} 
+        Bílý šum je teoretický (fyzikálně nerealizovatelný) náhodný proces, jehož výkonová spektrální hustota je konstantní pro všechny kmitočty $\omega$ ($G_{xx}(\omega) = k$). Jeho autokorelační funkce je rovna Diracovu impulzu (je nekonečně úzká), což znamená, že u bílého šumu jsou korelovány pouze hodnoty s nekonečně malým časovým odstupem.
+
+    \subsubsection{Použití FFT pro výpočet spektrální výkonové hustoty} 
+        Z důvodu nekonzistence samotného periodogramu se v praxi pro odhad výkonové spektrální hustoty z naměřených dat používají tzv. neparametrické metody (např. Welchova metoda). K jejich efektivnímu číslicovému výpočtu se využívá algoritmus rychlé Fourierovy transformace (FFT). Ve Welchově metodě se vstupní diskrétní realizace náhodného procesu rozdělí na kratší dílčí segmenty o délce $M$, které se obvykle vzájemně překrývají (např. s 50\% přesahem). Před výpočtem spektra se data v segmentech nejprve pronásobí zvoleným časovým oknem (tzv. modifikovaný periodogram). Následně se na každý z těchto modifikovaných segmentů aplikuje algoritmus FFT pro získání dílčích spekter a z nich dílčích periodogramů. Výsledný kvalitní odhad výkonové spektrální hustoty vznikne konečným zprůměrováním všech těchto dílčích periodogramů. Průměrování zásadně snižuje rozptyl odhadu a výsledná metoda je (při $N \to \infty$) pro odhad spektra konzistentní.
+\subsection{Sdělovací soustava a její vlastnosti, modulační a přenosová rychlost, spektrum sdělovacího kanálu. Analogový a číslicový přenosový systém. Přenos v základním pásmu, rušení číslicových signálů, Nyquistův filtr. Signály pro přenos v přeloženém pásmu. Modulace. AM a FM modulace. Amplitudové, kmitočtové a fázové klíčování. }
+    \subsubsection{Sdělovací soustava a její vlastnosti, analogový a číslicový přenosový systém} 
+        Sdělovací soustava (např. jednosměrná dvoubodová) je soubor zařízení pro přenos informace z jednoho místa na druhé. Skládá se z vysílače, sdělovacího vedení (přenosového kanálu) a přijímače. Vedením může být kroucený pár, koaxiální kabel, světlovod nebo atmosféra pro šíření rádiových vln. Úkolem vysílače je upravit signál pro přenos, zatímco přijímač upravuje výkonovou úroveň, vrací signál do původní kmitočtové pozice a odstraňuje vliv rušení.
+
+    \begin{itemize}
+        \item \textbf{Analogová sdělovací soustava} přenáší časově spojité signály. Její vlastnosti se definují pomocí kmitočtové charakteristiky (šířky propustného pásma), činitele nelineárního zkreslení a odstupu signálu od šumu (SNR).
+        \item \textbf{Číslicová sdělovací soustava} přenáší zprávy ve formě posloupnosti binárních číslic. Není kladen důraz na přesné zachování tvaru signálu, stačí správně rozeznat přenesený prvek (např. 0 nebo 1). Blokově typicky obsahuje zdrojový kodér (komprese dat), kanálový kodér (přidání zabezpečení proti chybám), linkový kodér (odstranění stejnosměrné složky a dlouhých neměnných úseků) a modulátor.
+    \end{itemize}
+    
+    \subsubsection{Přenos v základním pásmu, modulační a přenosová rychlost, spektrum sdělovacího kanálu}
+        Číslicové signály nezpracovávané pomocí modulace a demodulace se přenášejí v základním kmitočtovém pásmu. Příkladem je dvoustavový signál NRZ.
+    
+        \begin{itemize}
+            \item \textbf{Modulační rychlost ($M$)} udává počet signálových prvků přenesených za sekundu ($M = 1/T$, kde $T$ je doba trvání prvku) a její jednotkou je baud (Bd).
+            \item \textbf{Přenosová rychlost ($R$)} definuje počet binárních číslic (bitů) přenesených za sekundu (b/s). S modulační rychlostí je svázána vztahem $R = M \log_2 Q$, kde $Q$ je počet možných stavů signálu.
+            \item \textbf{Spektrum sdělovacího kanálu} se modeluje jako ideální dolní propust s šířkou pásma $B$ a mezním kmitočtem $f_B$. Pro bezchybné rozeznání nul a jedniček musí kanál přenést minimálně základní harmonickou složku signálu, tedy musí platit $f_1 < B < 3f_1$. Teoretickým mezním stavem pro rozlišitelnost je limit $M = 2B$.
+        \end{itemize}
+    \subsubsection{Rušení číslicových signálů, Nyquistův filtr} 
+        Přítomnost rušivých signálů v přenosovém kanálu způsobuje, že některé prvky zprávy nejsou přeneseny správně a dochází k záměně nul a jedniček. Míru těchto chyb určuje chybovost (BER – Bit Error Rate). Vlivem rušení je rovněž limitováno použití vícestavových signálů (pro zvýšení přenosové rychlosti), protože při stejném výkonu jsou jemnější úrovně signálu hůře rozlišitelné. Strmé hrany obdélníkových impulzů by generovaly nekonečně široké kmitočtové spektrum; signálové prvky se proto pro splnění šířky pásma a omezení limitní mezisymbolové interference ($M = 2B$) tvarují speciálními filtry.
+
+    \subsubsection{Signály pro přenos v přeloženém pásmu. Modulace} U prostředí, kde se dlouhé vlny základního pásma výrazně tlumí (např. atmosféra), je třeba použít pro přenos nosný signál vyššího kmitočtu. To se řeší přesunem spektra po kmitočtové ose pomocí operace modulace. Modulace je proces, při kterém je některý parametr nosného signálu (typicky harmonického) ovlivňován modulačním (řídicím) signálem ze základního pásma.
+
+    \subsubsection{AM a FM modulace} Nosný harmonický signál má tři parametry (amplitudu, úhlový kmitočet a fázi), od nichž se odvíjí typ analogové modulace.
+
+        \begin{itemize}
+            \item \textbf{Amplitudová modulace (AM):} Modulační signál $f(t)$ ovládá amplitudu nosné. Modulovaný signál je dán vztahem $s_{AM}(t) = S_n(1 + m f(t))\cos(\omega_n t + \phi_n)$, kde $m$ je hloubka modulace. Spektrum klasické AM (DSB) sestává z nosné a ze symetrického horního a spodního postranního pásma. Praktická šířka spektra je $B = 2F_{max}$. Omezením AM je malá odolnost proti rušení a plýtvání výkonem na nosnou. Proto se využívají zúžené formy s jedním postranním pásmem (SSB) nebo s potlačenou nosnou (SSB-SC).
+            \item \textbf{Kmitočtová modulace (FM):} Modulačním signálem je řízen okamžitý kmitočet nosného signálu. Definující rovnice využívá integrál modulační funkce. Zavádí se index kmitočtové modulace $\beta_{FM} = \Delta\omega / \Omega$, kde $\Delta\omega$ je kmitočtový zdvih. Teoretické spektrum se vyjadřuje pomocí Besselových funkcí. Praktická šířka spektra se odhaduje podle Carsonova pravidla jako $B_{FM} = 2(\Delta\omega + \Omega_{max})$. Oproti AM je FM mnohem odolnější vůči rušivým signálům (až do tzv. prahového jevu).
+        \end{itemize}
+    \subsubsection{Amplitudové, kmitočtové a fázové klíčování} 
+        Klíčování je termín pro modulace, u kterých je modulačním (řídicím) signálem signál číslicový (tj. posloupnosti stavů).
+
+        \begin{itemize}
+            \item \textbf{Amplitudové klíčování (ASK):} Amplituda nosného signálu se mění podle stavu 0 nebo 1. Z matematického hlediska se získá násobením nosné s bipolárním či unipolárním modulačním signálem $s_{ASK}(t) = g(t)s_n(t)$. Praktická šířka spektra ASK v Hz je číselně zhruba rovna přenosové rychlosti v b/s.
+            \item \textbf{Kmitočtové klíčování (FSK):} Signálové prvky 0 a 1 jsou vyjádřeny úseky kosinusovek o různých kmitočtech. Signál lze uvažovat jako součet dvou amplitudově klíčovaných signálů. Praktická šířka spektra se rovná přibližně přenosové rychlosti zvětšené o kmitočtový rozdíl obou kosinusovek.
+            \item \textbf{Fázové klíčování (PSK):} Nejčastější je dvoustavové klíčování (BPSK), kdy se fáze otáčí o $\pi$. Prvek nuly je vyjádřen jako $s_0(t) = -S_n \cos \omega_n t$ a prvek jedničky $s_1(t) = S_n \cos \omega_n t$. Liší se tedy pouze znaménkem, což zaručuje vynikající rozlišitelnost a odolnost vůči rušení. Praktická šířka pásma obsahující nezbytné složky spektra je $B = 1/T$.
+        \end{itemize}
+    
+        	    
+        

@@ -1,0 +1,338 @@
+\section{Měření v elektrotechnice (BPC-MVA)}
+\subsection{Nejistoty přímých a nepřímých měření, přístrojové nejistoty, chyby měřicích metod.}
+    \subsubsection{Chyby měřicích metod}
+        \begin{itemize}
+            \item \textbf{Absolutní odchylka měření:} Vyjadřuje se jako rozdíl naměřené hodnoty a hodnoty konvenčně pravé ($\Delta X = X_M - X_P$).
+            \item \textbf{Relativní odchylka měření:} Je dána podílem absolutní odchylky a hodnoty konvenčně pravé. V praxi se obvykle vyjadřuje v procentech ($\delta = \frac{\Delta X}{X_M} \cdot 100$).
+            \item \textbf{Systematické odchylky:} Zůstávají stejné při nezměněných podmínkách. Nejčastějším typem je \textbf{odchylka metody} (chyba metody), která vzniká zejména vzájemným působením měřicího přístroje a měřeného objektu. Dalšími jsou odchylka nuly a odchylka zesílení.
+            \item \textbf{Náhodné odchylky:} Mění se nepředvídatelně, jsou mimo kontrolu experimentátora a nelze je odstranit korekcí. Vyhodnocují se na základě statistických parametrů, jako je rozptyl a směrodatná odchylka.
+        \end{itemize}
+    \subsubsection{Přístrojové nejistoty}
+        \begin{itemize}
+            \item \textbf{Odchylky analogových přístrojů:} Stanovují se na základě třídy přesnosti ($\delta_{TP}$). Absolutní odchylka přístroje je konstantní po celém rozsahu a určí se ze vztahu $\Delta_P = \frac{\delta_{TP} \cdot X_R}{100}$, kde $X_R$ je velikost měřicího rozsahu. Z toho vyplývá, že relativní chyba s klesající naměřenou hodnotou roste, proto je vhodné měřit v poslední třetině rozsahu.
+            \item \textbf{Odchylky digitálních přístrojů:} Celková absolutní odchylka ($\Delta_P$) se skládá ze dvou složek. První je odchylka z naměřené hodnoty ($\delta_M$), která má multiplikativní charakter (roste s měřenou veličinou). Druhou je odchylka z rozsahu ($\delta_R$), která má aditivní charakter a je po celém měřicím rozsahu konstantní. Výpočet se realizuje vztahem $\Delta_P = \frac{|\delta_M \cdot X_M| + |\delta_R \cdot X_R|}{100}$.
+        \end{itemize}
+    \subsubsection{Nejistoty přímých a nepřímých měření}
+        \begin{itemize}
+            \item \textbf{Standardní nejistota typu A ($u_A$):} Stanovuje se na základě statistické analýzy opakovaných měření a je dána výběrovou směrodatnou odchylkou aritmetického průměru.
+            \item \textbf{Standardní nejistota typu B ($u_B$):} Určuje se z jiných nemetrologických informací (například z garantovaných odchylek měřicího přístroje). Nejčastěji se uvažuje rovnoměrné rozdělení pravděpodobnosti a převodní koeficient $\chi = \sqrt{3}$.
+            \item \textbf{Kombinovaná standardní nejistota ($u_C$):} Slučuje vliv obou typů nejistot (A i B) a vypočítá se jako jejich kvadratický (geometrický) součet: $u_C = \sqrt{u_A^2 + u_B^2}$.
+            \item \textbf{Rozšířená nejistota ($U$):} Používá se pro zápis finálního výsledku a vzniká vynásobením kombinované nejistoty koeficientem rozšíření ($k$, obvykle $k = 2$), čímž udává přesnější toleranční meze ($U = k \cdot u_C$).
+            \item \textbf{Zákon šíření nejistot (nepřímá měření):} Při nepřímých měřeních se hodnota $Y$ stanoví výpočtem z přímo měřených veličin $X$, tedy $Y = f(X_1, X_2, \dots, X_n)$. Nejistota nepřímého měření se určuje podle zákona šíření nejistot přenesením kombinovaných standardních nejistot veličin $X_i$ pomocí citlivostních koeficientů $A_i$ (určených parciálními derivacemi $\frac{\partial Y}{\partial X_i}$). Pokud jsou měřené veličiny vzájemně závislé, musí se ve výpočtu zohlednit také jejich korelace pomocí kovariančních koeficientů.
+        \end{itemize}
+\subsection{Analogové a číslicové měřicí přístroje; vlastnosti, základní funkční bloky.}
+    \subsubsection{Analogové měřicí přístroje}
+        \textbf{Vlastnosti (Statické a dynamické charakteristiky)} Analogové přístroje jsou elektromechanická ústrojí, která převádějí elektrickou veličinu na spojitou výchylku ukazatele, jež se mění úměrně se změnou měřené veličiny. Jejich vlastnosti popisují následující parametry:
+        
+        \begin{itemize}
+            \item \textbf{Převodní charakteristika:} Vyjadřuje vztah mezi měřenou veličinou a údajem přístroje, nejčastěji bývá lineární.
+            \item \textbf{Měřicí rozsah:} Část rozsahu stupnice, v níž platí normované metrologické vlastnosti a lze v ní měřit se zaručenou přesností.
+            \item \textbf{Přetížitelnost:} Násobek maximální hodnoty měřicího rozsahu, který přístroj vydrží bez trvalých změn svých vlastností.
+            \item \textbf{Citlivost:} Je definována jako poměr změny údaje ke změně měřené veličiny, která ji vyvolala ($C = \frac{\Delta Y}{\Delta X}$). U přístrojů s lineární charakteristikou je konstantní po celém rozsahu.
+            \item \textbf{Konstanta přístroje ($k$):} Je převrácenou hodnotou citlivosti a určuje se jako podíl největší hodnoty rozsahu a maximálního počtu dílků stupnice.
+            \item \textbf{Rozlišitelnost:} Schopnost zřetelně rozlišit blízké hodnoty, je dána prahem necitlivosti (hodnota potřebná pro první pozorovatelnou výchylku).
+            \item \textbf{Spotřeba:} Výkon odebíraný přístrojem z měřeného obvodu, který způsobuje zatížení obvodu a vznik odchylky (chyby) metody.
+            \item \textbf{Dynamické vlastnosti:} Souvisí s pohybem ústrojí, kde proti sobě působí čtyři základní momenty. \textbf{Pohybový moment ($M_P$)} je vyvolán měřenou veličinou. Proti němu působí \textbf{direktivní (řídicí) moment ($M_D$)} úměrný výchylce, \textbf{tlumicí (brzdicí) moment ($M_B$)} závislý na úhlové rychlosti a \textbf{moment setrvačných sil ($M_J$)} závislý na úhlovém zrychlení pohyblivé části. Jejich vzájemný poměr určuje charakter přechodného děje a rychlost ustálení ukazatele.
+        \end{itemize}
+        \textbf{Základní funkční bloky}\\Z obecného hlediska lze analogový přístroj rozdělit na následující funkční celky:
+        \begin{itemize}
+            \item \textbf{Pohyblivé části přístroje:} Na ně působí pohybový moment měřené veličiny.
+            \item \textbf{Porovnávací prvek:} Mechanismus, ve kterém dochází k vyrovnání (porovnání) pohybového momentu a direktivního (řídicího) momentu.
+            \item \textbf{Ztělesněná míra:} Systém umožňující odečtení výsledné výchylky (ukazatel a stupnice).
+        \end{itemize}
+        \textbf{Typy analogových měřicích ústrojí}
+            \begin{itemize}
+                \item \textbf{Magnetoelektrické ústrojí:} Využívá působení magnetického pole permanentního magnetu na otočnou cívku protékanou proudem. Výchylka je úměrná střední hodnotě veličiny. Do této skupiny patří i \textit{galvanometry} (pro velmi malé proudy), \textit{přístroje s usměrňovačem} (měří střední absolutní hodnotu střídavého proudu) a \textit{přístroje s termočlánkem} (měří efektivní hodnotu).
+                \item \textbf{Feromagnetické ústrojí:} Založeno na vzájemném odpuzování dvou feromagnetických plíšků (jednoho pevného a jednoho pohyblivého) umístěných v cívce protékané měřeným proudem. Ukazují efektivní hodnotu a jsou běžné jako rozváděčové ampérmetry a voltmetry.
+                \item \textbf{Elektrodynamické a ferodynamické ústrojí:} Využívá sil působících mezi pevnou a pohyblivou cívkou. Ferodynamické má navíc feromagnetický obvod. Tato ústrojí se dnes používají téměř výhradně jako \textit{wattmetry} pro měření činného výkonu.
+                \item \textbf{Indukční ústrojí:} Principem jsou vířivé proudy indukované střídavým magnetickým polem do vodivého kotouče. Používá se specificky pro \textit{elektroměry} k měření spotřeby střídavé elektrické energie.
+                \item \textbf{Rezonanční ústrojí:} Využívá mechanické rezonance řady laděných feromagnetických jazýčků (jazýčkové kmitoměry pro měření kmitočtu sítě).
+                \item \textbf{Poměrové ústrojí:} Nemá direktivní pružiny. Výchylka se ustavuje rovnováhou dvou nezávislých pohybových momentů od dvou zkřížených cívek a závisí pouze na poměru obou měřených veličin. Využívají se jako \textit{ohmmetry} či \textit{fázoměry}.
+            \end{itemize}
+    \subsubsection{Číslicové měřicí přístroje}
+        \textbf{Vlastnosti (Digitalizace signálu)}\\
+        Číslicové přístroje pracují diskrétně a dosahují obvykle vyšší přesnosti a jednoznačnosti údaje. Proces získání číslicové informace z analogové veličiny se skládá ze tří kroků:
+        
+        \begin{itemize}
+            \item \textbf{Vzorkování signálu v čase:} Odběr vzorku vstupního signálu v definovaných časových okamžicích (převod ze spojitého do nespojitého času). Musí splňovat Shannon-Kotělnikovův teorém, kdy vzorkovací kmitočet musí být minimálně dvojnásobkem nejvyšší kmitočtové složky spektra měřeného signálu, jinak vzniká aliasing.
+            \item \textbf{Kvantování v úrovni:} Zaokrouhlení odebraného vzorku na hodnotu odpovídající nejbližší pevně dané kvantovací úrovni. Tímto zaokrouhlením vzniká tzv. kvantizační šum.
+            \item \textbf{Kódování:} Vyjádření kvantovaných hodnot čísly v určitém binárním kódu.
+        \end{itemize}
+        \textbf{Základní funkční bloky}\\
+        Cesta zpracování signálu v číslicovém přístroji se skládá z následujících logických bloků:
+        \begin{itemize}
+            \item \textbf{Blok vstupní úpravy signálu:} Zajišťuje převod měřené fyzikální veličiny na napětí a následnou úpravu úrovně signálu pomocí zesilovače nebo děliče.
+            \item \textbf{Antialiasingový filtr (AAF):} Dolní propust, která z měřeného signálu propustí pouze složky s kmitočtem nižším, než je polovina vzorkovacího kmitočtu, čímž brání chybám ze vzorkování (aliasing).
+            \item \textbf{Vzorkovač (VZ):} Obvod provádějící vzorkování upraveného signálu definovaným vzorkovacím kmitočtem.
+            \item \textbf{Analogově-číslicový převodník (A/Č):} Provádí samotné kvantování a kódování navzorkovaných hodnot do číslicového tvaru.
+            \item \textbf{Blok číslicového zpracování (BČZ):} Výpočetní jednotka (procesor), která na digitalizovanou posloupnost dat aplikuje matematické algoritmy (např. filtraci, Fourierovu transformaci, výpočet efektivní hodnoty TRMS apod.).
+            \item \textbf{Zobrazovač (případně Č/A převodník):} Zajišťuje zobrazení výsledné numerické hodnoty nebo, v případě generátorů, zpětný převod číselné posloupnosti na analogový výstupní signál.
+        \end{itemize}
+\subsection{Analogové převodníky elektrických veličin; zesilovače, usměrňovače, měřicí transformátory, převodníky realizující matematické operace (součin, rozdíl, násobení, dělení, integrace)}
+    \subsubsection{Měřicí zesilovače}
+        Měřicí zesilovače tvoří nedílnou součást měřicích přístrojů, přičemž na rozdíl od sdělovacích zesilovačů se vyznačují vysokou přesností a stabilitou.
+        
+        \begin{itemize}
+            \item \textbf{Operační zesilovače (OZ):} Ideální OZ je napětím řízený zdroj napětí s nekonečným zesílením. Reálný OZ se od ideálního liší konečným a kmitočtově závislým zesílením, přítomností nenulových vstupních klidových proudů, napěťovou nesymetrií (a jejím driftem), omezenou rychlostí přeběhu a limitovaným rozkmitem výstupního napětí.
+            \item \textbf{Zpětnovazební zapojení:} Zavedením záporné zpětné vazby se stabilizuje zesílení, zvýší se kmitočtový rozsah a vstupní odpor, klesne výstupní odpor a omezí se šum. Pomocí OZ a zpětné vazby vznikají základní převodníky:
+            \begin{itemize}
+                \item \textit{Převodník U/U}.
+                \item \textit{Převodník U/I}.
+                \item \textit{Převodník I/U}.
+                \item \textit{Převodník I/I}.
+            \end{itemize}
+            \item \textbf{Modulační zesilovače:} Pro měření velmi malých stejnosměrných napětí ($\mu$V, nV) se běžné OZ nehodí kvůli driftu nuly a šumu. Používá se modulační zesilovač, kde se stejnosměrné napětí nejprve v modulátoru převede na střídavé (čímž se eliminuje drift), to se zesílí střídavým zesilovačem a následně se v synchronním demodulátoru převede zpět na stejnosměrné napětí.
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=1\linewidth]{UU.png}
+            \includegraphics[width=1\linewidth]{IU.png}
+            \includegraphics[width=1\linewidth]{ModZes.png}
+        \end{figure}
+    \subsubsection{Měřicí usměrňovače}
+        Měřicí usměrňovače slouží k převodu periodické časově proměnné veličiny na střední nebo střední absolutní hodnotu.
+        
+        \begin{itemize}
+            \item \textbf{Pasivní usměrňovače:} Využívají polovodičové diody v jednocestném nebo dvoucestném zapojení (Graetzův můstek). Mají omezení v nelinearitě vlivem prahového napětí diod, a proto jsou vhodné jen pro vyšší napětí.
+            \item \textbf{Aktivní usměrňovače s OZ:} K odstranění prahového napětí diod se diody zapojují do zpětné vazby operačního zesilovače. OZ svou funkcí kompenzuje úbytek na diodě, čímž vzniká převodník s vysoce lineární převodní charakteristikou i pro napětí v řádech milivoltů.
+            \item \textbf{Řízené (fázově citlivé) usměrňovače:} K přepínání polarity měřeného signálu nevyužívají jeho vlastní průchod nulou, ale jsou řízeny externím synchronizačními (referenčním) pravoúhlými kmity (napětím). Tyto usměrňovače umožňují fázově citlivou detekci – využívají se například ve vektorvoltmetrech k rozkladu fázoru napětí na reálnou a imaginární složku.
+        \end{itemize}
+    \subsubsection{Převodníky efektivní hodnoty na stejnosměrné napětí}
+        Efektivní hodnota vyjadřuje výkonové vlastnosti měřeného průběhu, patří k nejčastěji měřeným charakteristikám. Efektivní hodnota je fyzikálně definována takto: ,,Efektivní hodnota periodicky proměnného proudu $i$ je rovna stejnosměrnému proudu $I$, který v odporu vyvine za určitou dobu stejné teplo jako proud $i$.''
+
+        Přístroje, jejichž pohybový moment je úměrný čtverci okamžité hodnoty měřené veličiny a současně jejich dynamické vlastnosti umožňují indikovat střední hodnotu v čase, měří efektivní hodnotu.
+        
+        Problematické je měření efektivní hodnoty neharmonických průběhů, zejména obsahují-li harmonické složky vyšších řádů. Takové průběhy napětí a proudu se vyskytují např. v obvodech s polovodiči. Efektivní hodnota pro neharmonický průběh je definována jako odmocnina ze součtu čtverců efektivních hodnot jednotlivých vyšších harmonických složek (podle Parsevalova teorému):
+        $$U = \sqrt{U_0^2 + U_1^2 + U_2^2 + U_3^2 + \dots + U_n^2}$$
+        Přístroje pro měření skutečné efektivní hodnoty napětí neharmonických signálů musí měřit efektivní hodnotu všech jejich harmonických složek, proto musí mít dostatečný kmitočtový rozsah. Pro potřeby měření jsou periodické průběhy veličin charakterizovány těmito činiteli:
+        \begin{itemize}
+            \item \textbf{činitelem tvaru} $$k_t = \frac{U}{U_{sa}} \;,$$
+            \item \textbf{činitelem plnění} $$k_p = \frac{U_{sa}}{U_m} \;,$$
+            \item \textbf{činitelem výkyvu} $$k_v = \frac{U_m}{U} \;.$$
+        \end{itemize}
+    \subsubsection{Měřicí transformátory}
+        Zajišťují převod měřené veličiny na velikost vhodnou pro připojení přístroje a poskytují galvanické oddělení od silových částí obvodů. Jsou využívány pro měření časově proměnných veličin; nelze je využít pro stejnosměrné signály.
+        
+        \begin{itemize}
+            \item \textbf{Měřicí transformátory proudu (MTP):} Primární vinutí je do obvodu zapojeno sériově a sekundární napájí ampérmetr. Převod se určuje jako $p_I = I_p/I_s = N_s/N_p$. Zátěž (impedance) na sekundární straně nesmí překročit povolenou hodnotu (určenou ve VA), aby nedošlo k chybám. Důležitým parametrem je tzv. \textit{nadproudové číslo}, které udává násobek jmenovitého proudu, při kterém chyba převodu (vlivem přesycení jádra) dosáhne 10 \%. Pro měřicí účely se volí malé, aby přesycením chránilo přístroje.
+            \item \textbf{Měřicí transformátory napětí (MTN):} Primární vinutí se připojuje paralelně ke zdroji napětí. Sekundární strana je připojena na voltmetr (vysoká impedance). MTN musí pracovat blízko stavu naprázdno. Zkrat na sekundární straně je nepřípustný, protože vyvolá zničení transformátoru. Převod je $p_U = U_p/U_s = N_p/N_s$. Přesnost MTN se udává tzv. třídou přesnosti.
+
+            \item\textbf{Rogowského cívka:}
+                Pro měření střídavých proudů lze kromě MTP a bočníků použít také Rogowskiho cívky (RG). RG je tvořena cívkou s $N$ závity navinutými na nemagnetickém jádře s průřezem $S$, nejčastěji ve tvaru prstence. Prstenec obepíná vodič s měřeným proudem $i$. V krátkém elementu cívky délky $d\ell$ se podle Faradayova indukčního zákona indukuje napětí
+                $$u_z = -n \frac{d\Phi}{dt} = -n \frac{d}{dt} \iint_{S} \mu_0 \mathbf{H} d\mathbf{S} \;,$$
+                \begin{figure}[h]
+                    \centering
+                    \includegraphics[width=1\linewidth]{Rog.png}
+                \end{figure}
+        \end{itemize}
+    \subsubsection{Převodníky realizující matematické operace}
+        \textbf{A. Rozdíl a součet}\\
+        Součtové nebo rozdílové operace se realizují pasivně nebo aktivně.
+        
+        \begin{itemize}
+            \item \textbf{Pasivní sčítací obvod:} Tvořen rezistorovou sítí. Nevýhodou je vzájemné ovlivňování a snížení napětí, a proto se dnes spíše nepoužívá.
+            \item \textbf{Aktivní sčítací zesilovač:} Je realizován invertujícím operačním zesilovačem, do jehož vstupního (součtového) uzlu je přivedeno více napětí přes váhové odpory. Vstupní uzel představuje tzv. virtuální nulu, což eliminuje vzájemné ovlivňování signálů.
+            \item \textbf{Rozdílový zesilovač:} Rozdíl se realizuje buď předřazením invertoru pro odčítané napětí do sčítacího obvodu, nebo přímo v jednom OZ přivedením jednoho signálu na invertující a druhého na neinvertující vstup. V přesné měřicí technice se pak využívá \textit{přístrojový zesilovač}, který kombinuje rozdílový stupeň se vstupními neinvertujícími sledovači, čímž zajišťuje velký vstupní odpor a výborné potlačení souhlasného rušení (CMR).
+        \end{itemize}
+        \textbf{B. Násobení}\\
+        Podle schopnosti zpracovat polaritu napětí dělíme násobičky na jedno-, dvou- a čtyřkvadrantové.
+        \begin{itemize}
+            \item \textbf{Násobička s kvadrátory:} Využívá matematické identity, kdy se sečte a odečte kvadrát součtu a kvadrát rozdílu obou napětí: $4U_1U_2 = (U_1 + U_2)^2 - (U_1 - U_2)^2$. Kvadrátory jsou řešeny např. diodovými sítěmi po úsecích.
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=1\linewidth]{Ananas.png}
+            \end{figure}
+            \item \textbf{Násobička s řízeným činitelem přenosu:} Signál $U_1$ vstupuje do zesilovače, jehož napěťové zesílení je přímo řízeno napětím $U_2$.
+            \item \textbf{Násobička s Hallovou sondou:} První veličina vybudí magnetické pole $B$, druhá dodá proud do sondy $i_H$. Generované Hallovo napětí je tak přímo úměrné okamžitému součinu (okamžitému výkonu).
+            \item \textbf{Násobička s amplitudově-šířkovou modulací (AM-ŠM):} Pracuje s pravoúhlými impulzy konstantní periody $T$. Napětí $U_1$ v šířkovém modulátoru řídí střídu impulzů, napětí $U_2$ pak v amplitudovém modulátoru řídí jejich amplitudu. Střední hodnota výsledných pravoúhlých impulzů získaná na výstupní dolní propusti je úměrná součinu $U_1 \cdot U_2$. Tato násobička vyniká extrémní přesností (až 0,1 \%), byť při omezené šířce kmitočtového pásma.
+        \end{itemize}
+        
+        \textbf{C. Dělení (Podíl)}
+        
+        \begin{itemize}
+            \item \textbf{Dělička s násobicím členem ve zpětné vazbě:} Vznikne tak, že se násobička zapojí do záporné zpětné vazby základního invertujícího zesilovače. Do obvodu vstupuje napětí $U_1$ a dělitel $U_2$ je přiveden na násobičku, jejíž druhý vstup je spojen s výstupem obvodu. Výsledný stav se ustálí tak, že výstupní napětí je úměrné podílu $U_1/U_2$. Spojením obou vstupů násobičky vzniká v tomto zapojení obvod pro výpočet odmocniny.
+            \item \textbf{Modulační dělička:} Využívá dvou zdrojů proudu nabíjejících integrátory. Napětí $U_1$ řídí přímo úměrně amplitudu pilového napětí, zatímco $U_2$ (přes komparátor určující vybíjecí práh druhého integrátoru) ovlivňuje nepřímo úměrně periodu oscilací. Střední výstupní napětí je pak přímým podílem vstupních napětí.
+        \end{itemize}
+        
+        \textbf{D. Integrace}
+        
+        \begin{itemize}
+            \item \textbf{Pasivní integrační článek:} Skládá se pouze z rezistoru $R$ a kapacitoru $C$ v sérii, přičemž výstupní napětí se snímá z $C$. Jeho využití pro přesnou integraci je z důvodu nelinearity omezené a slouží spíše jako frekvenční filtr (dolní propust).
+            \item \textbf{Elektronický (Millerův) integrátor:} Řeší nelinearitu pasivního RC článku využitím operačního zesilovače. Do větve záporné zpětné vazby invertujícího OZ je vložen kapacitor $C$ a na vstup rezistor $R$. Virtuální nula na vstupu OZ zajišťuje, že se kapacitor nabíjí striktně konstantním proudem odpovídajícím okamžité hodnotě vstupního napětí. V ideálním případě je výstupní napětí exaktním časovým integrálem vstupního napětí s opačným znaménkem: $U_v = -\frac{1}{RC} \int u_1 dt$.
+        \end{itemize}
+\subsection{Analogově-číslicové převodníky (srovnávací, integrační) a číslicově-analogové převodníky (sériové, paralelní, nepřímé); vzorkování signálu a jeho chyby.}
+    \subsubsection{Vzorkování signálu a jeho chyby}
+        Vzorkování provádí diskretizaci signálu v čase. Základní podmínkou bezeztrátového převodu je splnění Shannon-Kotělnikovova teorému: vzorkovaný signál nesmí obsahovat kmitočtové složky vyšší nebo rovné $f_V/2$, jinak dochází ke vzniku překryvů ve frekvenční oblasti neboli aliasingu. Pro převodníky vyžadující stabilní napětí se využívá tzv. \textbf{vzorkovač s pamětí (S/H – sample-hold)}. Ten pomocí spínače a paměťového kondenzátoru sleduje signál (doba vzorkování) a následně jej uchová v čase potřebném pro převod AČP.
+        
+        \textbf{Chyby vzorkování u reálného vzorkovače:}
+        \begin{itemize}
+            \item \textbf{Doba upnutí ($T_A$ - acquisition time):} Čas nutný k tomu, aby se po přechodu z režimu pamatování výstupní napětí vzorkovače ustálilo na požadované hodnotě.
+            \item \textbf{Rychlost přeběhu:} Omezená rychlost, kterou je vzorkovač schopen sledovat skokové změny na vstupu.
+            \item \textbf{Rychlost změny pamatované hodnoty:} Pokles výstupního napětí způsobený samovolným vybíjením paměťového kondenzátoru v režimu pamatování.
+            \item \textbf{Časová nejistota:} Rozptyl zpoždění odpojení signálu (aperture time), který způsobuje časovou nepřesnost odebrání vzorku.
+            \item \textbf{Chyba průniku a chyba přeslechu:} Způsobeny pronikáním řídicího vzorkovacího signálu nebo měněním výstupu podle změn vstupu i v době pamatování.
+        \end{itemize}
+    \subsubsection{Analogově-číslicové převodníky (AČP)}
+        AČ převodníky lze rozdělit podle způsobu vyhodnocení napětí do dvou hlavních kategorií: srovnávací (zahrnující komparační a kompenzační typy) a integrační.
+        \\
+        \textbf{A. Srovnávací (komparační a kompenzační) AČP}\\
+        Převádějí na číslicovou hodnotu okamžitou hodnotu napětí (k čemuž bezpodmínečně vyžadují na vstupu paměťový vzorkovač S/H).
+        
+        \begin{itemize}
+            \item \textbf{Paralelní komparační převodníky:} Porovnávají vstupní napětí současně pomocí sady komparátorů. Referenční napětí $U_R$ je ekvidistantně rozděleno odporovým řetězcem. K dosažení rozlišení $n$ bitů vyžadují $2^n - 1$ komparátorů. Převod probíhá v jediném taktu, jde o vůbec nejrychlejší AČP (např. pro osciloskopy), avšak pro obrovskou obvodovou složitost mívají nižší rozlišení (6 až 10 bitů).
+            \item \textbf{Převodníky s postupnou komparací:} Odstraňují obvodovou nevýhodu předchozího typu. Rozdělují převod do dvou nebo více stupňů – např. jeden menší komparační blok určí nejvyšší bity, jejich napěťový ekvivalent je přes ČAP odečten od vstupního signálu, zbytek je zesílen a druhý blok vyhodnotí zbývající nižší bity.
+            \item \textbf{Kompenzační převodníky:} Pracují jako automatické kompenzátory. Zpětnovazební napětí, vyráběné interním Č/A převodníkem z měnícího se výstupního číslicového slova, se komparuje s napětím vstupním.
+            \begin{itemize}
+                \item \textit{Čítací a sledovací AČP:} Výstupní slovo je formováno čítačem (který počítá od nuly vpřed, nebo obousměrně sleduje signál), dokud komparátor nedetekuje shodu. Doba převodu u čítacího typu závisí na velikosti měřeného napětí.
+                \item \textit{AČP s postupnou aproximací:} Extrémně efektivní typ, který bit po bitu (od MSB k LSB) testuje výstupní slovo. Pokud nastavení bitu způsobí překročení vstupního napětí, bit je vynulován, jinak zůstává 1. Doba převodu je konstantní (pro $n$ bitů trvá $n$ taktů).
+            \end{itemize}
+        \end{itemize}
+        
+        \textbf{B. Integrační AČP}\\
+        Zjišťují hodnotu na základě integrace a jejího mezipřevodu. Jejich výstupem je průměrná hodnota vstupního signálu za určitý interval, čímž potlačují vysokofrekvenční rušivá napětí a typicky nevyžadují S/H vzorkovač.
+        
+        \begin{itemize}
+            \item \textbf{S mezipřevodem na kmitočet:} Napětí strmě nabíjí integrátor do pevné hodnoty referenčního napětí $-U_R$, po které následuje okamžité vybití kondenzátoru a nový cyklus. Kmitočet opakujících se cyklů (zubů pilového průběhu) je přímo úměrný napětí na vstupu a měří se čítačem.
+            \item \textbf{S dvoutaktní integrací:} Nejpoužívanější v digitálních multimetrech. V prvním taktu ($T_1$) je fixně (po definovaný počet pulsů generátoru) integrováno měřené napětí. Ve druhém taktu ($T_2$) se k integrátoru připojí referenční napětí $-U_R$ (opačné polarity) a kondenzátor se vybíjí zpět k nule. Čítač registruje dobu vybíjení $T_2$, která je přímo úměrná velikosti původně měřeného napětí. Toto řešení plně eliminuje nestabilitu RC prvků a časovou nestabilitu oscilátoru. Při volbě integrace $T_1$ jakožto násobku síťového kmitočtu také obrovským způsobem potlačují střídavé (síťové) rušení (tzv. SMR). Pokročilejší modely využívají i troj- a vícetaktní integraci pro další urychlení.
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=0.65\linewidth]{2tACP.png}
+            \end{figure}
+        \end{itemize}
+    \newpage
+    \subsubsection{Číslicově-analogové převodníky (ČAP)}
+        Zajišťují rekonstrukci číslicového slova $D$ do úměrné analogové veličiny (napětí nebo proudu) za pomoci referenčního napětí $U_R$ a analogových spínačů. Pro potlačení kmitočtových zbytků $f_V/2$ z digitalizace je nutné jejich výstup osadit rekonstrukčním filtrem.
+        
+        \textbf{A. Paralelní ČAP}\\
+        Jsou nejpoužívanější kategorií a využívají souběžného spojování elektrických drah k sumačnímu uzlu (např. převodníku I/U).
+        
+        \begin{itemize}
+            \item \textbf{S váhovými rezistory:} Každému bitu kódu odpovídá větev s předřadným odporem, spínaná ke vstupní virtuální nule. Hodnoty odporů musí exponenciálně narůstat ($R, 2R, 4R, \dots, 2^{n-1}R$), přičemž proudy tekoucí sítěmi jsou pro jednotlivé bity poloviční. 
+            \item \textbf{S rezistorovou sítí R-2R:} Váhování probíhá na žebříčkově kaskádované síti zkonstruované pouze za pomoci dvou hodnot rezistorů: $R$ a $2R$. Referenční napětí se po cestě žebříčkem vždy v každém uzlu sníží na polovinu.
+            \item \textbf{S přepínanými proudovými zdroji:} Eliminuje zátěž a nepřesnost vyvolanou odporem sepnutých spínačů. Místo spínání napěťových větví jsou natvrdo spínány binárně odstupňované zdroje konstantního proudu (realizované např. řadou tranzistorů s různými plochami přechodů B-E nebo proudovými zrcadly s R-2R sítí). Tyto převodníky pracují extrémně rychle (řádově v desítkách ns).
+        \end{itemize}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.45\linewidth]{R2R.png}
+        \end{figure}
+        \textbf{B. Sériové ČAP}\\
+        V monolitické sféře nepoužívané. Číslo se vyhodnocuje postupně od bitu s nejmenší vahou (LSB). Pomocí analogové sčítačky se daný bit sečte s předešlou uloženou hodnotou (vždy posunutou analogovou děličkou dvěma). Komplexní převod pro $n$-bitové číslo trvá přesně $n$ taktů.
+        
+        \textbf{C. Nepřímé ČAP}\\
+        Provádějí mezipřevod číslicové hodnoty na pomocnou veličinu. Nejpoužívanější je metoda pulzně-šířkové modulace (PWM). Výstupem digitální části převodníku jsou pravoúhlé impulzy s konstantní periodou (kmitočtem $f_r$), ale s dobou sepnutí $T_a$, která je přímo úměrná hodnotě číslicového vstupu. Tyto impulzy spínají obvod s referenčním napětím $U_R$. Finální hladina stejnosměrného napětí se pak z modulovaného průběhu získá pohlcením impulzů do dolní propusti s velmi nízkým mezním kmitočtem.
+\subsection{Měření časového intervalu, kmitočtu a fázového rozdílu.}
+    \subsubsection{Přímé měření kmitočtu}
+        V laboratorní praxi je nejrozšířenější číslicové měření kmitočtu pomocí \textbf{čítačů}.
+        \begin{itemize}
+            \item \textbf{Princip činnosti:} Měřený signál o kmitočtu $f_X$ prochází přes dělič a předzesilovač do tvarovacího obvodu, kde je upraven na obdélníkové impulzy definované úrovně. Tyto impulzy postupují na elektronické hradlo. Hradlo je otevřeno po přesně stanovenou dobu $T_O$, která je odvozena od referenčního krystalového oscilátoru ($f_O$) s děličkou. Po dobu otevření hradla procházejí impulzy do dekadického čítače.
+            \item \textbf{Vyhodnocení:} Údaj čítače $N$ je dán součinem $N = f_X \cdot T_O$.
+            \item \textbf{Přesnost:} Celková relativní nejistota měření je dána součtem poměrné nejistoty kmitočtu krystalového oscilátoru ($\delta f_O$) a rozlišovací schopnosti čítače ($\Delta f_X = 1/T_O$).
+        \end{itemize}
+    \subsubsection{Nepřímé měření kmitočtu (Měření časového intervalu)}
+        Pro \textbf{nízké kmitočty} je výhodnější měřit periodu a kmitočet následně dopočítat. Tím se zásadně zkrátí doba měření a zvýší se rozlišovací schopnost.
+        
+        \begin{itemize}
+            \item \textbf{Princip činnosti:} Měřený signál je tvarovacím obvodem převeden na obdélníky. Náběžná hrana spouští monostabilní klopný obvod, jehož výstupní krátké impulzy překlápí bistabilní klopný obvod. Výstupem bistabilního obvodu je impulz o délce přesně odpovídající periodě měřeného signálu $T_X$. Po tuto dobu je otevřeno hradlo a čítač čítá velmi rychlé impulzy z krystalového oscilátoru $f_O$.
+            \item \textbf{Vyhodnocení:} Údaj čítače odpovídá vztahu $N = (f_O \cdot T_X)/D$, kde $D$ je dělicí poměr děliče referenčního kmitočtu.
+            \item \textbf{Zdroje chyb a jejich potlačení:} Nevýhodou této metody je citlivost na přesné nastavení komparačních úrovní tvarovacího obvodu. Při zarušení signálu zákmity může čítač změřit chybný časový úsek. Kolísání lze účinně potlačit \textbf{průměrováním}, čímž lze u kvalitních čítačů dosáhnout rozlišení pod 1 ns.
+        \end{itemize}
+    \subsubsection{Ostatní metody měření kmitočtu}
+        \begin{itemize}
+            \item \textbf{Jazýčkový kmitoměr:} Využívá mechanické rezonance feromagnetických plíšků různých délek ve střídavém magnetickém poli elektromagnetu. Slouží k měření síťových kmitočtů s přesností asi 0,3 \%.
+            \item \textbf{Střídavé můstky s kmitočtově závislými parametry:} Např. Wienův můstek. Po vyvážení můstku (nulové napětí v diagonále) se kmitočet vypočte ze vztahu $f = 1/(2\pi \sqrt{C_1C_2R_1R_2})$.
+            \item \textbf{Měření osciloskopem:} Orientační určení převrácené hodnoty periody z časové základny, nebo přesnější srovnávací metodou dvou kmitočtů na osách X a Y s využitím \textbf{Lissajousových obrazců}.
+            \item \textbf{Analogové kmitoměry s přímým údajem:} Střídavé napětí je převedeno na impulzy s konstantní délkou (monostabilním klopným obvodem) a konstantní amplitudou. Stejnosměrná složka (střední hodnota) těchto impulzů je přímo úměrná měřenému kmitočtu a indikuje se magnetoelektrickým ústrojím.
+        \end{itemize}
+    \subsubsection{Měření fázového rozdílu}
+        Fázový posuv $\phi$ charakterizuje časový vztah dvou harmonických signálů se stejnou periodou. Vztah mezi fázovým a časovým zpožděním obou signálů $\Delta t$ je dán rovnicí $\phi = 2\pi \cdot f \cdot \Delta t = 2\pi \cdot \frac{\Delta t}{T}$.
+        
+        \begin{itemize}
+            \item \textbf{Měření osciloskopem:}
+            \begin{itemize}
+                \item \textit{Jednokanálový osciloskop (režim X-Y):} Signály tvoří Lissajousův obrazec. Při shodném kmitočtu vznikne elipsa. Fázový posuv se vypočítá z jejích rozměrů: $\phi = \arcsin(x_1/x_2) = \arcsin(y_1/y_2)$. Metoda je pouze orientační (nepřesnost až 5 \%).
+                \item \textit{Dvoukanálový osciloskop:} Zobrazí oba průběhy v čase současně a z časového rozdílu průchodů nulou se určí $\Delta t$ a dopočítá $\phi$.
+            \end{itemize}
+            \item \textbf{Analogové fázoměry s přímým údajem:} Oba signály se komparátory vytvarují do obdélníků, jež spouští monostabilní obvody. Ty ovládají společný bistabilní obvod, jehož výstupem jsou obdélníky o délce trvání $\Delta t$. Magnetoelektrický přístroj pak ukáže jejich střední hodnotu, která je přímo úměrná fázovému posuvu. Metoda je zatížena dynamickými chybami komparátorů při vyšších kmitočtech, využívá se do 1 MHz.
+            \item \textbf{Měření fázového posuvu čítačem:} Dvoukanálový čítač v režimu měření časového intervalu změří $\Delta t$ i periodu $T$ a zabudovaný mikropočítač přímo vypočítá a zobrazí fázový rozdíl ve stupních nebo radiánech.
+            \item \textbf{Nepřímé (silnoproudé a energetické) metody:} Založeno na měření účiníku $\cos \phi$, který vyjadřuje podíl činného a zdánlivého výkonu. Určuje se například elektrodynamickým poměrovým fázoměrem, číslicovými wattmetry, nebo výpočtem pomocí metody tří voltmetrů / tří ampérmetrů. Nejpřesnější analýzu fáze pak provádějí spektrální analyzátory s výpočtem rychlé Fourierovy transformace (FFT).
+        \end{itemize}
+\subsection{Měření stejnosměrných a střídavých napětí. Měření efektivní hodnoty napětí neharmonických průběhů. Měření stejnosměrných a střídavých proudů.}
+    \subsubsection{Měření stejnosměrných a střídavých napětí}
+        K přímému měření napětí využíváme voltmetry zapojené paralelně k měřenému obvodu. Podmínkou přesného měření je, aby vnitřní odpor voltmetru ($R_V$) byl mnohonásobně větší než odpor měřeného zdroje ($R_i$). Pokud tento předpoklad není splněn, voltmetr zatěžuje obvod, napětí poklesne a vzniká odchylka metody definovaná vztahem $\delta = -R_i / (R_i + R_V) \cdot 100\ \%$.
+        
+        \begin{itemize}
+            \item \textbf{Měření stejnosměrných napětí:} Využívají se elektromechanické voltmetry s magnetoelektrickým ústrojím nebo voltmetry číslicové. Číslicové voltmetry vykazují vysoký vstupní odpor (typicky $10\text{ M}\Omega$ až $1\text{ G}\Omega$) a odchylka metody je u nich zanedbatelná. Ke specifičtějším měřením se používají modulační zesilovače (pro malá napětí v řádu nV a $\mu$V) a elektrometry (pro zdroje s malým výkonem a vstupními odpory až $200\text{ T}\Omega$). Pro nejpřesnější laboratorní měření se používá \textbf{kompenzační metoda}. Je to nulová metoda, kde se měřené napětí kompenzuje známým úbytkem napětí na přesném rezistoru, jenž je vyvolán pomocným zdrojem. V rovnovážném stavu, který je indikován galvanometrem, neodebírá kompenzátor z měřeného obvodu žádný proud a odchylka metody je tak teoreticky nulová.
+            \item \textbf{Měření střídavých napětí:} Časově proměnná napětí se charakterizují střední absolutní, efektivní a maximální hodnotou. Z elektromechanických přístrojů se pro měření efektivní hodnoty využívají voltmetry s feromagnetickým či ferodynamickým ústrojím, jsou však použitelné pouze do nízkých kmitočtů v řádu stovek Hz až $1{,}5\text{ kHz}$. K měření vyšších kmitočtů lze využít voltmetry s termočlánkem (do $10\text{ MHz}$). Ke klasickému měření patří též magnetoelektrické ústrojí doplněné usměrňovačem, to ovšem ukazuje střední absolutní hodnotu. K detekci signálů z kmitočtového spektra (jednotlivých harmonických) se využívají širokopásmové a selektivní mikrovoltmetry pracující na heterodynním principu a k vyhodnocení reálné a imaginární složky fázoru pak vektorvoltmetry pracující na principu řízených usměrňovačů.
+        \end{itemize}
+    \subsubsection{Měření efektivní hodnoty napětí neharmonických průběhů}
+        Efektivní hodnota $U$ vyjadřuje výkonové vlastnosti periodického neharmonického signálu a je definována jako kvadratický součet efektivních hodnot všech jeho harmonických složek a složky stejnosměrné: $U = \sqrt{U_0^2 + U_1^2 + \dots + U_n^2}$.
+        
+        \begin{itemize}
+            \item \textbf{Chyby přístrojů s usměrňovači:} Běžné analogové voltmetry s usměrňovačem a jednodušší číslicové multimetry  reagují na střední absolutní hodnotu signálu. Jsou ovšem cejchovány činitelem tvaru harmonického signálu ($k_{tH} = 1,11$) tak, aby na stupnici indikovaly hodnotu efektivní. Pokud se jimi však měří napětí neharmonického průběhu, jehož činitel tvaru se od hodnoty 1,11 liší, vznikají hrubé přídavné systematické odchylky.
+            \item \textbf{Měření skutečné efektivní hodnoty (TRMS):} Pro správné měření neharmonických průběhů je bezpodmínečně nutné použít přístroj měřící skutečnou efektivní hodnotu (True RMS - TRMS). Z klasických analogových to splňují voltmetry s termočlánkem nebo s elektrodynamickým ústrojím. U moderních číslicových přístrojů se využívají speciální TRMS převodníky tvořené integrovanými obvody s násobičkou a integrátorem, nebo s teplotně závislými prvky.
+            \item \textbf{Vliv činitele výkyvu (Crest Factor):} Přesnost i TRMS přístrojů je limitována tvarem měřeného signálu, obzvláště \textbf{činitelem výkyvu ($k_v$)}, jenž je dán poměrem maximální (vrcholové) a efektivní hodnoty signálu ($k_v = U_m/U$). Dosahuje-li činitel výkyvu velkých hodnot (typicky u vysokých a úzkých impulzů), přistupuje u číslicových přístrojů ke standardní nejistotě měření další značná přídavná nejistota.
+        \end{itemize}
+    \subsubsection{Měření stejnosměrných a střídavých proudů}
+        K přímému měření proudů používáme ampérmetry, které se zapojují zásadně do série s měřeným obvodem a měly by vykazovat co nejmenší vnitřní odpor $R_A$. Zařazení reálného ampérmetru do obvodu zvětšuje celkový odpor a zmenšuje procházející proud, čímž vzniká odchylka metody $\delta = -R_A / (R_i + R_A) \cdot 100\ \%$. Změny proudových rozsahů jsou zajišťovány primárně prostřednictvím bočníků (odporů paralelně zapojených k ústrojí), jež fungují jako proudové děliče.
+        
+        \begin{itemize}
+            \item \textbf{Měření stejnosměrných proudů:} Většinou se provádí elektromechanickým magnetoelektrickým ústrojím. Pro měření obvodů bez nutnosti jejich rozpojení lze aplikovat \textbf{klešťové ampérmetry s Hallovou sondou}, která ve vzduchové mezeře detekuje stejnosměrné magnetické pole zkoumaného vodiče a pomocí operačního zesilovače generuje kompenzační měřicí proud. Pro nejpřesnější laboratorní měření se používá kompenzační metoda (převod I/U), kdy měříme kompenzátorem přesný úbytek napětí na zapojeném etalonovém odporu $R_E$. Malé proudy se měří pikoampérmetry či elektrometry.
+            \item \textbf{Měření střídavých proudů:} K určování efektivní hodnoty nízkofrekvenčních harmonických proudů slouží feromagnetické ampérmetry (do $100\text{ Hz}$, popř. $1\text{ kHz}$). Magnetoelektrické ampérmetry opatřené usměrňovačem vyhodnocují opět jen střední hodnotu a pro neharmonické průběhy nejsou vhodné. Přístroje opatřené termočlánky spolehlivě měří efektivní hodnoty i neharmonických proudů až do vysokých kmitočtů ($1\text{ MHz}$). Pro galvanické oddělení a změnu rozsahů pro proudy přesahující $10\text{ A}$ se vkládají do obvodu \textbf{měřicí transformátory proudu (MTP)}, případně u vysokých kmitočtů vzduchové Rogowského cívky. Pro exaktní a nejnáročnější stanovení efektivních hodnot střídavých proudů s přesností 0,001 \% se využívá \textbf{proudový komparátor}. Tento postup je založen na srovnávání tepelných účinků referenčního stejnosměrného a zkoumaného střídavého proudu, které postupně ohřívají termočlánek.
+        \end{itemize}\textbf{}
+\subsection{Měření pasivních elektrických veličin; odporů, impedancí, metody výchylkové, metody můstkové. }
+    \subsubsection{MĚŘENÍ ODPORŮ}
+
+        Odpory se dělí podle velikosti do tří kategorií, což určuje vhodnou metodu měření: malé ($< 0,1\ \Omega$), střední ($0,1\ \Omega - 1\text{ M}\Omega$) a velké ($> 1\text{ M}\Omega$).
+        
+        \textbf{Výchylkové metody měření odporů}\\
+        Vychylkové metody jsou rychlé a v praxi nejčastěji používané, byť mohou být méně přesné.
+        
+        \begin{itemize}
+            \item \textbf{Ohmova metoda:} Vhodná i pro nelineární odpory; hodnota se stanovuje z Ohmova zákona $R_X = U_X / I_X$.
+            \begin{itemize}
+                \item \textit{Zapojení VA:} Voltmetr je zapojen před ampérmetrem a měří úbytek napětí i na něm. Měřený odpor vychází $R_X = U_V / I_A - R_A$. Využívá se pro odpory $R_X \gg R_A$, kde je relativní odchylka metody $\delta = (R_A / R_X) \cdot 100\ \%$.
+                \item \textit{Zapojení AV:} Ampérmetr měří součet proudů tekoucích zátěží a voltmetrem. Metoda je vhodná pro malé odpory $R_X \ll R_V$, vzniká zde záporná odchylka metody $\delta = -(R_X / R_V) \cdot 100\ \%$.
+            \end{itemize}
+            \item \textbf{Srovnávací metoda:}
+            \begin{itemize}
+                \item \textit{Sériová:} Pro střední a malé odpory, využívá zapojení měřeného a etalonového odporu do série. Měří se úbytky napětí při konstantním proudu, platí $R_X = R_E \cdot (U_X / U_E)$.
+                \item \textit{Paralelní:} Vhodná pro velké odpory. Měří se proudy ve větvích, platí $R_X = R_E \cdot (I_E / I_X)$.
+            \end{itemize}
+            \item \textbf{Ohmmetry:} Ukazují hodnotu přímo. Analogové poměrové ohmmetry mají výhodu nezávislosti na kolísání napájecího napětí. Číslicové ohmmetry (běžná součást multimetrů) využívají přesné operační převodníky odporu na napětí (R/U) ve zpětnovazebním zapojení a dosahují přesnosti i 0,1 \%.
+        \end{itemize}
+        
+        \textbf{Specifika měření extrémních hodnot odporů}
+        
+        \begin{itemize}
+            \item \textbf{Velké odpory (izolanty):} Používá se metoda FVMC (Force Voltage Measure Current) využívající zdroj vysokého napětí a citlivý pikoampérmetr. Kvůli povrchovým svodovým proudům se aplikuje uspořádání s třísvorkovou (prstencovou) elektrodou a s triaxiálním kabelem osazeným aktivním stíněním (Guard), jež je napájeno přes jednotkový sledovač.
+            \item \textbf{Malé odpory:} Aplikuje se zapojení FCMV a \textbf{čtyřsvorkové připojení} oddělující silové (napájecí, Source) a potenciálové (měřicí, Sense) vodiče, čímž se plně vyloučí úbytek napětí na přechodových odporech svorek a vodičů. Dalším rizikem jsou parazitní termoelektrická napětí na svorkách; eliminují se bipolárním měřením (komutací), tedy periodickým obrácením směru měřicího proudu a zprůměrováním zjištěných napětí.
+        \end{itemize}
+        
+        \textbf{Můstkové (nulové) metody měření odporů}\\
+        Měřicí přístroj (např. galvanometr) slouží pouze pro indikaci vyváženého stavu, odchylky metody neovlivňují přesnost.
+        
+        \begin{itemize}
+            \item \textbf{Wheatstoneův můstek:} Slouží primárně k měření středních hodnot. Je tvořen čtyřmi rezistory. V rovnováze je úhlopříčné napětí nulové a platí $R_X = R_2 \cdot (R_3 / R_4)$. Přesnost závisí jen na použitých odporech a citlivosti indikátoru.
+            \item \textbf{Thomsonův dvojitý můstek:} Speciální můstek k velmi přesnému měření malých odporů (až 0,1 \%). Využívá opět čtyřsvorkové zapojení a je doplněn o další pár napěťových odporových větví tvořících hvězdu, čímž kompenzuje vliv přechodových spojů.
+        \end{itemize}
+    \subsubsection{MĚŘENÍ IMPEDANCÍ}
+
+        Střídavé impedanční prvky (L a C) se hodnotí pomocí sériového nebo paralelního náhradního schématu. Kvalita izolantu kondenzátoru se určuje ztrátovým úhlem $\tan \delta$, kvalita cívky činitelem jakosti $Q$.
+        
+        \textbf{Výchylkové metody měření impedancí}
+        
+        \begin{itemize}
+            \item \textbf{Ohmova metoda pro Z:} Stejně jako u stejnosměrného proudu měříme napětí voltmetrem a proud ampérmetrem, přičemž absolutní hodnota impedance je $|Z| = U/I$. Z obdržených hodnot lze určit induktanci a odtud indukčnost, pokud známe vnitřní činný odpor vinutí, popř. přímo kapacitu. Metoda je omezena pro cívky bez feromagnetického jádra a dává orientační přesnost kolem 5 \%.
+            \item \textbf{Měření indukčnosti wattmetrem:} Vhodné pro cívky se železným jádrem. Ztráty ve feromagnetiku i ve vinutí se modelují odporem $R_S$ v sériovém zapojení. Výkon cívky se změří wattmetrem (po korekci na spotřebu napěťové cívky wattmetru a voltmetru), z výkonu a proudu se vypočte efektivní odpor $R_S$ a na základě Ohmova zákona a fázoru následně $L_S$.
+            \item \textbf{Metoda tří ampérmetrů:} Paralelně k měřené impedanci je dán etalonový neinduktivní rezistor. Měří se tři proudy (celkový, přes rezistor, přes impedanci). Využívá se kosinová věta a metoda se hodí spíše pro impedance velkých hodnot.
+            \item \textbf{Metoda tří voltmetrů:} Sériové zapojení měřené impedance a etalonového rezistoru; hodí se pro cívky s jádrem.
+            \item \textbf{Číslicové měřiče impedancí (RLC měřiče):} Využívají operačních převodníků. Pro prvky sériového obvodu se aplikuje \textbf{převodník impedance na napětí (Z/U)}, pro paralelní obvod \textbf{převodník admitance na napětí (Y/U)}. Výstup je následně veden na fázově řízený usměrňovač, který dokonale separuje reálnou a imaginární složku zkoumaného fázoru napětí nebo proudu, a mikropočítač přímo vypočte parametry jako $L_S, R_S$, resp. $C_P, G_P$.
+        \end{itemize}
+        
+        \textbf{Můstkové (nulové) metody měření impedancí}\\
+        Střídavé můstky mají zapojení analogické k Wheatstoneovu můstku, ale větve obsahují komplexní impedance. Podmínka rovnováhy střídavého můstku má dvě složky, které musí platit současně: rovnost modulů $|Z_1| \cdot |Z_4| = |Z_2| \cdot |Z_3|$ a součet fázových argumentů $\phi_1 + \phi_4 = \phi_2 + \phi_3$.
+        
+        \begin{itemize}
+            \item \textbf{Scheringův můstek:} Používá se pro přesné měření kapacit a to zejména při vysokém napětí. Měřený kondenzátor se vyvažuje proměnnou bezeztrátovou kapacitní dekádou a odporovou dekádou. Zásadní výhodou tohoto můstku je naprostá kmitočtová nezávislost podmínek vyvážení, takže přesně stanoví i ztrátový činitel dielektrika $\tan \delta$.
+            \item \textbf{Maxwellův můstek:} Využívá se k měření sériové náhradní indukčnosti $L_S$ a činného odporu $R_S$ cívky. Můstek využívá kapacitního a odporového standardu (zpravidla měnitelných dekád) v paralelní kombinaci v protější větvi. Stejně jako Scheringův můstek je kmitočtově zcela nezávislý a umožňuje určit přesně činitel jakosti cívky $Q$.
+        \end{itemize}

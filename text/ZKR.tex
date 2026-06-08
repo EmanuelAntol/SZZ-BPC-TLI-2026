@@ -1,0 +1,154 @@
+\section{Základy kryptografie (BPC-ZKR)}
+    \subsection{Prvočísla – generování, testování, základní testy, typy prvočísel}
+        \subsubsection{Prvočísla}
+            \begin{itemize}
+                \item Prvočíslo je definováno jako celé číslo $\geq 2$, které má pouze triviální dělitele
+                \item Prvočísel existuje nekonečně mnoho a jejich počet (hustotu) menší než dané číslo $n$ lze aproximovat vztahem $\pi(n) \approx \frac{n}{\ln(n)}$. 
+                \item V moderní kryptografii se běžně pracuje s prvočísly o velikosti 1024 až 2048 bitů (308 až 617 cifer)
+            \end{itemize}
+        \subsubsection{Typy prvočísel}
+            Pro kryptografické účely se často nevyužívají obecná prvočísla, ale prvočísla ve specifickém tvaru, která zajišťují požadované vlastnosti:
+            \begin{itemize}
+                \item \textbf{Mersennova prvočísla ($M_p$):} Mají tvar $M_p = 2^p - 1$, přičemž exponent $p$ musí být rovněž prvočíslo.
+                \item \textbf{Sophie-Germain prvočísla ($SG_p$):} Jedná se o prvočíslo $SG_p$, pro které platí, že i číslo $p = 2SG_p + 1$ je prvočíslem.
+                \item \textbf{Bezpečná prvočísla (Safe primes - $B_p$):} Mají tvar $B_p = 2p + 1$, kde $p$ je prvočíslo.
+                \end{itemize}
+        \subsubsection{Generování prvočísel}
+            \begin{itemize}
+                \item \textbf{Eratosthenovo síto:} Historický a jednoduchý způsob. Pro velká čísla je nepraktický. Algoritmus sestaví seznam čísel od 2 do n. První nevyřazené číslo označí za prvočíslo a všechny jeho násobky ze seznamu odstraní. Tento postup se opakuje, dokud se nedosáhne hodnoty $\sqrt{n}$; zbylá čísla v seznamu představují prvočísla.
+                \item \textbf{Praktický postup v kryptografii:} Generování velkých prvočísel probíhá iterativně: nejprve se vygeneruje náhodné číslo o požadované velikosti (bitové délce) a následně se otestuje, zda se jedná o prvočíslo. Pokud testem neprojde, celý proces generování a testování se opakuje s novým kandidátem.
+            \end{itemize}
+        \subsubsection{Testování prvočísel}
+            \subsubsection*{Testy pravděpodobné prvočíselnosti}
+                Z důvodu výkonu a výpočetní náročnosti se u obrovských čísel používají pravděpodobnostní testy. Tyto testy neodkážou prvočíselnost absolutně prokázat, pravděpodobnost omylu je ale zanedbatelná.
+                \begin{itemize}
+                    \item \textbf{Fermatův test:} Tento test je založen na Malé Fermatově větě, podle níž pro prvočíslo $n$ a s ním nesoudělné kladné číslo $a$ platí kongruence $a^{n-1} \equiv 1 \pmod{n}$. Postup spočívá v náhodné volbě základu $a$ v intervalu $2 \le a \le n - 2$. Pokud kongruence neplatí, testované číslo je s jistotou složené. Hlavní slabinou testu je selhání na tzv. Carmichaelových číslech -- složených číslech, pro která kongruence platí pro libovolné $a$ nesoudělné s $n$. Z tohoto důvodu se v reálné praxi Fermatův test téměř nepoužívá.
+                    
+                    \item \textbf{Miller-Rabinův test:} Test, který spolehlivě vylučuje Carmichaelova čísla. Složené číslo jím dokáže projít v jedné iteraci s maximální pravděpodobností pouze 25 \%. Kandidát $n$ se vyjádří ve tvaru $n - 1 = 2^s r$, kde $r$ je liché číslo. Poté se náhodně zvolí základ $a$ ($2 \le a \le n - 2$) a testuje se, zda platí $a^r \equiv 1 \pmod{n}$, nebo zda $a^{2^j r} \equiv -1 \pmod{n}$ pro některé $j$ ($0 \le j \le s - 1$). Pokud neplatí ani jedna z podmínek, základ $a$ je odhalen jako \textit{silný svědek složenosti} a číslo $n$ je složené. Pokud je alespoň jedna podmínka splněna, iterace se zopakuje s novým základem $a$.
+                \end{itemize}
+            \subsubsection*{Testy skutečné prvočíselnosti}
+                \begin{itemize}
+                    \item \textbf{Lucas-Lehmerův test:} Tento test je výhradně na testování Mersennových prvočísel ve tvaru $n = 2^s - 1$. Využívá se při něm rekurentní postup s počáteční hodnotou $u_0 = 4$ a následným vzorcem $u_{k+1} = (u_k^2 - 2) \pmod{n}$. Test postupně spočte prvky posloupnosti $u_1, u_2, \dots, u_{s-2}$. Pokud je finálním výsledkem $u_{s-2} = 0$, je nepochybně matematicky dokázáno, že se jedná o Mersennovo prvočíslo.
+                \end{itemize}
+                
+        \subsection{Klasifikace výpočetních problémů - složitost algoritmů, třídy složitosti, popis problémů používaných v kryptografii (RSA, diskrétní logaritmus, DH)}
+            \subsubsection{Složitost algoritmů}
+                Teorie složitosti klasifikuje výpočetní problémy podle jejich náročnosti na tyto prostředky. Základní metriky složitosti jsou \textbf{Časová složitost} (vyjadřuje vztah mezi velikostí vstupu a počtem operací potřebných k vykonání algoritmu) a \textbf{Paměťová složitost} (vyjadřuje vztah mezi velikostí vstupu a paměťovými nároky potřebnými pro běh algoritmu).
+                \subsubsection*{Asymptotická složitost}
+                Přesné určení složitosti je často nemožné, využívá se asymptotické značení pro různé stavy běhu algoritmu:
+                \begin{itemize}
+                    \item \textbf{Notace $\mathcal{O}(f(n))$ (Omikron):} Ohraničuje funkci shora (nejhorší možný případ)
+                    \item \textbf{Notace $\Omega(f(n))$ (Omega):} Ohraničuje funkci zespodu. (nejlepší možný případ)
+                    \item \textbf{Notace $\Theta(f(n))$ (Theta):} Označuje složitost, která má stejný řád jako funkce $f(n)$. ('střední' případ)
+                \end{itemize}
+                Základní asymptotické třídy (seřazené dle rychlosti růstu): $\mathcal{O}(1)$ (konstantní), $\mathcal{O}(\log \log n)$ (dvojitě logaritmická), $\mathcal{O}(n)$ (lineární), $\mathcal{O}(n \log n)$ (lineárně-logaritmická), $\mathcal{O}(n^2)$ (kvadratická), $\mathcal{O}(n^3)$ (kubická), $\mathcal{O}(n^p)$ (polynomiální), $\mathcal{O}(p^n)$ (exponenciální) a $\mathcal{O}(n!)$ (faktoriálová).
+
+                \subsubsection{Třídy složitosti}
+                    Pro klasifikaci výpočetní náročnosti problémů se definují základní třídy složitosti:
+                    \begin{itemize}
+                        \item \textbf{Třída P (Polynomiální):} Obsahuje všechny problémy, které dokáže deterministický algoritmus \textit{vyřešit} v polynomiálním čase.
+                        \item \textbf{Třída NP (Nedeterministicky polynomiální):} Obsahuje problémy, pro které sice nemusí existovat algoritmus řešící je v polynomiálním čase, ale pokud je předloženo jejich řešení, lze v polynomiálním čase \textit{ověřit} jeho správnost.
+                        \item \textbf{Třída NP-úplná:} Představuje množinu 'nejtěžších' problémů ve třídě NP. Významná vlastnost NP-úplných problémů je, že jakýkoliv jiný problém ze třídy NP lze na ně v polynomiálním čase redukovat.
+                    \end{itemize}
+                    Vztah mezi třídami není matematicky zcela dokázán. V informatice a kryptografii se všeobecně předpokládá platnost tvrzení $P \neq NP$. Z toho plyne, že těžké problémy typu faktorizace se nedají v rozumném čase vyřešit pouhou hrubou silou nebo současnými algoritmy -- využívá se k budování asymetrických kryptosystémů.
+
+                \subsubsection{Popis problémů používaných v kryptografii}
+                    \begin{itemize}
+                        \item \textbf{Problém faktorizace (RSA):} Kryptosystém RSA je založen na modulárních operacích, kde modulem je složené číslo $n = r \cdot s$, přičemž $r$ a $s$ jsou velká prvočísla. Bezpečnost RSA spočívá výhradně v obtížnosti problému faktorizace velkých čísel. Útočník potřebuje soukromý klíč, jehož výpočet závisí na Eulerově funkci $\varphi(n) = (r - 1)(s - 1)$. Pro jeho získání je nutné veřejně známé velké číslo $n$ (v praxi 1024--2048 bitů) rozložit zpět na prvočinitele $r$ a $s$. Pro klasické výpočetní systémy je nalezení takového rozkladu výpočetně neřešitelné.
+                        
+                        \item \textbf{Problém diskrétního logaritmu (Diffie-Hellman a DSA):} Algoritmy využívající modulární umocňování na multiplikativních grupách vycházejí z problému diskrétního logaritmu. V protokolu DH strany bezpečně ustaví sdílený symetrický klíč nad velkým prvočíselným modulem $p$ pomocí generátoru $g$ tak, že strana vypočte a rozešle $A = g^a \pmod{p}$. Modulární umocňování se provede rychle, avšak inverzní extrakce exponentu $a$ ze znalosti $A, g$ a $p$ (výpočet diskrétního logaritmu) je výpočetně složitá.
+                        
+                        \item \textbf{Diskrétní logaritmus nad eliptickými křivkami (EC-DH / EC-DSA):} Jako alternativní algebraické struktury se používají eliptické křivky (ECC). Místo modulárního umocňování se používá násobení bodu křivky skalárem (celým číslem), což se provádí jako $a$-násobné přičtení bodu k sobě samému. Inverzní operace (zjištění původního skaláru $a$) je výpočetně ještě náročnějším problémem než tradiční diskrétní logaritmus nad okruhem celých čísel.
+                    \end{itemize}
+            \subsection{Symetrické šifrování – princip, využití, algoritmy DES a AES. Hashovací funkce – požadavky, zástupci }
+                \subsubsection{Symetrické šifrování}
+                    Symetrické kryptosystémy jsou založeny na předpokladu, že obě komunikující strany sdílejí totožný tajný klíč, případně klíče, které lze jeden z druhého velmi snadno odvodit. Podle způsobu zpracování vstupních dat se tyto systémy dělí na \textbf{proudové šifry}, které zpracovávají data bit po bitu nebo bajt po bajtu, a na \textbf{blokové šifry}, které zpracovávají data po větších, fixně daných blocích. 
+
+                    Symetrické šifrování se primárně nasazuje při šifrování velkých objemů dat. Mezi jeho zásadní výhody patří výpočetní nenáročnost, rychlost a efektivní implementovatelnost do hardwaru. Kryptografickou slabinou symetrických systémů je problematika bezpečné distribuce tajných klíčů. Tyto systémy zároveň samy o sobě neřeší otázku nepopiratelnosti.
+                \subsubsection{Algoritmy DES a AES}
+                    Při konstrukci blokových šifer se uplatňují dva základní návrhové vzory: Feistelovo schéma (vstup se dělí na poloviny, které se s klíčem křížově promíchávají) a SP-síť (Substituční-permutační síť).
+                    \begin{itemize}
+                        \item \textbf{DES (Data Encryption Standard)}
+                            \begin{itemize}
+                                \item Šifra je postavená na Feistelově schématu, jež zpracovává data po 64bitových blocích. Šifra využívá klíč, který byl uměle oslaben na 56 bitů.
+                            \end{itemize}
+                            \begin{figure}[!h]
+                                \begin{center}
+                                \includegraphics[scale=0.4]{Feistel.png}
+                                \caption{První část Feistelova schématu}
+                                \end{center}
+                            \end{figure}\textbf{}
+                        \item \textbf{AES (Advanced Encryption Standard)}
+                            \begin{itemize}
+                                \item AES je bloková šifra navržená na bázi SP-sítě. Standardizovaný vstupní blok má délku 128 bitů, pro klíč jsou povoleny délky 128, 192, nebo 256 bitů.
+                                \item Šifrování probíhá v několika iteračních rundách, jejichž počet závisí na délce klíče. Každá standardní runda aplikuje na blok čtyři hardwarově nenáročné operace: \textit{ByteSub} (nelineární substituce jednotlivých bajtů přes S-box), \textit{ShiftRow} (cyklický posun bajtů v řádcích), \textit{MixColumn} (lineární kombinování bajtů ve sloupcích zajišťující difúzi) a \textit{AddRoundKey} (kombinace bloku s rundovním klíčem pomocí operace XOR).
+                            \end{itemize}
+                    \end{itemize}
+                \subsubsection{Hashovací funkce – požadavky, zástupci}
+                    Hashovací funkce je matematický jednosměrný algoritmus, který pro libovolně velký vstupní datový soubor vypočítá otisk (tzv. hash či digest) reprezentovaný řetězcem o pevně dané délce.
+
+                    Mezi historické hašovací funkce patří například SHA-1 nebo MD5, jehož hash je zranitelný vůči kolizím. V současnosti se používají algoritmy SHA-2 (typicky varianty s výstupem 224, 256, 384 a 512 bitů) nebo jeho nástupce SHA-3.
+
+                    
+                    \subsubsection*{Požadavky na bezpečnost:}
+                        \begin{enumerate}
+                            \item \textbf{Jednosměrnost:} Z jakéhokoliv vstupu $m$ je výpočetně velmi jednoduché získat hash $H(m)$, avšak opačný proces – zrekonstruovat původní data ze znalosti samotného hashe – musí být výpočetně neřešitelný.
+                            \item \textbf{Bezkoliznost 1. řádu:} Je výpočetně prakticky nemožné objevit libovolné dvě zcela odlišné zprávy $m$ a $m'$, jejichž výstupní hashe by byly totožné ($H(m) = H(m')$).
+                            \item \textbf{Bezkoliznost 2. řádu:} Pro jednu konkrétní fixní zprávu $m$ je výpočetně nemožné nalézt modifikovanou (podvrženou) zprávu $m'$, která by po zahašování dávala naprosto stejný výsledek ($H(m) = H(m')$).
+                            \item \textbf{Rychlost:} Hashovací funkce musí být rychlá
+                        \end{enumerate}
+            \subsection{Asymetrické šifrování – princip, využití, algoritmus RSA, protokol Diffie-Hellman}
+                Asymetrická kryptografie využívá dvojici matematicky svázaných klíčů ($K \neq K'$). Tuto dvojici tvoří veřejný klíč ($Pk$), který je volně k dispozici, a soukromý klíč ($Sk$), který je držen v tajnosti. Proces šifrování probíhá pomocí veřejného klíče, dešifrování zase pomocí soukromého.
+                
+                Asymetrické šifrování řeší problém distribuce klíčů, se kterým se potýkají symetrické systémy. Nevýhodou asymetrických systémů je jejich vysoká výpočetní náročnost ve srovnání se symetrickými algoritmy.
+                \subsubsection{Algoritmus RSA (Rivest, Shamir, Adleman)}
+                    Bezpečnost RSA je postavena na problému faktorizace. Systém pracuje s modulem $n$, který je součinem dvou velkých prvočísel ($n = r \cdot s$). Pro zajištění bezpečnosti se vyžaduje, aby délka modulu $n$ činila minimálně 2048 bitů.
+                    \subsubsection*{Generování parametrů, proces šifrování a dešifrování:}
+                        \begin{enumerate}
+                            \item Zvolí se dvě velká bezpečná prvočísla $r$ a $s$.
+                            \item Vypočte se modulus $n = r \cdot s$.
+                            \item Vypočte se hodnota Eulerovy funkce $\varphi(n) = (r - 1)(s - 1)$.
+                            \item Zvolí se soukromý klíč $Sk$ tak, aby byl s $\varphi(n)$ nesoudělný, tj. $GCD(Sk, \varphi(n)) = 1$.
+                            \item Vypočte se veřejný klíč $Pk \equiv Sk^{-1} \pmod{\varphi(n)}$.
+                            \item Kryptogram $c = m^{Pk} \pmod{n}$, Zpráva $m = c^{Sk} \pmod{n}$.
+                        \end{enumerate}
+                \subsubsection{Protokol Diffie-Hellman (DH)}
+                    Diffie-Hellmanův protokol slouží k bezpečnému ustanovení sdíleného tajného klíče přes nedůvěryhodné komunikační médium, je však náchylný k útoku Man-in-the-Middle. Bezpečnost protokolu DH se opírá o výpočetní složitost problému diskrétního logaritmu v multiplikativní grupě ${Z}_p^*$. Veřejnými předem sdílenými parametry jsou velké bezpečné prvočíslo $p$ (modulus o délce alespoň 3072 bitů) a číslo $g$, což je generátor podgrupy řádu $q$ (délka alespoň 256 bitů).
+
+                    \subsubsection*{Průběh protokolu:}
+                        \begin{enumerate}
+                            \item \textbf{Účastník 1:} Zvolí si zcela náhodné číslo $a \in {Z}_q$. Spočte hodnotu $A = g^a \pmod{p}$ a veřejně ji odešle.
+                            \item \textbf{Účastník 2:} Nezávisle zvolí náhodné číslo $b \in {Z}_q$. Spočte hodnotu $B = g^b \pmod{p}$ a veřejně ji odešle.
+                            \item \textbf{Výpočet klíče (Účastník 1):} Přijatou hodnotu $B$ umocní svým soukromým klíčem $a$, čímž získá výsledný symetrický klíč $K = B^a \pmod{p}$.
+                            \item \textbf{Výpočet klíče (Účastník 2):} Přijatou hodnotu $A$ umocní svým soukromým klíčem $b$, čímž získá tentýž symetrický klíč $K = A^b \pmod{p}$. 
+                        \end{enumerate}
+                    
+            \subsection{Autentizace – princip protokolů výzva-odpověď, certifikáty, digitální podpis.}
+                Autentizace je proces ověření pravosti. V kryptografii a bezpečnosti se dělí na dvě hlavní oblasti:
+
+                \begin{itemize}
+                    \item \textbf{Autentizace dat:} Zajišťuje ověření, že data skutečně pocházejí od očekávaného odesílatele a nacházejí se v původní formě. K tomuto účelu se v asymetrické kryptografii využívá elektronický (digitální) podpis.
+                    \item \textbf{Autentizace entit (osob/zařízení):} Zajišťuje spolehlivé ověření, že komunikujeme se zamýšleným subjektem.
+                \end{itemize}
+
+                \subsubsection{Princip protokolů Challenge-Response}
+                     K bezpečné autentizaci osob (bez nutnosti přenášet heslo v otevřené podobě) slouží protokoly postavené na mechanismu \textbf{challenge-response}.
+                    
+                    \begin{itemize}
+                        \item \textbf{Princip fungování:} Server zašle klientovi náhodnou \textit{výzvu} (challenge). Klient ze znalosti svého tajného hesla a přijaté výzvy vypočte kryptografickou \textit{odpověď} (např. zašifrováním výzvy nebo vytvořením otisku pomocí hashovací funkce) a tu odešle zpět serveru. Server provede na své straně totožný výpočet a ověří, zda se jím vypočtená hodnota shoduje s přijatou odpovědí ($\textit{odpoved} = F(\textit{vyzva}, \textit{heslo})$).
+                        \item \textbf{Praktické nasazení:} Tento princip nachází uplatnění například v rozšířené autentizaci CHAP v rámci protokolu RADIUS nebo doménové autentizace NTLM v systémech Windows, kde server volí náhodnou výzvu a klient na ni odpovídá derivátem svého hashe hesla.
+                    \end{itemize}
+                \subsubsection{Digitální podpis}
+                    Digitální podpis slouží k jasnému prokázání autorství a integrity odeslané zprávy pomocí asymetrické kryptografie. Podepisování a ověřování funguje na základě páru matematicky svázaných klíčů -- soukromého a veřejného.
+                    
+                    \begin{itemize}
+                        \item \textbf{Postup podepisování a ověření:} Odesílatel zkrátí původní zprávu na její otisk pomocí hashovací funkce. Tento otisk následně zašifruje svým drženým \textbf{soukromým klíčem} ($Sk$), čímž vznikne digitální podpis ($Sig_m$). Příjemce použije odpovídající \textbf{veřejný klíč} ($Pk$) odesílatele. Pomocí něj dešifruje přijatý podpis a výsledek porovná se spočteným hashem přijaté zprávy.
+                        \item \textbf{Využívané algoritmy:} Standardním zástupcem je kryptosystém \textbf{RSA}, u kterého matematické operace digitálního podpisu pracují s modulem tvořeným součinem dvou velkých prvočísel. Dalším významným zástupcem je \textbf{DSA} (Digital Signature Algorithm), jež operuje nad modulární multiplikativní grupou modulo prvočíslo a pro každý jednotlivý podpis vyžaduje vygenerování nové, unikátní náhodné hodnoty $k$.
+                    \end{itemize}
+                \subsection*{4. Certifikáty}
+                    Certifikáty se využívají k ověření autentičnosti osob a koncových zařízení. Jejich hlavním smyslem je kryptograficky svázat konkrétní identitu uživatele nebo serveru s jeho veřejným klíčem, což brání útokům typu Man-in-the-Middle.
+                    
+                    \begin{itemize}
+                        \item \textbf{Princip fungování v SSL/TLS:} Při sestavování zabezpečeného spojení odešle server klientovi svůj certifikát ($Cert_S$), který obsahuje veřejný klíč serveru. Klient tento certifikát a jeho validitu ověří. Následně může bezpečně vytvořit sdílené tajemství, zašifrovat jej veřejným klíčem vytaženým z certifikátu a odeslat zpět serveru, z čehož obě strany finálně odvodí symetrické šifrovací klíče. V případě potřeby oboustranného ověření je nasazena tzv. vzájemná autentizace, kde svůj vlastní certifikát ($Cert_C$) navíc předkládá k ověření i klient.
+                    \end{itemize}
+\newpage
