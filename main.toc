@@ -1,0 +1,253 @@
+\babel@toc {czech}{}\relax 
+\contentsline {section}{\numberline {1}Analogová technika (BPC-ANA)}{8}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Základní stavební jednotky bipolárních a unipolárních analogových obvodů - parametry PNP a NPN, MOS FET a JFET tranzistorů, zapojení se společným emitorem, bází a kolektorem (emitorový sledovač), tranzistor jako zdroj proudu, proudová zrcadla, diferenční zesilovač, FET jako řízený rezistor.}{8}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Parametry bipolárních tranzistorů (PNP a NPN)}{8}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}Parametry unipolárních tranzistorů (MOSFET a JFET)}{8}{subsubsection.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.3}Základní zapojení zesilovačů (SE, SB, SC)}{8}{subsubsection.1.1.3}%
+\contentsline {subsubsection}{\numberline {1.1.4}Tranzistor jako zdroj proudu a proudová zrcadla}{9}{subsubsection.1.1.4}%
+\contentsline {subsubsection}{\numberline {1.1.5}Diferenční zesilovač}{10}{subsubsection.1.1.5}%
+\contentsline {subsubsection}{\numberline {1.1.6}FET jako řízený rezistor}{10}{subsubsection.1.1.6}%
+\contentsline {subsection}{\numberline {1.2}Parametry operačních zesilovačů; lineární obvody s OZ - invertující a neinvertující zesilovač, integrátor a derivátor, sčítací a rozdílové zapojení, přístrojový rozdílový zesilovač, zdroje proudu řízené napětím. Komparátory s OZ, okénkový komparátor, komparátor s hysterezí.}{11}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Parametry operačních zesilovačů}{11}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Lineární obvody s OZ}{11}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Komparátory s OZ}{12}{subsubsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.3}Kmitočtové filtry - základní zapojení pasivních filtrů RC a RLC, aproximace přenosové funkce dle Butterwortha, Bessela a Čebyševa, aktivní filtry RC s jednoduchou smyčkou zpětné vazby, s rozvětvenou zpětnou vazbou, se zesilovačem s konečným zesílením (Sallen-Key).}{12}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Základní zapojení pasivních filtrů RC a RLC}{12}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Aproximace přenosové funkce}{13}{subsubsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.4}Nelineární obvody - pasivní diodové omezovače a tvarovače, diodové omezovače a tvarovače s OZ, logaritmické a exponenciální převodníky, jednocestné a dvoucestné operační usměrňovače.}{15}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Pasivní diodové omezovače a tvarovače}{15}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.2}Diodové omezovače a tvarovače s OZ (obvody s nelineární zpětnou vazbou)}{18}{subsubsection.1.4.2}%
+\contentsline {subsubsection}{\numberline {1.4.3} Logaritmické a exponenciální převodníky}{19}{subsubsection.1.4.3}%
+\contentsline {subsubsection}{\numberline {1.4.4}Jednocestné a dvoucestné operační usměrňovače}{20}{subsubsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.5}Obvody s elektronickými spínači - multiplexery a demultiplexery, zesilovače s elektronicky přepínatelným zesílením, elektronické střídače, vzorkovače/sledovače s pamětí.}{21}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}Analogové multiplexery a demultiplexery}{21}{subsubsection.1.5.1}%
+\contentsline {subsubsection}{\numberline {1.5.2}Zesilovače s elektronicky přepínatelným zesílením}{21}{subsubsection.1.5.2}%
+\contentsline {subsubsection}{\numberline {1.5.3}Elektronické střídače}{22}{subsubsection.1.5.3}%
+\contentsline {subsubsection}{\numberline {1.5.4}Vzorkovače a sledovače s pamětí}{23}{subsubsection.1.5.4}%
+\contentsline {subsection}{\numberline {1.6}Stabilizátory napětí - sériový a paralelní stabilizátor se zesilovačem odchylky. Generátory - funkční generátory, multivibrátory.}{24}{subsection.1.6}%
+\contentsline {subsubsection}{\numberline {1.6.1}Stabilizátory napětí se zesilovačem odchylky}{24}{subsubsection.1.6.1}%
+\contentsline {subsubsection}{\numberline {1.6.2}Generátory}{24}{subsubsection.1.6.2}%
+\contentsline {section}{\numberline {2}Měření v elektrotechnice (BPC-MVA)}{27}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Nejistoty přímých a nepřímých měření, přístrojové nejistoty, chyby měřicích metod.}{27}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Chyby měřicích metod}{27}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Přístrojové nejistoty}{27}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Nejistoty přímých a nepřímých měření}{27}{subsubsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.2}Analogové a číslicové měřicí přístroje; vlastnosti, základní funkční bloky.}{28}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Analogové měřicí přístroje}{28}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Číslicové měřicí přístroje}{29}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Analogové převodníky elektrických veličin; zesilovače, usměrňovače, měřicí transformátory, převodníky realizující matematické operace (součin, rozdíl, násobení, dělení, integrace)}{29}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Měřicí zesilovače}{29}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Měřicí usměrňovače}{30}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Převodníky efektivní hodnoty na stejnosměrné napětí}{30}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.4}Měřicí transformátory}{31}{subsubsection.2.3.4}%
+\contentsline {subsubsection}{\numberline {2.3.5}Převodníky realizující matematické operace}{31}{subsubsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.4}Analogově-číslicové převodníky (srovnávací, integrační) a číslicově-analogové převodníky (sériové, paralelní, nepřímé); vzorkování signálu a jeho chyby.}{32}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Vzorkování signálu a jeho chyby}{32}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Analogově-číslicové převodníky (AČP)}{33}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}Číslicově-analogové převodníky (ČAP)}{35}{subsubsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.5}Měření časového intervalu, kmitočtu a fázového rozdílu.}{35}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Přímé měření kmitočtu}{35}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}Nepřímé měření kmitočtu (Měření časového intervalu)}{35}{subsubsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.3}Ostatní metody měření kmitočtu}{36}{subsubsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.4}Měření fázového rozdílu}{36}{subsubsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.6}Měření stejnosměrných a střídavých napětí. Měření efektivní hodnoty napětí neharmonických průběhů. Měření stejnosměrných a střídavých proudů.}{37}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Měření stejnosměrných a střídavých napětí}{37}{subsubsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.2}Měření efektivní hodnoty napětí neharmonických průběhů}{37}{subsubsection.2.6.2}%
+\contentsline {subsubsection}{\numberline {2.6.3}Měření stejnosměrných a střídavých proudů}{37}{subsubsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.7}Měření pasivních elektrických veličin; odporů, impedancí, metody výchylkové, metody můstkové. }{38}{subsection.2.7}%
+\contentsline {subsubsection}{\numberline {2.7.1}MĚŘENÍ ODPORŮ}{38}{subsubsection.2.7.1}%
+\contentsline {subsubsection}{\numberline {2.7.2}MĚŘENÍ IMPEDANCÍ}{39}{subsubsection.2.7.2}%
+\contentsline {section}{\numberline {3}Analýza signálů a soustav (BPC-ASI)}{44}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Systémy se spojitým časem. Dynamický systém, stavové veličiny. Základní dělení systémů. Impulsní charakteristika, princip superpozice. Popis lineárního časově invariantního spojitého systému pomocí lineární diferenciálních rovnic s konstantními koeficienty. Přirozená a vynucená odezva, přechodný děj. Definice kmitočtové charakteristiky. Přenosová funkce, póly a nulové body. Ideální přenosový článek. Kmitočtové filtry. }{44}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Systémy se spojitým časem}{44}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Dynamický systém a stavové veličiny}{44}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Základní dělení systémů}{44}{subsubsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.4}Impulsní charakteristika, princip superpozice}{44}{subsubsection.3.1.4}%
+\contentsline {subsubsection}{\numberline {3.1.5}Popis lineárního časově invariantního spojitého systému pomocí lineárních diferenciálních rovnic s konstantními koeficienty}{45}{subsubsection.3.1.5}%
+\contentsline {subsubsection}{\numberline {3.1.6}Přirozená a vynucená odezva, přechodný děj}{45}{subsubsection.3.1.6}%
+\contentsline {subsubsection}{\numberline {3.1.7}Definice kmitočtové charakteristiky}{45}{subsubsection.3.1.7}%
+\contentsline {subsubsection}{\numberline {3.1.8}Přenosová funkce, póly a nulové body}{45}{subsubsection.3.1.8}%
+\contentsline {subsubsection}{\numberline {3.1.9}Ideální přenosový článek}{45}{subsubsection.3.1.9}%
+\contentsline {subsubsection}{\numberline {3.1.10}Kmitočtové filtry}{45}{subsubsection.3.1.10}%
+\contentsline {subsection}{\numberline {3.2}Skutečné signály a jejich matematické modely, dělení signálů. Základní operace se signály. Jednotkový skok, jednotkový impuls, definice harmonického signálu. Periodický signál, harmonická analýza. Fourierova řada v komplexním tvaru. Spektrum obdélníkového signálu. Fourierova transformace, vlastnosti spektrální funkce. Spektra vybraných signálů. Spektrum konvoluce. Souvislost mezi Fourierovou řadou a Fourierovou transformací. }{46}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Skutečné signály a jejich matematické modely, dělení signálů}{46}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Základní operace se signály}{46}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Jednotkový skok, jednotkový impuls, definice harmonického signálu}{46}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}Periodický signál, harmonická analýza}{46}{subsubsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.5}Fourierova řada v komplexním tvaru}{46}{subsubsection.3.2.5}%
+\contentsline {subsubsection}{\numberline {3.2.6}Spektrum obdélníkového signálu}{47}{subsubsection.3.2.6}%
+\contentsline {subsubsection}{\numberline {3.2.7}Fourierova transformace, vlastnosti spektrální funkce}{47}{subsubsection.3.2.7}%
+\contentsline {subsubsection}{\numberline {3.2.8}Spektra vybraných signálů}{47}{subsubsection.3.2.8}%
+\contentsline {subsubsection}{\numberline {3.2.9}Spektrum konvoluce}{48}{subsubsection.3.2.9}%
+\contentsline {subsubsection}{\numberline {3.2.10}Souvislost mezi Fourierovou řadou a Fourierovou transformací}{48}{subsubsection.3.2.10}%
+\contentsline {subsection}{\numberline {3.3}Ideální vzorkování a rekonstrukce signálu se spojitým časem. Vzorkovací poučka. Spektra ideálně vzorkovaného signálu. Aliasing. A/D a D/A převodníky, vzorkování pásmově omezeného signálu.}{48}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Ideální vzorkování}{48}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Vzorkovací poučka a Aliasing}{49}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Rekonstrukce signálu se spojitým časem}{49}{subsubsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.4}Vzorkování pásmově omezeného signálu}{49}{subsubsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.4}Signály s diskrétním časem. Diskrétní Fourierova řada a diskrétní Fourierova transformace. Rychlá Fourierova transformace (FFT), rychlá konvoluce a rychlá korelace. Transformace Z. Zpětná transformace Z. Použití transformace Z pro řešení diferenčních rovnic. Přenosová funkce a impulzní charakteristika. Rozložení pólů a nulových bodů v rovině-z. Stabilita a kauzalita. Kmitočtová charakteristika.}{50}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Signály s diskrétním časem}{50}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Diskrétní Fourierova řada (DFŘ) a diskrétní Fourierova transformace (DFT)}{50}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}Rychlá Fourierova transformace (FFT), rychlá konvoluce a rychlá korelace}{50}{subsubsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.4}Transformace Z a Zpětná transformace Z}{50}{subsubsection.3.4.4}%
+\contentsline {subsubsection}{\numberline {3.4.5}Použití transformace Z pro řešení diferenčních rovnic}{51}{subsubsection.3.4.5}%
+\contentsline {subsubsection}{\numberline {3.4.6}Přenosová funkce a impulzní charakteristika}{51}{subsubsection.3.4.6}%
+\contentsline {subsubsection}{\numberline {3.4.7}Rozložení pólů a nulových bodů v rovině-z}{51}{subsubsection.3.4.7}%
+\contentsline {subsubsection}{\numberline {3.4.8}Stabilita a kauzalita}{51}{subsubsection.3.4.8}%
+\contentsline {subsubsection}{\numberline {3.4.9}Kmitočtová charakteristika}{51}{subsubsection.3.4.9}%
+\contentsline {subsection}{\numberline {3.5}Náhodné signály se spojitým a diskrétním časem. Definice náhodného procesu a jeho reprezentace množinou realizací. Distribuční funkce a hustota rozložení pravděpodobnosti, momenty. Stacionarita a ergodicita. Spektrální výkonová hustota pro spojitý a diskrétní náhodný proces. Bílý šum. Použití FFT pro výpočet spektrální výkonové hustoty.}{52}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Náhodné signály se spojitým a diskrétním časem, definice náhodného procesu a jeho reprezentace množinou realizací}{52}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}Distribuční funkce a hustota rozložení pravděpodobnosti, momenty}{52}{subsubsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.3}Stacionarita a ergodicita}{52}{subsubsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.4}Spektrální výkonová hustota pro spojitý a diskrétní náhodný proces}{52}{subsubsection.3.5.4}%
+\contentsline {subsubsection}{\numberline {3.5.5}Bílý šum}{53}{subsubsection.3.5.5}%
+\contentsline {subsubsection}{\numberline {3.5.6}Použití FFT pro výpočet spektrální výkonové hustoty}{53}{subsubsection.3.5.6}%
+\contentsline {subsection}{\numberline {3.6}Sdělovací soustava a její vlastnosti, modulační a přenosová rychlost, spektrum sdělovacího kanálu. Analogový a číslicový přenosový systém. Přenos v základním pásmu, rušení číslicových signálů, Nyquistův filtr. Signály pro přenos v přeloženém pásmu. Modulace. AM a FM modulace. Amplitudové, kmitočtové a fázové klíčování. }{53}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Sdělovací soustava a její vlastnosti, analogový a číslicový přenosový systém}{53}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.2}Přenos v základním pásmu, modulační a přenosová rychlost, spektrum sdělovacího kanálu}{54}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.3}Rušení číslicových signálů, Nyquistův filtr}{54}{subsubsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.4}Signály pro přenos v přeloženém pásmu. Modulace}{54}{subsubsection.3.6.4}%
+\contentsline {subsubsection}{\numberline {3.6.5}AM a FM modulace}{54}{subsubsection.3.6.5}%
+\contentsline {subsubsection}{\numberline {3.6.6}Amplitudové, kmitočtové a fázové klíčování}{54}{subsubsection.3.6.6}%
+\contentsline {section}{\numberline {4}Digitální elektronika (BPC-DE1)}{56}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Logická hradla. Postuláty a zákony Booleovy algebry}{56}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Logická hradla a základní kombinační funkce}{56}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Postuláty a zákony Booleovy algebry}{56}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Klopné obvody. Typy, vlastnosti, zapojení a realizace.}{58}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Latches: Klopné obvody citlivé na úroveň}{58}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Flip-Flops: Klopné obvody řízené hranou}{59}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Časové parametry}{60}{subsubsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.3}Čítače. Typy, vlastnosti, zapojení a realizace. }{60}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Typy a klasifikace čítačů}{60}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Asynchronní čítače (Ripple counters)}{61}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}Synchronní čítače}{61}{subsubsection.4.3.3}%
+\contentsline {section}{\numberline {5}Datová komunikace (BPC-DAK)}{63}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Teorie informace: Statické a dynamické vlastnosti zdroje informace, množství informace, entropie, nadbytečnost, kódování snižující nadbytečnost, prefixové kódy, Huffmanův kód a další.}{63}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Statické vlastnosti zdroje informace}{63}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Dynamické vlastnosti zdroje informace}{63}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}Kódování snižující nadbytečnost (Zdrojové kódování)}{63}{subsubsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.4}Prefixové kódy}{64}{subsubsection.5.1.4}%
+\contentsline {subsubsection}{\numberline {5.1.5}Metody konstrukce a optimální kód}{64}{subsubsection.5.1.5}%
+\contentsline {subsubsection}{\numberline {5.1.6}Další metody bezeztrátové komprese}{64}{subsubsection.5.1.6}%
+\contentsline {subsection}{\numberline {5.2}Přenos informace: Kapacita diskrétního a spojitého kanálu, Shannonův vztah a jeho popis, kapacita kanálu a přenosová rychlost, modulační rychlost, výkon a výkonová spektrální hustota.}{64}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Kapacita diskrétního kanálu}{64}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Kapacita spojitého kanálu}{65}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Výkon a výkonová spektrální hustota}{65}{subsubsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.3}Druhy chyb, zabezpečovací schopnost kódu, Hammingova vzdálenost a váha. Blokové kódy: Vytvářecí a kontrolní matice. Cyklické kódy: Vytvářecí mnohočlen. Zabezpečení, detekce a oprava chyb. Příklady cyklických kódů. LDPC kódy.}{65}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Druhy chyb}{65}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Hammingova vzdálenost a váha}{66}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Zabezpečovací schopnost kódu}{66}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.4}Blokové kódy}{66}{subsubsection.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.3.5}Cyklické kódy}{67}{subsubsection.5.3.5}%
+\contentsline {subsubsection}{\numberline {5.3.6}LDPC kódy}{67}{subsubsection.5.3.6}%
+\contentsline {subsection}{\numberline {5.4}Stromové kódy: Odlišnost proti blokovým, popis grafy a diagramy, princip dekódování, Viterbiho algoritmus. Zřetězené kódy, Turbo kódy a násobné kódy.}{68}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Stromové kódy}{68}{subsubsection.5.4.1}%
+\contentsline {paragraph}{}{68}{section*.5}%
+\contentsline {paragraph}{}{68}{section*.6}%
+\contentsline {subsubsection}{\numberline {5.4.2}Zřetězené kódy a násobné kódy}{68}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.3}Turbo kódy}{68}{subsubsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.5}Modemy: Měniče v základním a v přeloženém pásmu, linkové kódy, klíčování, modulace s jednou a více nosnými, DMT/OFDM, metody duplexního přenosu. }{69}{subsection.5.5}%
+\contentsline {subsubsection}{\numberline {5.5.1}Modemy a rozdělení měničů signálu}{69}{subsubsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.2}Přenos v základním pásmu -- Linkové kódy}{69}{subsubsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.3}Modulace s jednou nosnou}{70}{subsubsection.5.5.3}%
+\contentsline {subsubsection}{\numberline {5.5.4}Modulace s více nosnými}{70}{subsubsection.5.5.4}%
+\contentsline {subsubsection}{\numberline {5.5.5}Metody duplexního přenosu}{70}{subsubsection.5.5.5}%
+\contentsline {section}{\numberline {6}Komunikační technologie (BPC-KOM) a Architektura sítí (BPC-ARS)}{71}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Základní popis referenčního modelu TCP/IP, srovnání s ISO/OSI, telekomunikační sítě – definice, struktura, vlastnosti sítí se spojováním fyzických okruhů a datových jednotek, chybovost a zdroje zpoždění. }{71}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}ISO/OSI, TCP/IP}{71}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Telekomunikační sítě}{71}{subsubsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.2}Fyzická a spojová vrstva přenosových systémů - rámce spojové vrstvy, metody zajištění spolehlivého přenosu, aktivní síťové prvky, SPT protokol. Ethernet, IEEE 802.11, průmyslový Ethernet.}{72}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Rámce spojové vrstvy}{73}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Metody zajištění spolehlivého přenosu}{73}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}Ethernet, Průmyslový Ethernet, IEEE 802.11}{74}{subsubsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.3}Síťová vrstva přenosových systémů - služby síťové vrstvy s IPv4 i IPv6 protokolem, IPv4 adresy, techniky směrování a směrovací protokoly, IPv4 datagram, ARP, ICMPv4, IPv6 datagram a globální IPv6 adresa. }{75}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Služby síťové vrstvy s IPv4 i IPv6 protokolem}{75}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}IPv4 adresy}{75}{subsubsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}Techniky směrování a směrovací protokoly}{76}{subsubsection.6.3.3}%
+\contentsline {subsubsection}{\numberline {6.3.4}IPv4 datagram}{76}{subsubsection.6.3.4}%
+\contentsline {subsubsection}{\numberline {6.3.5}ARP (Address Resolution Protocol)}{76}{subsubsection.6.3.5}%
+\contentsline {subsubsection}{\numberline {6.3.6}ICMPv4 (Internet Control Message Protocol v4)}{77}{subsubsection.6.3.6}%
+\contentsline {subsubsection}{\numberline {6.3.7}IPv6 datagram}{77}{subsubsection.6.3.7}%
+\contentsline {subsubsection}{\numberline {6.3.8}Globální IPv6 adresa}{77}{subsubsection.6.3.8}%
+\contentsline {subsection}{\numberline {6.4}Transportní vrstva přenosových systémů - UDP protokol, TCP protokol, NAT. }{77}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}Transportní vrstva a její služby}{77}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}User Datagram Protocol (UDP)}{78}{subsubsection.6.4.2}%
+\contentsline {subsubsection}{\numberline {6.4.3}Transmission Control Protocol (TCP)}{78}{subsubsection.6.4.3}%
+\contentsline {subsubsection}{\numberline {6.4.4}NAT (Network Address Translation)}{78}{subsubsection.6.4.4}%
+\contentsline {subsection}{\numberline {6.5}Aplikační vrstva přenosových systémů - DHCP protokol, DNS systém, přenos souborů FTP protokolem, elektronická pošta a protokol SMTP, protokoly pro řízení a správu sítí (SNMP). }{79}{subsection.6.5}%
+\contentsline {subsubsection}{\numberline {6.5.1}Aplikační vrstva}{79}{subsubsection.6.5.1}%
+\contentsline {subsubsection}{\numberline {6.5.2}Dynamic Host Configuration Protocol (DHCP)}{79}{subsubsection.6.5.2}%
+\contentsline {subsubsection}{\numberline {6.5.3}Domain Name System (DNS)}{79}{subsubsection.6.5.3}%
+\contentsline {subsubsection}{\numberline {6.5.4}Přenos souborů protokolem FTP}{80}{subsubsection.6.5.4}%
+\contentsline {subsubsection}{\numberline {6.5.5}Elektronická pošta a protokol SMTP}{80}{subsubsection.6.5.5}%
+\contentsline {subsubsection}{\numberline {6.5.6}SNMP (Simple Network Management Protocol)}{80}{subsubsection.6.5.6}%
+\contentsline {section}{\numberline {7}Multimediální služby (BPC-MDS)}{82}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Kvalita služeb a kvalita zážitků v multimediálních službách.}{82}{subsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Kvalita služeb}{82}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Měřitelné parametry QoS a třídy služeb}{82}{subsubsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Architektury QoS}{82}{subsubsection.7.1.3}%
+\contentsline {subsubsection}{\numberline {7.1.4}Kvalita zážitků (QoE -- Quality of Experience)}{83}{subsubsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.2}Streaming – standardy, využívané protokoly pro signalizaci a přenos, unicast vs. multicast. }{83}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}Standardy a využívané formáty}{83}{subsubsection.7.2.1}%
+\contentsline {subsubsection}{\numberline {7.2.2}Protokoly pro signalizaci a řízení}{84}{subsubsection.7.2.2}%
+\contentsline {subsubsection}{\numberline {7.2.3}Distribuce obsahu: Unicast vs. Multicast}{84}{subsubsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.3}Webinar, webcast, videokonference, teleprezence, VoIP – využívané standardy SIP, H.323 a podpůrné protokoly.}{85}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}Formy multimediální komunikace v reálném čase}{85}{subsubsection.7.3.1}%
+\contentsline {subsubsection}{\numberline {7.3.2}Standard H.323 (ITU-T)}{85}{subsubsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.4}Komprese obrazových signálů a videa – principy standardů JPEG a MPEG, H.26x.}{87}{subsection.7.4}%
+\contentsline {subsubsection}{\numberline {7.4.1}Principy komprese}{87}{subsubsection.7.4.1}%
+\contentsline {subsubsection}{\numberline {7.4.2}Standard JPEG}{87}{subsubsection.7.4.2}%
+\contentsline {subsubsection}{\numberline {7.4.3}Komprese videa}{87}{subsubsection.7.4.3}%
+\contentsline {subsubsection}{\numberline {7.4.4}Standardy H.26x (ITU-T)}{88}{subsubsection.7.4.4}%
+\contentsline {section}{\numberline {8}Přístupové a transportní sítě}{89}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Základní jednotky, pojmy a veličiny telekomunikační techniky (dB, dBm0, útlum, zisk a úroveň, kanál, okruh, dvoudrát, čtyřdrát, komutace paketů a okruhů, FDM, TDM)}{89}{subsection.8.1}%
+\contentsline {subsubsection}{\numberline {8.1.1}Základní jednotky a veličiny}{89}{subsubsection.8.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.2}Přenosové parametry a rušení}{89}{subsubsection.8.1.2}%
+\contentsline {subsubsection}{\numberline {8.1.3}Kanály, okruhy a způsoby přenosu}{89}{subsubsection.8.1.3}%
+\contentsline {subsubsection}{\numberline {8.1.4}Komutace (Přepojování)}{89}{subsubsection.8.1.4}%
+\contentsline {subsubsection}{\numberline {8.1.5}Multiplexování (FDM a TDM)}{89}{subsubsection.8.1.5}%
+\contentsline {subsection}{\numberline {8.2}Základní blokové schéma digitálního přenosového systému, rámec a multirámec E1, kompandory a nelineární kodéry.}{90}{subsection.8.2}%
+\contentsline {subsubsection}{\numberline {8.2.1}Základní blokové schéma digitálního přenosového systému}{90}{subsubsection.8.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.2}Rámec a multirámec E1}{90}{subsubsection.8.2.2}%
+\contentsline {subsubsection}{\numberline {8.2.3}Kompandory a nelineární kodéry}{90}{subsubsection.8.2.3}%
+\contentsline {subsection}{\numberline {8.3}Spektrum vzorkovaného signálu, celkové zkreslení digitálního přenosu E1 (kvantizační + omezením) pro harmonický a náhodný signál, charakteristiku mí a A.}{91}{subsection.8.3}%
+\contentsline {subsubsection}{\numberline {8.3.1}Spektrum vzorkovaného signálu}{91}{subsubsection.8.3.1}%
+\contentsline {subsubsection}{\numberline {8.3.2}Celkové zkreslení digitálního přenosu}{91}{subsubsection.8.3.2}%
+\contentsline {subsubsection}{\numberline {8.3.3}Kompresní charakteristiky A a $\mu $}{92}{subsubsection.8.3.3}%
+\contentsline {subsection}{\numberline {8.4}Systémy vyšších řádů, stuffing, Synchronní digitální hierarchie SDH.}{92}{subsection.8.4}%
+\contentsline {subsubsection}{\numberline {8.4.1}Systémy vyšších řádů v Plesiochronní digitální hierarchii (PDH)}{92}{subsubsection.8.4.1}%
+\contentsline {subsubsection}{\numberline {8.4.2}Synchronní digitální hierarchie (SDH)}{93}{subsubsection.8.4.2}%
+\contentsline {section}{\numberline {9}Síťové operační systémy (BPC-SOS)}{94}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Systémové jádro a systémové volání, monolitický systém a modulární jádro, systém klient-server a mikrojádro}{94}{subsection.9.1}%
+\contentsline {subsubsection}{\numberline {9.1.1}Systémové jádro a systémová volání}{94}{subsubsection.9.1.1}%
+\contentsline {subsubsection}{\numberline {9.1.2}Monolitický systém a Modulární jádro}{94}{subsubsection.9.1.2}%
+\contentsline {subsubsection}{\numberline {9.1.3}Systém klient-server a mikrojádro}{94}{subsubsection.9.1.3}%
+\contentsline {subsection}{\numberline {9.2}Rozšířený stavový model činnosti procesů a přechody mezi stavy.}{95}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Okamžiky rozhodnutí při plánování procesů, plánování procesů a výpočet priority.}{95}{subsection.9.3}%
+\contentsline {subsubsection}{\numberline {9.3.1}Okamžiky rozhodnutí při plánování procesů}{95}{subsubsection.9.3.1}%
+\contentsline {subsubsection}{\numberline {9.3.2}Plánování procesů}{96}{subsubsection.9.3.2}%
+\contentsline {subsubsection}{\numberline {9.3.3}Výpočet priority}{96}{subsubsection.9.3.3}%
+\contentsline {subsection}{\numberline {9.4}Stránkování a segmentace paměti, přidělování hlavní paměti procesům.}{96}{subsection.9.4}%
+\contentsline {subsubsection}{\numberline {9.4.1}Stránkování paměti}{96}{subsubsection.9.4.1}%
+\contentsline {subsubsection}{\numberline {9.4.2}Segmentace paměti}{97}{subsubsection.9.4.2}%
+\contentsline {subsubsection}{\numberline {9.4.3}Přidělování hlavní paměti procesům}{97}{subsubsection.9.4.3}%
+\contentsline {section}{\numberline {10}Základy kryptografie (BPC-ZKR)}{99}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Prvočísla – generování, testování, základní testy, typy prvočísel}{99}{subsection.10.1}%
+\contentsline {subsubsection}{\numberline {10.1.1}Prvočísla}{99}{subsubsection.10.1.1}%
+\contentsline {subsubsection}{\numberline {10.1.2}Typy prvočísel}{99}{subsubsection.10.1.2}%
+\contentsline {subsubsection}{\numberline {10.1.3}Generování prvočísel}{99}{subsubsection.10.1.3}%
+\contentsline {subsubsection}{\numberline {10.1.4}Testování prvočísel}{99}{subsubsection.10.1.4}%
+\contentsline {subsection}{\numberline {10.2}Klasifikace výpočetních problémů - složitost algoritmů, třídy složitosti, popis problémů používaných v kryptografii (RSA, diskrétní logaritmus, DH)}{100}{subsection.10.2}%
+\contentsline {subsubsection}{\numberline {10.2.1}Složitost algoritmů}{100}{subsubsection.10.2.1}%
+\contentsline {subsubsection}{\numberline {10.2.2}Třídy složitosti}{100}{subsubsection.10.2.2}%
+\contentsline {subsubsection}{\numberline {10.2.3}Popis problémů používaných v kryptografii}{100}{subsubsection.10.2.3}%
+\contentsline {subsection}{\numberline {10.3}Symetrické šifrování – princip, využití, algoritmy DES a AES. Hashovací funkce – požadavky, zástupci }{101}{subsection.10.3}%
+\contentsline {subsubsection}{\numberline {10.3.1}Symetrické šifrování}{101}{subsubsection.10.3.1}%
+\contentsline {subsubsection}{\numberline {10.3.2}Algoritmy DES a AES}{101}{subsubsection.10.3.2}%
+\contentsline {subsubsection}{\numberline {10.3.3}Hashovací funkce – požadavky, zástupci}{102}{subsubsection.10.3.3}%
+\contentsline {subsection}{\numberline {10.4}Asymetrické šifrování – princip, využití, algoritmus RSA, protokol Diffie-Hellman}{102}{subsection.10.4}%
+\contentsline {subsubsection}{\numberline {10.4.1}Algoritmus RSA (Rivest, Shamir, Adleman)}{102}{subsubsection.10.4.1}%
+\contentsline {subsubsection}{\numberline {10.4.2}Protokol Diffie-Hellman (DH)}{103}{subsubsection.10.4.2}%
+\contentsline {subsection}{\numberline {10.5}Autentizace – princip protokolů výzva-odpověď, certifikáty, digitální podpis.}{103}{subsection.10.5}%
+\contentsline {subsubsection}{\numberline {10.5.1}Princip protokolů Challenge-Response}{103}{subsubsection.10.5.1}%
+\contentsline {subsubsection}{\numberline {10.5.2}Digitální podpis}{103}{subsubsection.10.5.2}%
