@@ -4,7 +4,7 @@
 * **Rok vypracovania:** 2026
 
 # Disclaimer
-**Tento materiál bol vytvorený aj za pomoci AI, výhradne z oficiálnych materiálov jednotlivých predmetov a zo znalostí autorov. Úlohou materiálu nie je byť jediným zdrojom pravdy, ale prostriedkom na opakovanie. Napriek všetkej vynaloženej snahe môže materiál obsahovať chyby, nekompletné otázky alebo iné nezrovnalosti. Jeho využitie je tak výhradne na vlastnú zodpovednosť. Tento dokument berte ako znak dobrej vôle a v budúcnosti ho zveľaďujte a udržiavajte. Podobné materiály obsahujúce otázky pre odbory/voliteľné predmety [BPC-EKT](https://github.com/Stredoslovak/SZZ-BPC-EKT-2026) a [BPC-MET](https://github.com/levlukas/SZZ-BPC-MET-2026/tree/main) sú dostupné v samostatných repozitároch.**
+**Tento materiál bol vytvorený aj za pomoci AI, výhradne z oficiálnych materiálov jednotlivých predmetov a zo znalostí autorov. Úlohou materiálu nie je byť jediným zdrojom pravdy, ale prostriedkom na opakovanie. Napriek všetkej vynaloženej snahe môže materiál obsahovať chyby, nekompletné otázky alebo iné nezrovnalosti. Jeho využitie je tak výhradne na vlastnú zodpovednosť. Tento dokument berte ako znak dobrej vôle a v budúcnosti ho zveľaďujte a udržiavajte. Podobné materiály iných autorov obsahujúce otázky pre odbory/voliteľné predmety [BPC-EKT](https://github.com/Stredoslovak/SZZ-BPC-EKT-2026) a [BPC-MET](https://github.com/levlukas/SZZ-BPC-MET-2026/tree/main) sú dostupné v samostatných repozitároch.**
 
 ---
 
