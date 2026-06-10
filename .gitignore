@@ -1,0 +1,6 @@
+*.toc
+main.synctex.gz
+*.pdf
+*.gz
+*.out
+*.log
