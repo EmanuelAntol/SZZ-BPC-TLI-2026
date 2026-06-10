@@ -57,7 +57,7 @@
     \subsubsection{Další metody bezeztrátové komprese}
         \begin{itemize}
             \item \textbf{Komprese bloků dat:} Pokud jeden symbol silně dominuje, prosté Huffmanovo kódování selhává (nejkratší možný znak je 1 bit). Řešením je sdružení několika původních znaků do bloku (nová abeceda). Na bloky se aplikuje kód s podstatně lepší kompresní účinností.
-            \item \textbf{Aritmetické kódování:} Mapuje zprávu na reálné číslo v definovaném intervalu. Pro každý prvek určí délku tak, aby $n \ge 1 - \log_2 p_i$, a následně generuje celé číslo $c$, takové, že $c - 1 \le 2^n a_i < c$.
+            \item \textbf{Aritmetické kódování:} Mapuje zprávu na reálné číslo v definovaném intervalu. Pro každý prvek určí délku tak, aby $n \ge 1 - \log_2 p_i$, a následně generuje celé číslo $c$ takové, že $c - 1 \le 2^n a_i < c$.
             \item \textbf{Kódování se slovníkem (např. LZW):} Slovníkové algoritmy (statické či dynamické) nahrazují opakující se delší sekvence či fráze pouze jejich indexem ve sdíleném slovníku.
         \end{itemize}
 \subsection{Přenos informace: Kapacita diskrétního a spojitého kanálu, Shannonův vztah a jeho popis, kapacita kanálu a přenosová rychlost, modulační rychlost, výkon a výkonová spektrální hustota.}
@@ -141,7 +141,7 @@
             \item \textbf{Cyklický kód odvozený z Hammingova kódu:} Slouží pro detekci a opravu drobnějších úseků nezávislých chyb.
             \item \textbf{Fireův kód:}
             \item \textbf{BCH kódy (\textit{Bose--Chaudhuri--Hocquenghem}):} Cyklické kódy pro efektivní opravu vícenásobných chyb, opírající se silně o algebru tzv. Galoisových těles $GF(p^r)$.
-            \item \textbf{Reed--Solomonovy kódy (RS):} Speciální (nebinární) bloková implementace BCH algoritmů schopná efektivně korektovat dlouhé shluky chyb.
+            \item \textbf{Reed--Solomonovy kódy (RS):} Speciální (nebinární) bloková implementace BCH algoritmů schopná efektivně opravovat dlouhé shluky chyb.
         \end{itemize}
     \subsubsection{LDPC kódy}
         \textbf{Low-Density Parity-Check (LDPC)} kódy jsou třídou lineárních blokových kódů, které se řadí mezi nejvýkonnější metody kanálového kódování. Jejich hlavní předností je schopnost dosahovat přenosových rychlostí blízkých teoretickému Shannonovu limitu.
