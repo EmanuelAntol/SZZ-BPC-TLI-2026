@@ -17,12 +17,13 @@
             \item \textbf{Standardní nejistota typu A ($u_A$):} Stanovuje se na základě statistické analýzy opakovaných měření a je dána výběrovou směrodatnou odchylkou aritmetického průměru.
             \item \textbf{Standardní nejistota typu B ($u_B$):} Určuje se z jiných nemetrologických informací (například z garantovaných odchylek měřicího přístroje). Nejčastěji se uvažuje rovnoměrné rozdělení pravděpodobnosti a převodní koeficient $\chi = \sqrt{3}$.
             \item \textbf{Kombinovaná standardní nejistota ($u_C$):} Slučuje vliv obou typů nejistot (A i B) a vypočítá se jako jejich kvadratický (geometrický) součet: $u_C = \sqrt{u_A^2 + u_B^2}$.
-            \item \textbf{Rozšířená nejistota ($U$):} Používá se pro zápis finálního výsledku a vzniká vynásobením kombinované nejistoty koeficientem rozšíření ($k$, obvykle $k = 2$), čímž udává přesnější toleranční meze ($U = k \cdot u_C$).
+            \item \textbf{Rozšířená nejistota ($U$):} Používá se pro zápis finálního výsledku a vzniká vynásobením kombinované nejistoty koeficientem rozšíření ($k$, obvykle $k = 2$), čímž rozšiřuje toleranční meze ($U = k \cdot u_C$).
             \item \textbf{Zákon šíření nejistot (nepřímá měření):} Při nepřímých měřeních se hodnota $Y$ stanoví výpočtem z přímo měřených veličin $X$, tedy $Y = f(X_1, X_2, \dots, X_n)$. Nejistota nepřímého měření se určuje podle zákona šíření nejistot přenesením kombinovaných standardních nejistot veličin $X_i$ pomocí citlivostních koeficientů $A_i$ (určených parciálními derivacemi $\frac{\partial Y}{\partial X_i}$). Pokud jsou měřené veličiny vzájemně závislé, musí se ve výpočtu zohlednit také jejich korelace pomocí kovariančních koeficientů.
         \end{itemize}
 \subsection{Analogové a číslicové měřicí přístroje; vlastnosti, základní funkční bloky.}
     \subsubsection{Analogové měřicí přístroje}
-        \textbf{Vlastnosti (Statické a dynamické charakteristiky)} Analogové přístroje jsou elektromechanická ústrojí, která převádějí elektrickou veličinu na spojitou výchylku ukazatele, jež se mění úměrně se změnou měřené veličiny. Jejich vlastnosti popisují následující parametry:
+        \textbf{Vlastnosti (Statické a dynamické charakteristiky)}\\
+        Analogové přístroje jsou elektromechanická ústrojí, která převádějí elektrickou veličinu na spojitou výchylku ukazatele, jež se mění úměrně se změnou měřené veličiny. Jejich vlastnosti popisují následující parametry:
         
         \begin{itemize}
             \item \textbf{Převodní charakteristika:} Vyjadřuje vztah mezi měřenou veličinou a údajem přístroje, nejčastěji bývá lineární.
@@ -162,7 +163,7 @@
         \end{itemize}
 \subsection{Analogově-číslicové převodníky (srovnávací, integrační) a číslicově-analogové převodníky (sériové, paralelní, nepřímé); vzorkování signálu a jeho chyby.}
     \subsubsection{Vzorkování signálu a jeho chyby}
-        Vzorkování provádí diskretizaci signálu v čase. Základní podmínkou bezeztrátového převodu je splnění Shannon-Kotělnikovova teorému: vzorkovaný signál nesmí obsahovat kmitočtové složky vyšší nebo rovné $f_V/2$, jinak dochází ke vzniku překryvů ve frekvenční oblasti neboli aliasingu. Pro převodníky vyžadující stabilní napětí se využívá tzv. \textbf{vzorkovač s pamětí (S/H – sample-hold)}. Ten pomocí spínače a paměťového kondenzátoru sleduje signál (doba vzorkování) a následně jej uchová v čase potřebném pro převod AČP.
+        Vzorkování provádí diskretizaci signálu v čase. Základní podmínkou bezeztrátového převodu je splnění Shannon-Kotělnikovova teorému: vzorkovaný signál nesmí obsahovat kmitočtové složky vyšší nebo rovné $f_{vz}/2$, jinak dochází ke vzniku překryvů ve frekvenční oblasti neboli aliasingu. Pro převodníky vyžadující stabilní napětí se využívá tzv. \textbf{vzorkovač s pamětí (S/H – sample-hold)}. Ten pomocí spínače a paměťového kondenzátoru sleduje signál (doba vzorkování) a následně jej uchová v čase potřebném pro převod AČP.
         
         \textbf{Chyby vzorkování u reálného vzorkovače:}
         \begin{itemize}
@@ -199,15 +200,14 @@
                 \includegraphics[width=0.65\linewidth]{2tACP.png}
             \end{figure}
         \end{itemize}
-    \newpage
     \subsubsection{Číslicově-analogové převodníky (ČAP)}
-        Zajišťují rekonstrukci číslicového slova $D$ do úměrné analogové veličiny (napětí nebo proudu) za pomoci referenčního napětí $U_R$ a analogových spínačů. Pro potlačení kmitočtových zbytků $f_V/2$ z digitalizace je nutné jejich výstup osadit rekonstrukčním filtrem.
+        Zajišťují rekonstrukci číslicového slova $D$ do úměrné analogové veličiny (napětí nebo proudu) za pomoci referenčního napětí $U_R$ a analogových spínačů. Pro potlačení kmitočtových zbytků $f_{vz}/2$ z digitalizace je nutné jejich výstup osadit rekonstrukčním filtrem.
         
         \textbf{A. Paralelní ČAP}\\
         Jsou nejpoužívanější kategorií a využívají souběžného spojování elektrických drah k sumačnímu uzlu (např. převodníku I/U).
         
         \begin{itemize}
-            \item \textbf{S váhovými rezistory:} Každému bitu kódu odpovídá větev s předřadným odporem, spínaná ke vstupní virtuální nule. Hodnoty odporů musí exponenciálně narůstat ($R, 2R, 4R, \dots, 2^{n-1}R$), přičemž proudy tekoucí sítěmi jsou pro jednotlivé bity poloviční. 
+            \item \textbf{S váhovými rezistory:} Každému bitu kódu odpovídá větev s předřadným odporem spínaná ke vstupní virtuální nule. Hodnoty odporů musí exponenciálně narůstat ($R, 2R, 4R, \dots, 2^{n-1}R$), přičemž proudy tekoucí sítěmi jsou pro jednotlivé bity poloviční. 
             \item \textbf{S rezistorovou sítí R-2R:} Váhování probíhá na žebříčkově kaskádované síti zkonstruované pouze za pomoci dvou hodnot rezistorů: $R$ a $2R$. Referenční napětí se po cestě žebříčkem vždy v každém uzlu sníží na polovinu.
             \item \textbf{S přepínanými proudovými zdroji:} Eliminuje zátěž a nepřesnost vyvolanou odporem sepnutých spínačů. Místo spínání napěťových větví jsou natvrdo spínány binárně odstupňované zdroje konstantního proudu (realizované např. řadou tranzistorů s různými plochami přechodů B-E nebo proudovými zrcadly s R-2R sítí). Tyto převodníky pracují extrémně rychle (řádově v desítkách ns).
         \end{itemize}
@@ -215,6 +215,7 @@
             \centering
             \includegraphics[width=0.45\linewidth]{R2R.png}
         \end{figure}
+        
         \textbf{B. Sériové ČAP}\\
         V monolitické sféře nepoužívané. Číslo se vyhodnocuje postupně od bitu s nejmenší vahou (LSB). Pomocí analogové sčítačky se daný bit sečte s předešlou uloženou hodnotou (vždy posunutou analogovou děličkou dvěma). Komplexní převod pro $n$-bitové číslo trvá přesně $n$ taktů.
         

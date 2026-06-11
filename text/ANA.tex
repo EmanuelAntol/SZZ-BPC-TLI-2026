@@ -39,7 +39,7 @@
         
         \begin{itemize}
             \item \textbf{Jednoduché Widlarovo zrcadlo:} Dva shodné tranzistory, kde propojené báze zaručují stejné $u_{BE}$ a tudíž i $i_C$. U BJT vzniká chyba vlivem bázových proudů: přenos $K_I \approx \beta / (\beta + 2)$. U FET (vstupní proud 0) lze jednoduše poměr proudů určit poměrem šířky a délky kanálu obou tranzistorů $W/L$.
-            \item \textbf{Zrcadlo s redukcí proudu do bází:} Třetí tranzistor zapojený jako sledovač saturuje chybu od bázových proudů na zlomek promile, přenos $K_I \approx 1 - 2/\beta^2$.
+            \item \textbf{Zrcadlo s redukcí proudu do bází:} Třetí tranzistor, zapojený jako sledovač, saturuje chybu od bázových proudů na zlomek promile, přenos $K_I \approx 1 - 2/\beta^2$.
             \item \textbf{Zpětnovazební Wilsonovo zrcadlo:} K potlačení chyby zrcadlení je zařazena paralelní proudová zpětná vazba. Poskytuje několikanásobně vyšší vnitřní odpor. Lze realizovat s bipolárními i unipolárními tranzistory (kde se takto řeší nízký výstupní odpor $r_{DS}$).
         \end{itemize}
         \begin{figure}[h]
@@ -89,13 +89,20 @@
         \begin{figure}[h]
             \centering
             \includegraphics[width=0.9\linewidth]{INVNEINV.jpg}
+        \end{figure}
+        \begin{figure}[h]
+        	\centering
             \includegraphics[width=0.9\linewidth]{INTDERI.jpg}
+        \end{figure}
+        \begin{figure}[h]
+        	\centering
             \includegraphics[width=0.9\linewidth]{SCITROZD.jpg}
         \end{figure}
         \begin{figure}[h]
             \centering
             \includegraphics[width=0.9\linewidth]{PRISTSCIT.jpg}
         \end{figure}
+        \clearpage
     \subsubsection{Komparátory s OZ}
         Porovnávají dvě napětí na vstupech a na základě výsledku mění skokově svůj výstup. Použití běžného OZ jako komparátoru je teoreticky možné, ale prakticky nevhodné – pokud dojde k plné saturaci, projeví se jev "latch up", z něhož se obvod dlouho zotavuje. Z tohoto důvodu se pro komparaci vyrábějí specializované integrované komparátory bez frekvenčních kompenzací (jsou rychlé) a s logickými výstupními úrovněmi.
         
