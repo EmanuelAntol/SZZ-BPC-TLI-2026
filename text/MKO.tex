@@ -140,3 +140,143 @@
 				\item \textbf{Handover řízený mobilní stanicí (MCHO – Mobile Controlled Handover):} Měření kvality všech kanálů provádí mobilní stanice i BTS. O přepnutí rozhoduje mobilní stanice. Rozhodnutí předá systému a ten zajistí samotné přepojení.
 				\item \textbf{Sítí řízený handover s asistencí mobilní stanice (MAHO – Mobile Assisted Handover):} Mobilní stanice monitoruje signály okolních BTS a výsledky předává BTS, ke které je aktuálně připojena. Současně mobilní stanice i BTS provádí měření aktuálního vzájemného spojení. Na základě naměřených údajů systém provádí rozhodnutí o přepojení i jeho realizaci.
 			\end{itemize}
+	
+	\subsection{Základní architektura a vlastnosti systémů GSM, GPRS, EDGE, UMTS}
+		\subsubsection{GSM (Global System for Mobile Communication)} 
+		Plně digitální systém 2. generace pracující v pásmech 900 a 1800 MHz. Primárně navržen pro přenos hovorových signálů (okruhově spojované přenosy) pomocí sdílení kanálů metodami FDMA a TDMA a modulace GMSK. Systém se vyznačuje vysokou kvalitou spojení i v nepříznivých podmínkách, celosvětovou kompatibilitou, efektivním využitím spektra a pokročilým zabezpečením proti odposlechu (autentizace, šifrování, identifikátory IMSI/TMSI a PIN/PUK u SIM karet). Nevýhodou je jeho složitost a ekonomická náročnost
+		\subsubsection*{Architektura}
+			\begin{itemize}[]
+				\item \textbf{BSS (Base Station Sub-System):} Rádiový subsystém zajišťující bezdrátové spojení. Skládá se ze základnových stanic (BTS) a základnových řídicích jednotek (BSC)
+				\item \textbf{NSS (Network and Switching Subsystem):} Síťový a spojovací subsystém (páteřní síť),  řídí směrování hovorů a mobilitu. Obsahuje ústředny (MSC) a důležité databáze jako domovský registr (HLR), návštěvnický registr (VLR), centrum autentičnosti (AuC) a registr koncových zařízení (EIR)
+				\item \textbf{OSS (Operation Support Subsystem):} Operační subsystém sloužící pro dohled, provoz, tarifování a údržbu sítě (prvky OMC, NMC, ADC)
+				\item Koncové uživatelské zařízení se nazývá MS (Mobilní stanice) a její nedílnou součástí je SIM karta
+			\end{itemize}
+		\subsubsection{GPRS (General Packet Radio Service)}
+		\textbf{Základní vlastnosti: }Standard 2,5G, rozšiřuje stávající GSM sítě o paketový přenos dat (na bázi protokolu IP), umožňuje např. přístup k internetu. Přenosová rychlost dynamicky závisí na aktuálně přiděleném počtu časových slotů a na jednom ze čtyř kódovacích schémat (CS1 až CS4), přičemž teoreticky může dosahovat hodnoty až 171,2 kbit/s.
+		\subsubsection*{Architektura}
+			\begin{itemize}[]
+				\item Do rádiové části (BSS) přibyla jednotka PCU (Packet Controller Unit), řídí paketový provoz na rádiovém rozhraní
+				\item Páteřní síť (NSS) byla doplněna o datový uzel SGSN (Serving GPRS Support Node) komunikující s rádiovou sítí (zajišťuje šifrování, kompresi a handover) a standardní směrovač GGSN (Gateway GPRS Support Node), který spojuje mobilní síť s vnějšími paketovými sítěmi (Internet)
+			\end{itemize}
+		\subsubsection{EDGE (Enhanced Data Rates for GSM Evolution)}
+		Evoluční vylepšení rádiového rozhraní pro GSM i GPRS, jehož cílem je výrazné zvýšení datové propustnosti. Dosaženo zavedením modulace 8-PSK a 9 nových kódovacích schémat (MCS1 až MCS9). Teoretická modulační rychlost EDGE je až 810 kbit/s, přičemž reálná rychlost na jeden timeslot může dosáhnout téměř 60 kbit/s (celkově např. 384 kbit/s při spojení více slotů). Přenosová rychlost je však závislá na vzdálenosti od základnové stanice; při špatné kvalitě rádiového kanálu systém plynule přechází zpět k robustnější, avšak pomalejší modulaci GMSK.
+		\subsubsection*{Architektura}
+		Síťová struktura zůstává shodná s GPRS, ale implementace EDGE vyžadovala zásah do hardwaru základnových stanic BTS (osazení nových vysílačů pro podporu 8-PSK) a softwarovou aktualizaci pro chytřejší přepínání kódovacích schémat v BSS.
+		\subsubsection{UMTS (Universal Mobile Telecommunication System)}
+		Síť 3. generace navržena pro vysokorychlostní služby (hlas, data, multimédia), od 144 kbit/s pro rychle se pohybující uživatele, přes 384 kbit/s, až po 2 Mbit/s pro statické přijímače (v budovách).  Plně podporuje okruhově i paketově spojované přenosy současně a má výrazně vyšší spektrální účinnost. Mění se metoda přístupu ke kanálu: systém využívá kombinaci FDMA a CDMA (rozprostření spektra přímou sekvencí - DS-WCDMA), kdy jsou jednotliví uživatelé na stejném kmitočtu odděleni unikátním kódem.
+		\subsubsection*{Architektura}
+			\begin{itemize}[]
+				\item \textbf{UTRAN (Rádiová přístupová síť): }Zcela nová rádiová část, jejímž základem jsou stanice označované jako Node B (BTS u GSM) a kontrolery rádiové sítě RNC (Radio Network Controller)
+				\item \textbf{CN (Páteřní síť): }Je strukturovaná do tří domén: CS-Domain pro komutovaný provoz (obsahuje uzly známé z GSM - MSC, VLR), PS-Domain pro paketový provoz (uzly SGSN, GGSN z GPRS) a BC-Domain (BroadCast Domain pro koordinaci hromadného vysílání)
+				\item Koncové mobilní zařízení je v UMTS označováno jako UE (User Equipment), disponuje cca sedmkrát vyšším výkonem pro zpracování WCDMA signálu oproti starším GSM telefonům
+			\end{itemize}
+
+	\subsection{Systém LTE, základní architektura a popis systému LTE, rozdíly mezi LTE a LTE-A}
+		\subsubsection{Popis systému LTE}
+		Ryze paketový systém založený na protokolu IP, nepoužívá komutovaný přenos (přepínání okruhů). To umožňuje využívání služeb v reálném čase (VoIP) při zachování plné mobility uživatele
+		\subsubsection*{Klíčové vlastnosti}
+			\begin{itemize}
+				\item \textbf{Vysoká přenosová rychlost a spektrální účinnost: }Teoretické maximum vyžadované standardem je více než 100 Mbit/s pro downlink, více než 50 Mbit/s pro uplink. Spektrální účinnost je 3x až 4x vyšší než u předchozích technologií.
+				\item \textbf{Nízká latence: } Odezva na rádiovém rozhraní je menší než 10 ms a latence při navazování spojení je menší než 100 ms.
+				\item \textbf{Odlišné přístupové techniky pro různé směry: } Downlink: OFDMA (Orthogonal Frequency Division Multiple Access), poskytuje vysokou spektrální účinnost, škálovatelnost pásma a odolnost proti únikům. Uplink: SC-FDMA (Single Carrier FDMA) z důvodu nižšího poměru špičkového a průměrného výkonu, snižuje nároky na linearitu zesilovačů a především šetří baterii koncového zařízení.
+				\item \textbf{Flexibilní šířka pásma: }Systém dokáže dynamicky pracovat s různými šířkami rádiového kanálu v rozsahu od 1,4 MHz do 20 MHz.
+				\item \textbf{Duplexní režimy: }LTE plně podporuje kmitočtový duplex (FDD), časový duplex (TDD) i jejich kombinaci (Half FDD).
+			\end{itemize}
+		\subsubsection{Základní architektura systému LTE}
+		Rozděluje se na dvě hlavní části: \textbf{přístupovou síť E-UTRAN} a \textbf{páteřní síť EPC}. 
+		\subsubsection*{Přístupová síť E-UTRAN (Evolved Universal Terrestrial Radio Access Network):}
+		Hlavním prvkem jsou základnové stanice eNode B (evolved Node B), plní funkci samotného vysílače/přijímače a řídicí jednotky (dříve v režii RNC). Každý eNode B samostatně přiděluje rádiové prostředky, zajišťuje pokrytí, měří úroveň interferencí a rozhoduje o handoveru.
+		\subsubsection*{Páteřní síť EPC (Evolved Packet Core):}
+			\begin{itemize}
+				\item \textbf{MME (Mobility Management Entity): }Hlavní řídicí prvek sítě LTE. Neprocházejí přes něj žádná uživatelská data, ale stará se o kontrolu přístupu, ověření totožnosti, ochranu proti odposlechu (šifrovací klíče), mobilitu a přidělování dočasné identity GUTI mobilním stanicím.
+				\item \textbf{S-GW (Serving Gateway) a P-GW (Packet Data Network Gateway): }Tvoří společně bránu SAE-GW. P-GW funguje jako směrovač do externích paketových sítí (Internet) a přiděluje uživatelům IP adresy.
+				\item \textbf{HSS (Home Subscriber Server): }Databáze obsahující informace o všech účastnících v síti a jejich profilech či službách, ke kterým mají přístup (nahrazuje HLR a AuC).
+				\item \textbf{PCRF (Policy and Charging Rules Function): }Dohlíží na služby, kontroluje parametry kvality služby (QoS) a zajišťuje podklady pro vyúčtování.
+			\end{itemize}
+		\subsubsection{Rozdíly mezi LTE a LTE-Advanced (LTE-A)}
+		LTE je považováno za mezikrok (3,9G), systém LTE-Advanced je sít 4. generace (4G). Oba systémy jsou nicméně zpětně kompatibilní (starší telefony fungují v nové síti a naopak)
+		Hlavní technické rozdíly LTE-A:
+			\begin{itemize}
+				\item \textbf{Přenosové rychlosti a spektrální účinnost: }Až 3x vyšší spektrální účinnosti (v downlinku 30 bit/s/Hz, v uplinku 15 bit/s/Hz). Dokáže nabídnout maximální teoretickou rychlost až 3 Gbit/s (downlink) a 1,5 Gbit/s (uplink). Latence se snížila až na 5 ms.
+				\item \textbf{Sdružování nosných (Carrier Aggregation): }Agregace až 5 kmitočtových pásem (sousedních i nesousedních) do jednoho velkého bloku s celkovou šířkou až 100 MHz. LTE pracovalo s maximální šířkou kanálu pouze 20 MHz.
+				\item \textbf{Pokročilé anténní techniky (MIMO): }Podporuje masivní rozšíření až na MIMO 8x8 v downlinku (s využitím MU-MIMO pro více uživatelů) a MIMO 4x4 v uplinku (SU-MIMO pro jednoho uživatele).
+				\item \textbf{Vylepšení architektury (Relay Nodes a CoMP): }reléové stanice (Relay Nodes - RN), fungují jako chytré opakovače s více skoky. Ty zásadně zlepšují pokrytí na okrajích buněk či ve stínech signálu bez nutnosti stavět plnohodnotný eNode B. CoMP (Coordinated Multi-Point), kdy uživatel na okraji buňky přijímá/vysílá data koordinovaně z několika sousedních základnových stanic současně, drasticky omezuje interference a zvyšuje přenosovou rychlost.
+			\end{itemize}
+	
+	\subsection{Systém LTE, základní popis E-UTRA Downlink a Uplink a rodzíly mezi nimi, základní popis systémů LTE-CAT, NB-IoT}
+		\subsubsection{Základní popis E-UTRA Downlink a Uplink a rozdíly mezi nimi}
+		Fyzická vrstva systému LTE používá odlišné přístupové techniky pro sestupný a vzestupný směr přenosu.
+			\begin{itemize}
+				\item \textbf{Downlink: }OFDMA (Orthogonal Frequency Division Multiple Access) s konstantním rozestupem subnosných 15 kHz, nezávisí na šířce rádiového kanálu. Má vyšší spektrální účinnost ve srovnání se staršími systémy, flexibilní škálovatelnost pásma, jednodušší implementace pokročilých anténních technik (MIMO) a lepší odolnost signálu při průchodu rádiovým kanálem. Jednotlivé subnosné jsou ortogonální a k jejich modulaci se využívají formáty QPSK, 16-QAM nebo 64-QAM. Nevýhody: velká hodnota poměru špičkového a průměrného výkonu (PAPR).
+				\item \textbf{Uplink (vzestupný směr): }SC-FDMA (Single Carrier FDMA). Důvody: PAPR (nároky na linearitu zesilovačů, vyžadoval výkonný napájecí zdroj). Výhody SC-FDMA: nízký PAPR, lepší účinnost zesilovače a nižší energetický odběr UE. Pro modulaci se využívají QPSK, 16-QAM nebo 64-QAM. Datové symboly jsou rozprostřeny přes více fyzických symbolů OFDM, každý datový symbol je rozprostřen na všechny subnosné, čímž se hodnota PAPR zamezí zvyšovat.
+				\item \textbf{Hlavní rozdíly: }Downlink (OFDMA): koncipován s důrazem na maximální možnou kapacitu, efektivitu spektra a odolnost vůči interferencím a únikům. Uplink (SC-FDMA): Ohled na technická a energetická omezení UE, prioritou je minimalizace špičkového výkonu a zajištění dlouhé výdrže baterie.
+			\end{itemize}
+		\subsubsection{Základní popis systémů pro Internet věcí (IoT): LTE-CAT a NB-IoT}
+		Systémy pro M2M (Machine-to-Machine) a IoT (Internet of Things). Kladou důraz na nízkou spotřebu, dobré pokrytí a velkou kapacitu zařízení spíše než na vysoké rychlosti.
+		\subsubsection*{LTE-CAT (konkrétně LTE Cat-M1 / eMTC)}
+			\begin{itemize}
+				\item \textbf{Přenosové vlastnosti: }Šířka pásma je omezena na 1,4 MHz (6 PRB). Využívá stejná hlavní schémata jako standardní LTE (OFDMA downlink a SC-FDMA uplink).
+				\item \textbf{Výhody: }Vylepšené pokrytí signálem (cca o 13 dB), rychlosti dosahují maximálně 1 Mbit/s, oproti běžnému LTE přináší zásadní úsporu energie s životností baterií v jednotkách let. Přidání do LTE vysílačů softwarovou úpravou. Novější verze LTE Cat-M2 pak používá šířku pásma 5 MHz a dosahuje rychlosti cca 4 Mbit/s.
+			\end{itemize}
+		\subsubsection*{NB-IoT (Narrowband IoT)} 
+			\begin{itemize}
+				\item \textbf{Extrémně úzké pásmo: }Šířka pásma: 180 kHz (1 PRB), rychlosti přenosu: od 160 bit/s do malých stovek kbit/s. Maximální latence může být pro 99\% zařízení až 10 sekund.
+				\item \textbf{Maximální úspora a kapacita: }Vylepšení pokrytí o 20 dB oproti staršímu GPRS, umožňuje na jednu buňku připojit velký počet zařízení (cca 50 tisíc), životnost baterie senzoru je až 10 let.
+				\item \textbf{Možnosti nasazení: }
+				\begin{itemize}
+					\item Stand-alone: vyhradí se pro ni část GSM spektra s využitím 200kHz kanálů
+					\item Guard Band: využije se nevyužité ochranné pásmo mezi existujícími LTE kanály
+					\item In-Band: Přímo v pásmu operátorovy sítě LTE sdílením jejích zdrojových bloků
+				\end{itemize}
+		\end{itemize}
+	
+	\subsection{Systémy WLAN (základní popis standardu IEEE 802.11 a definice fyzické vrstvy) a WPAN (základní popis, systém Bluetooth a topologie sítě Bluetooth)}
+		\subsubsection{WLAN (Wireless Local Area Network)}
+		Slouží k bezdrátovému pokrytí lokálních oblastí, typicky s dosahem od stovek metrů až po jednotky kilometrů. Nejznámějším zástupcem je Wi-Fi, která je založená na rodině standardů IEEE 802.11 a slouží zejména k připojení koncových zařízení k přístupovému bodu (Access Point) a dále do sítě Internet. Tyto systémy pracují v bezlicenčních pásmech (nejčastěji 2,4 GHz nebo 5 GHz), přičemž nejnovější standardy (802.11ad) využívají i pásmo 60 GHz nebo bílá místa v TV spektru (White-Fi). Pro minimalizaci kolizí při komunikaci využívají přístupovou metodu CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance), předchází kolizím pomocí vyměňování paketů RTS (požadavek na vysílání) a CTS (připravenost k vysílání).
+		\subsubsection*{Fyzická vrstva (PHY) standardu IEEE 802.11:}
+			\begin{itemize}
+				\item \textbf{Tři způsoby fyzické vrstvy: }FH-SS (rozprostřené spektrum s kmitočtovým skákáním, které bylo z novějších verzí vyřazeno), DS-SS (přímé rozprostření signálu pseudonáhodnou sekvencí) a IR (infračervené záření s rychlostí do 2 Mbit/s).
+				\item \textbf{Modulace OFDM (Orthogonal Frequency Division Multiplexing): } přenosové pásmo je rozděleno na desítky ortogonálních subnosných frekvencí, přes které se data přenáší paralelně.
+				\item Využívají se vícestavové modulace (BPSK, QPSK, 16-QAM až 4096-QAM) a pokročilé vícenásobné anténní systémy MIMO (až 16x16), zaručují přenosové rychlosti v řádech desítek Gbit/s.
+				\item Pásmo 2,4 GHz je rozděleno do 13 rádiových kanálů se šířkou 20 MHz, pouze 3 kanály se vzájemně nepřekrývají.
+			\end{itemize}
+		\subsubsection{WPAN (Wireless Personal Area Network)}
+		Osobní sítě pro bezdrátovou komunikaci na velmi krátké vzdálenosti, (rozsahu od několika metrů do desítek metrů). Určeny pro propojení osobních zařízení a periferií (počítače, mobilní telefony, tiskárny, sluchátka, senzory). Vyznačují se nízkým vysílacím výkonem, vysokou bezpečností a nízkou spotřebou energie. Patří sem systémy jako Bluetooth, ZigBee nebo UWB.	
+		\subsubsection*{Systém Bluetooth (IEEE 802.15.1):}
+			\begin{itemize}
+				\item \textbf{Základní popis: }Pracuje v bezlicenčním pásmu 2,4 GHz. Využívá se technika rozprostřeného spektra s kmitočtovým skákáním FH-SS (Frequency Hopping Spread Spectrum) pro předcházení interferencí s jinými systémy (WiFi).
+				\item \textbf{Kanály a skákání: }79 rádiových kanálů s odstupem nosných 1 MHz. Ke změně nosné frekvence dochází velmi rychle (1600krát za sekundu) na základě pseudonáhodné sekvence generované řídicí jednotkou.
+				\item \textbf{Modulace a výkon: }GFSK (při vyšších rychlostech v režimu EDR i fázové modulace). Terminály se podle vysílacího výkonu dělí do tří tříd (Class 1, dosah: do 100 m; Class 2, dosah: cca 10 m; Class 3, dosah: 1 m).
+				\item \textbf{Přístup ke kanálu: }Pro oddělení směru komunikace využívá časový duplex TDD, čas je rozdělen na timesloty o délce 625 µs.
+			\end{itemize}
+		\subsubsection*{Topologie sítě Bluetooth:}
+			\begin{itemize}
+				\item \textbf{Pikonet (pikosíť): }Základní stavební jednotkou sítě je tzv. pikonet. V jednom pikonetu může být maximálně 8 vzájemně komunikujících zařízení.
+				\item \textbf{Master a Slave: }Terminál, který iniciuje sestavení sítě, se automaticky stává řídicí jednotkou (Master) a ostatní zařízení přijímají roli podřízených jednotek (Slave)
+				\item \textbf{Řízení komunikace: }Master jednotka definuje frekvenční skákací sekvenci (hodinovým signálem) a zajišťuje synchronizaci. Komunikace s využitím TDD probíhá tak, že Master vysílá pouze v sudých timeslotech a dotázaný Slave smí odpovídat pouze v lichých timeslotech. Pakety mohou v některých případech zabrat i 3 nebo 5 timeslotů, vždy se ale vysílají na jedné konkrétní nosné.
+				\item \textbf{Scatternet: }V případě potřeby propojení více zařízení lze spojit několik pikonetů dohromady (až 10 pikonetů), čímž vznikne složitější topologie zvaná scatternet. Toho se dosáhne tím, že jedno zařízení může fungovat zároveň např. jako Master v jedné síti a jako Slave v druhé.
+			\end{itemize}
+
+	\subsection{Systém LPWAN (základní popis, IoT, systémy LoRa a SigFox)}
+		\subsubsection{Systém LPWAN a Internet věcí (IoT)}
+			Sítě LPWAN (Low Power Wide Area Network) jsou speciální bezdrátové sítě navržené primárně pro koncept Internetu věcí a pro komunikaci typu Machine-to-Machine (M2M). Tato zařízení (měřiče, senzory, detektory, sledovací zařízení) obvykle fungují bez zásahu uživatele a odesílají či přijímají data. 
+			\begin{itemize}
+				\item \textbf{Nízká spotřeba energie: }Zajišťuje provoz na baterie v řádech desítek let
+				\item \textbf{Dlouhý dosah: }Signál dosáhne na vzdálenost desítek kilometrů (10 až 50 km) a dobře prostupuje překážkami.
+				\item \textbf{Nízká přenosová rychlost: }Kladen je důraz na přenos malých zpráv (v řádech bajtů) při rychlostech od desítek bitů za sekundu (bps) po malé stovky kilobitů za sekundu (kbps).
+				\item \textbf{Vysoká kapacita a nízká cena: }Cílem je připojit obrovské množství levných zařízení k jedné základnové stanici s možností akceptovatelné latence v řádech sekund.
+			\end{itemize}
+		\subsubsection{Systém SigFox}
+			\begin{itemize}
+				\item \textbf{Architektura: }SigFox využívá klasickou buňkovou strukturu se základnovými stanicemi. Senzory odesílají zprávy základnové stanici, která je následně přeposílá do Sigfox cloudu, odkud jsou data směrována k nadřazeným uživatelským aplikacím. Zařízení nepoužívají SIM karty ani IP adresy, ale jsou identifikována hardwarově pomocí unikátních sériových čísel.
+				\item \textbf{Parametry přenosu: }Pracuje v bezlicenčním pásmu 868 MHz a využívá extrémně úzké pásmo o šířce pouhých 100 Hz. Pro uplink využívá modulaci DBPSK a pro downlink GFSK. Přenosová rychlost je velmi nízká, pohybuje se od 100 (UL) do 600 (DL) bit/s.
+				\item \textbf{Omezení zpráv: }Velikost jedné zprávy je omezena na maximálně 12 bajtů uplink. Downlink nabízí 0 až 8 bajtů dat a zařízení může přijmout pouze 4 zprávy denně.
+				\item \textbf{Dosah a provoz: }Vyzařovaný výkon činí 14 dBm, díky čemuž dosahuje systém výborného pokrytí až 50 km ve volném terénu a kolem 10 km v městské zástavbě. V České republice tuto síť provozuje společnost SimpleCell ve spolupráci s T-Mobile.
+			\end{itemize}
+		\subsubsection{Systém LoRa (Long Range)}
+			\begin{itemize}
+				\item \textbf{Základní princip a modulace: }LoRa je technologie definující fyzickou vrstvu pro sítě s dlouhým dosahem a nízkou spotřebou. Využívá techniku rozprostřeného spektra CSS (Chirp Spread Spectrum). Signál je rozložen na širší pásmo pomocí krátkých pulzů s lineárně se měnící frekvencí (chirp), což zaručuje obrovskou odolnost vůči rušení, rádiovému šumu, vícecestnému šíření a Dopplerovu posuvu.
+				\item \textbf{Architektura a zabezpečení: }Architekturu často zastřešuje protokol nadstavbové sítě LoRaWAN. Bezpečnost dat je zajištěna 64bitovým identifikátorem a šifrováním pomocí dvou 128bitových klíčů. Na jeden přístupový bod (bránu) lze připojit až 1 milion koncových zařízení.
+				\item \textbf{Kmitočtová pásma: }V Evropě typicky operuje v pásmu 868 MHz, ale může pracovat i v pásmu 2,4 GHz. Nevýhodou využití pásma 868 MHz je přísné omezení vysílacího času (duty cycle), který typicky povoluje vysílat pouze 1 \% času a 99 \% času musí zařízení mlčet.
+				\item \textbf{Přenosové rychlosti a šířka pásma: }Technologie dynamicky pracuje s několika parametry, z nichž nejdůležitější je šířka kanálu BW (125, 250, 500 kHz) a činitel rozprostření SF (Spreading Factor). Hodnota SF se volí mezi 7 až 12 v závislosti na kvalitě spojení (vyšší SF znamená delší dosah a vyšší odolnost, ale nižší rychlost).
+			\end{itemize}
