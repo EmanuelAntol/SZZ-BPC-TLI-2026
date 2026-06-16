@@ -20,7 +20,7 @@
             \end{itemize}
         \subsubsection{Testování prvočísel}
             \subsubsection*{Testy pravděpodobné prvočíselnosti}
-                Z důvodu výkonu a výpočetní náročnosti se u obrovských čísel používají pravděpodobnostní testy. Tyto testy neodkážou prvočíselnost absolutně prokázat, pravděpodobnost omylu je ale zanedbatelná.
+                Z důvodu výkonu a výpočetní náročnosti se u obrovských čísel používají pravděpodobnostní testy. Tyto testy nedokážou prvočíselnost absolutně prokázat, pravděpodobnost omylu je ale zanedbatelná.
                 \begin{itemize}
                     \item \textbf{Fermatův test:} Tento test je založen na Malé Fermatově větě, podle níž pro prvočíslo $n$ a s ním nesoudělné kladné číslo $a$ platí kongruence $a^{n-1} \equiv 1 \pmod{n}$. Postup spočívá v náhodné volbě základu $a$ v intervalu $2 \le a \le n - 2$. Pokud kongruence neplatí, testované číslo je s jistotou složené. Hlavní slabinou testu je selhání na tzv. Carmichaelových číslech -- složených číslech, pro která kongruence platí pro libovolné $a$ nesoudělné s $n$. Z tohoto důvodu se v reálné praxi Fermatův test téměř nepoužívá.
                     

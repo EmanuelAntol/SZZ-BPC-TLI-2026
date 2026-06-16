@@ -3,8 +3,8 @@
 		V blokovém schématu se nachází 3 hlavní části, a to vysílač, přenosový kanál a přijímač.
 		\subsubsection{Blokové schéma digitálního radiokomunikačního systému, popis bloků}
 			\begin{itemize}
-				\item \textbf{Zdroj signálu:} Zdrojem může být například mikrofon, snímač kamery či digitální zdroj jako je počítač.
-				\item \textbf{Převod A-D:} Tato číst není nutná, pokud je zdroj signálu digitální. Slouží k digitalizaci analogových signálů.
+				\item \textbf{Zdroj signálu:} Zdrojem může být například mikrofon, snímač kamery či digitální zdroj.
+				\item \textbf{Převod A-D:} Tato část není nutná, pokud je zdroj signálu digitální. Slouží k digitalizaci analogových signálů.
 				\item \textbf{Kodér zdroj:} Slouží k potlačení redundance a irelevance (komprese).
 				\item \textbf{Kodér kanálu:} Přizpůsobuje data k přenosu. Dochází k zabezpečení (umělé navýšení redundance) a k prokládání (interleaving).
 				\item \textbf{Modulátor:} Signál je namodulován na nosnou. Může se jednat o amplitudovou, frekvenční či fázovou modulaci, případně jejich kombinaci (QAM).
@@ -33,7 +33,7 @@
 		\subsubsection{Kanálové kódování, prokládání}
 			Kanálové kódovíní přizpůsobuje přenášený signál přenosovému kanálu. Dochází k zabezpečení přenášených dat a prokládání.
 			\begin{itemize}
-				\item \textbf{Zabezpečení:} Zabezpečit přenášený data lze pomocí umělého přidání informací (redundanci). Lze využít kódy detekční, které jsou schopné chyby pouze detekovat, nebo korekční, které jsou schopny nejen detekce, ale také opravy určitého množství chyb. Sledovaným parametrem je BER (Bit Error Rate) udávající počet chybně přenesených bitů oproti všem.
+				\item \textbf{Zabezpečení:} Zabezpečit přenášená data lze pomocí umělého přidání informací (redundanci). Lze využít kódy detekční, které jsou schopné chyby pouze detekovat, nebo korekční, které jsou schopny nejen detekce, ale také opravy určitého množství chyb. Sledovaným parametrem je BER (Bit Error Rate) udávající počet chybně přenesených bitů oproti všem.
 				\item \textbf{Prokládání:} Proces přeházení pořadí bitů/bytů (interleaving) na straně vysílače a návratu zpět na správnou pozici (deinterleaving) na straně přijímače. Díky prokládání je shluková chyba (burstová), které vznikla v přenosovém kanálu, rozprostřena na vícero menších chybných úseků, které jsou schopny detekční/korekční zabezpečovací kódy detekovat/opravit.
 			\end{itemize}
 			Kódy mohou být konvoluční, blokové (Cyklické, Turbo, Reed-Solomonovi, BCH, LDPC). Lze je také zřetězit za sebe pro lepší zabezpečení. Mezi jednotlivé kodéry jsou vloženy prokladače.
@@ -41,7 +41,7 @@
 			Modulace je proces, při kterém dochází k ovlivnění alespoň jednoho z parametrů nosné vlny v závislosti na modulačním signálu, a to amplitudy, frekvence či fáze.
 			\begin{itemize}
 				\item \textbf{Amplitudová:} Při této modulaci je modulačním signálem ovlivňována amplituda nosné vlny. Maximální změnu (snížení) amplitudy nosné modulovaným signálem označujeme jako hloubku modulace.
-				\item \textbf{Frekvenční:} Vysílaná frekvence se mění v závislosti na modulačním signálu. Maximální rozdíl frekvence nosné a modulované nosné $\delta f$ nazýváme frekvenční zdvih.
+				\item \textbf{Frekvenční:} Vysílaná frekvence se mění v závislosti na modulačním signálu. Maximální rozdíl frekvence nosné a modulované nosné $\Delta{f}$ nazýváme frekvenční zdvih.
 				\item \textbf{Fázová:} Dochází k ovlivnění (změně) fáze nosné. Příklad je doustavová modulace DPSK, u které je použita fáze nosné 0\textdegree a 180\textdegree.
 			\end{itemize}
 			Mezi základní parametry diitálních modulací patří
